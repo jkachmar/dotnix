@@ -1,3 +1,6 @@
+HOSTNAME = callisto
+DARWIN_CONFIG = ./hosts/$(HOSTNAME)/configuration.nix
+
 .PHONY bootstrap-nix:
 bootstrap-nix:
 	./scripts/bootstrap-nix
@@ -18,3 +21,7 @@ uninstall-tools:
 	./scripts/uninstall-darwin
 	./scripts/uninstall-home-manager
 	nix-channel --update
+
+.PHONY darwin-switch:
+darwin-switch:
+	darwin-rebuild switch -I darwin-config=$(DARWIN_CONFIG)
