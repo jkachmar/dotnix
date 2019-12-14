@@ -1,0 +1,4 @@
+#!/bin/bash -xe
+
+nix-channel --remove home-manager
+nix-env --uninstall home-manager-path
