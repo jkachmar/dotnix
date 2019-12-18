@@ -1,5 +1,5 @@
 HOSTNAME = callisto
-DARWIN_CONFIG = ./hosts/$(HOSTNAME)/configuration.nix
+DARWIN_CONFIG = ./machines/$(HOSTNAME)/configuration.nix
 
 .PHONY bootstrap-nix:
 bootstrap-nix:
