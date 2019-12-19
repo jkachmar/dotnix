@@ -5,7 +5,7 @@ DARWIN_CONFIG_DIR = ./machines/$(HOSTNAME)
 bootstrap-nix:
 	./scripts/bootstrap-nix
 	@echo "Run the following command:"
-	@echo "source /etc/bashrc && nix-channel --add https://nixos.org/channels/nixpkgs-unstable && nix-channel --update"
+	@echo "source /etc/bashrc && nix-channel --add https://nixos.org/channels/nixpkgs-19.09-darwin && nix-channel --update"
 
 .PHONY uninstall-nix-macos:
 uninstall-nix-macos:
