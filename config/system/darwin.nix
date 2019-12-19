@@ -12,7 +12,7 @@
   programs = {
     bash.enable = true;
     fish.enable = true;
-    # zsh.enable = true;
+    zsh.enable = true;
   };
 
   services.nix-daemon.enable = true;
