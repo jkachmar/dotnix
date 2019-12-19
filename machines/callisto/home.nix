@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ../../config/home/base-unix.nix
-    ../../config/home/base-network.nix
+    ../../config/home/common.nix
+    ../../config/home/darwin.nix
   ];
 
   home.packages = with pkgs; [
