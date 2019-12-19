@@ -22,6 +22,9 @@ uninstall-tools:
 	./scripts/uninstall-home-manager
 	nix-channel --update
 
+.PHONY: switch-all
+switch-all: darwin-switch home-switch
+
 .PHONY: darwin-switch
 darwin-switch:
 	darwin-rebuild switch -I darwin-config=$(DARWIN_CONFIG_DIR)/configuration.nix
