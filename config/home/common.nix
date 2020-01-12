@@ -9,6 +9,7 @@
     ./htop.nix
     ./mosh.nix
     ./neovim.nix
+    ./ripgrep.nix
     ./starship.nix
   ];
 
