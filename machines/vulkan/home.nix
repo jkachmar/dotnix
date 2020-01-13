@@ -7,10 +7,6 @@
   ];
 
   home.packages = with pkgs; [
-    # Fonts
-    fontconfig
-    fira-code
+    awscli
   ];
-
-  fonts.fontconfig.enable = true;
 }
