@@ -5,8 +5,16 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [ ];
 
-  # Auto upgrade nix package
-  nix.package = pkgs.nix;
+  nix = {
+    # Auto upgrade nix package
+    package = pkgs.nix;
+
+    # Set the appropriate trusted users (I trust myself... usually)
+    trustedUsers = [
+      "@admin"
+      "jkachmar"
+    ];
+  };
 
   # Create /etc/bashrc and /etc/zshrc that loads the nix-darwin environment
   programs = {
