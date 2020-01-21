@@ -1,6 +1,12 @@
 HOSTNAME = callisto
 DARWIN_CONFIG_DIR = ./machines/$(HOSTNAME)
 
+# On multi-user installs, the global channel needs to be updated with sudo
+.PHONY: update-channels
+update-channels:
+	nix-channel --update
+	sudo -i nix-channel --update
+
 .PHONY: bootstrap-nix
 bootstrap-nix:
 	./scripts/bootstrap-nix
