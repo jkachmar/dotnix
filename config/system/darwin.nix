@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./lorri.nix ];
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [ ];
@@ -11,8 +13,10 @@
 
     # Set the appropriate trusted users (I trust myself... usually)
     trustedUsers = [
-      "@admin"
       "jkachmar"
+      "root"
+      "@admin"
+      "@wheel"
     ];
   };
 
