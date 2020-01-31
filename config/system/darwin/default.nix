@@ -1,11 +1,14 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [ ./lorri.nix ];
+  imports = [
+    ./lorri.nix
+    ../../nix/nix-path.nix
+  ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [ ];
+  environment.systemPackages = [];
 
   nix = {
     # Auto upgrade nix package

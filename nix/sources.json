@@ -1,0 +1,50 @@
+{
+    "home-manager": {
+        "branch": "release-19.09",
+        "description": "Manage a user environment using Nix",
+        "homepage": "",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "f5c9303cedd67a57121f0cbe69b585fb74ba82d9",
+        "sha256": "0xqzz4pb084wsnglq8z6dhbz3c8l3v44bz0bzf51yqrs6g33ky8k",
+        "type": "tarball",
+        "url": "https://github.com/rycee/home-manager/archive/f5c9303cedd67a57121f0cbe69b585fb74ba82d9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nix-darwin": {
+        "branch": "master",
+        "description": "nix modules for darwin",
+        "homepage": "",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "3201be1bd4ee8b1b5bfcf4ccf2acfc485fb2cd5c",
+        "sha256": "0nvm5fxcdzfbgfzjxsfl9is5higr5fbjd54n6nxvvxccclx6cdys",
+        "type": "tarball",
+        "url": "https://github.com/lnl7/nix-darwin/archive/3201be1bd4ee8b1b5bfcf4ccf2acfc485fb2cd5c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-darwin": {
+        "branch": "nixpkgs-19.09-darwin",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "b1a1ada26d58f0651b33bfdd5dff2efe19856381",
+        "sha256": "07m8n6jm4ggi8q9qsf05hwm9pvr0avr7209n16p8m19wpmhabvdg",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/b1a1ada26d58f0651b33bfdd5dff2efe19856381.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-unstable": {
+        "branch": "nixpkgs-unstable",
+        "description": "Nixpkgs/NixOS branches that track the Nixpkgs/NixOS channels",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "40be1827ee6fa0fbd1c73e9e97f6b338ca4df421",
+        "sha256": "094vm2sl4cs5pl8s644lfz0rf5khw20mjwqd3s0myr198z6mwp0j",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/40be1827ee6fa0fbd1c73e9e97f6b338ca4df421.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
