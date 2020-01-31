@@ -19,6 +19,9 @@ an argument to the `nix-shell`, as follows (e.g. for `thetis`):
 nix-shell --argstr "machine" "thetis" --run "switch-all"
 ```
 
+Once everything's been installed and is up and running, `direnv allow` will
+enable `lorri` and most of the `nix-shell --run` nonsense below can be elided.
+
 ## Maintenance
 
 ### Updating
