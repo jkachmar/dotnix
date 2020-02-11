@@ -77,14 +77,18 @@ in
         unstable.niv
 
         # darwin rebuild script and switch util
-        darwin-rebuild-bin darwin-switch
+        darwin-rebuild-bin
+        darwin-switch
 
         # home-manager activation script and switch util
-        home-manager-bin home-switch
+        home-manager-bin
+        home-switch
 
         # Utils for lintinga nd formatting nix files in this repo
-        unstable.nix-linter lint
-        unstable.nixpkgs-fmt format
+        unstable.nix-linter
+        lint
+        unstable.nixpkgs-fmt
+        format
 
         # System (i.e. darwin && home-manager) switch util
         switch-all
