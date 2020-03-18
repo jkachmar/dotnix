@@ -1,13 +1,10 @@
 { machine ? "callisto" }:
-
-
 let
   sources = import ./nix/sources.nix;
   nixpkgs = sources.nixpkgs-darwin;
   darwin = sources.nix-darwin;
   home-manager = sources.home-manager;
   unstable = import sources.nixpkgs-unstable {};
-
 in
   with (import nixpkgs {});
   let
@@ -55,7 +52,8 @@ in
 
     files = "$(find . -name '*.nix' -not -wholename './nix/sources.nix')";
 
-    lint = pkgs.writeShellScriptBin "lint" "nix-linter ${files}";
+    # nix-linter is marked as broken
+    # lint = pkgs.writeShellScriptBin "lint" "nix-linter ${files}";
 
     format = pkgs.writeShellScriptBin "format" "nixpkgs-fmt ${files}";
 
@@ -63,34 +61,35 @@ in
 
     switch-all = pkgs.writeShellScriptBin "switch-all" ''
       set -e
-      lint
+      # nix-linter is marked as broken
+      # lint
       format
 
       darwin-switch
       home-switch
     '';
-
   in
-    mkShell {
-      buildInputs = [
-        # Newer version of niv that should still be cached
-        unstable.niv
+  mkShell {
+    buildInputs = [
+      # Newer version of niv that should still be cached
+      unstable.niv
 
-        # darwin rebuild script and switch util
-        darwin-rebuild-bin
-        darwin-switch
+      # darwin rebuild script and switch util
+      darwin-rebuild-bin
+      darwin-switch
 
-        # home-manager activation script and switch util
-        home-manager-bin
-        home-switch
+      # home-manager activation script and switch util
+      home-manager-bin
+      home-switch
 
-        # Utils for lintinga nd formatting nix files in this repo
-        unstable.nix-linter
-        lint
-        unstable.nixpkgs-fmt
-        format
+      # Utils for linting and formatting nix files in this repo
+      # nix-linter is marked as broken
+      # unstable.nix-linter
+      # lint
+      unstable.nixpkgs-fmt
+      format
 
-        # System (i.e. darwin && home-manager) switch util
-        switch-all
-      ];
-    }
+      # System (i.e. darwin && home-manager) switch util
+      switch-all
+    ];
+  }
