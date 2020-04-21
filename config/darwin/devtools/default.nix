@@ -5,6 +5,12 @@
     ./lorri.nix
   ];
 
+  programs = {
+    bash.enable = true;
+    fish.enable = true;
+    zsh.enable = true;
+  };
+
   ###############################################################################
   # User-level configuration.
   #

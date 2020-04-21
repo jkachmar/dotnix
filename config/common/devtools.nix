@@ -24,7 +24,6 @@
     ];
 
     programs = {
-      bash.enable = true;
       bat.enable = true;
 
       direnv = {
