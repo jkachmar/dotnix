@@ -2,29 +2,38 @@
 
 ## Installation
 
-To install the default profile (callisto), ensure Nix is installed and
-available (multi-user with daemon) and run the following:
+### Existing Profile
+
+To install based off of a profile for an existing machine, symlink the machine
+configuration directory to the repository root directory with the name
+`current-machine`.
+
+For example, to configure `star-platinum`, one would run the following command
+in the root directory after a fresh clone of this repository:
 
 ```bash
-nix-shell --run "switch-all"
+ln -s ./machines/star-platinum ./current-machine
+nix-shell --run rebuild
 ```
 
-To install another profile, ensure that valid `configuration.nix` and `home.nix`
-files (to configure the NixOS or `nix-darwin` system and `home-manager`
-settings, respectively) are present in a directory named after the
-machine-to -be-configured under `./machines`, and pass the machine name as
-an argument to the `nix-shell`, as follows (e.g. for `thetis`):
+### New Profile
 
-```bash
-nix-shell --argstr "machine" "thetis" --run "switch-all"
-```
+To install based off of a new profile:
+
+* create a new directory with the machine name at `machines/<new-machine-name>`
+* ensure that `isDarwin` is updated in `default.nix` and `shell.nix` to reflect
+the new machine's host platform
+* perform the same steps as above to build and deploy the new machine's
+configuration
+
+### Post-Install
 
 Once everything's been installed and is up and running, `direnv allow` will
 enable `lorri` and most of the `nix-shell --run` nonsense below can be elided.
 
 ## Maintenance
 
-### Updating
+### Updates
 
 The pinned sources tracked in `./nix/sources.json` are managed with [`niv`],
 and can be updated as follows:
