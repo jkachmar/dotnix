@@ -3,6 +3,7 @@
 {
   nix.nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
     nixpkgs = toString <nixpkgs>;
-    darwin = toString <darwin>;
+    nixpkgs-overlays = toString <nixpkgs-overlays>;
+    nixos-config = toString <nixos-config>;
   };
 }

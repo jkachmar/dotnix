@@ -1,0 +1,62 @@
+{
+    "home-manager": {
+        "branch": "release-20.03",
+        "description": "Manage a user environment using Nix",
+        "homepage": "https://rycee.gitlab.io/home-manager/",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "3461ceebc01169f99362ab5cc62d26224e7886d9",
+        "sha256": "0242ibqrr8wn8wipl41dmchmr76lh6zrv046hp374wx4dpkdl7r1",
+        "type": "tarball",
+        "url": "https://github.com/rycee/home-manager/archive/3461ceebc01169f99362ab5cc62d26224e7886d9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nix-darwin": {
+        "branch": "master",
+        "description": "nix modules for darwin",
+        "homepage": "",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "053f2cb9cb0ce7ceb4933cbd76e2d28713ad85da",
+        "sha256": "04m9id1gzq0k7n5rkrds6y6r0mmhhsci3aqwhj3i691kx0sf09ia",
+        "type": "tarball",
+        "url": "https://github.com/lnl7/nix-darwin/archive/053f2cb9cb0ce7ceb4933cbd76e2d28713ad85da.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nix-linter": {
+        "branch": "master",
+        "description": "Linter for the Nix expression language",
+        "homepage": "",
+        "owner": "synthetica9",
+        "repo": "nix-linter",
+        "rev": "8f1037ddb3c03a12f285b4a9702e73c0eb15f972",
+        "sha256": "0ghlr8pvhps75y4c4nxkdfkl0v0rrk7mc1n5nwp3cfyyn2zl6w94",
+        "type": "tarball",
+        "url": "https://github.com/synthetica9/nix-linter/archive/8f1037ddb3c03a12f285b4a9702e73c0eb15f972.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-darwin": {
+        "branch": "nixpkgs-20.03-darwin",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "nixos",
+        "repo": "nixpkgs-channels",
+        "rev": "c185d15160e9a2996567781f378df2ede31b05d5",
+        "sha256": "141gs7cqzik6wc5g68kq9cw7q6l7zk168qbaf0hr91xspyiw4rhq",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs-channels/archive/c185d15160e9a2996567781f378df2ede31b05d5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-nixos": {
+        "branch": "nixpkgs-20.03-darwin",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "",
+        "repo": "",
+        "rev": "c185d15160e9a2996567781f378df2ede31b05d5",
+        "sha256": "141gs7cqzik6wc5g68kq9cw7q6l7zk168qbaf0hr91xspyiw4rhq",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs-channels/archive/c185d15160e9a2996567781f378df2ede31b05d5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
