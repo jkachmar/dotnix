@@ -2,7 +2,7 @@
 # Desktop, sound, and graphics.
 ###############################################################################
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   ###############################################################################
@@ -25,9 +25,25 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
-  # Enable Kwallet auto-signin
+  # Enable bluetooth hardware support + required pulseaudio packages for
+  # bluetooth audio.
+  hardware.bluetooth = {
+    enable = true;
+    config = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
+
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
+
+  # Enable Kwallet auto-signin.
   security.pam.services.sddm.enableKwallet = true;
 
   ###############################################################################
@@ -40,6 +56,7 @@
       discord
       firefox
       irccloud
+      signal-desktop
       slack
       spotify
     ];
