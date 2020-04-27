@@ -52,13 +52,20 @@
   # NOTE: It's important that `pkgs` be taken as an argument here, so that
   # home-manager may install/configure packages based on the user's settings.
   primary-user.home-manager = { pkgs, ... }: {
-    home.packages = with pkgs; [
+    home.packages = with pkgs; with kdeApplications; [
       discord
       firefox
       irccloud
       signal-desktop
       slack
       spotify
+
+      # KDE/Plasma packges
+      ark
+      kcalc
+      kdeconnect
+      kdeplasma-addons
+      spectacle
     ];
   };
 }
