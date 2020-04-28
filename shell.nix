@@ -1,5 +1,5 @@
 # { machine ? "crazy-diamond"
-{ sources ? import ./sources.nix
+{ sources ? import ./nix/sources.nix
 }:
 
 let
@@ -22,23 +22,13 @@ let
 
   #############################################################################
 
-  niv = pkgs.symlinkJoin {
-    name = "niv";
-    paths = [ sources.niv ];
-    buildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/niv \
-        --add-flags "--sources-file ${toString ./sources.json}"
-    '';
-  };
-
-  #############################################################################
+  niv = (pkgs.callPackage sources.niv {}).niv;
 
   nix-linter = (pkgs.callPackage sources.nix-linter {}).nix-linter;
 
   #############################################################################
 
-  files = "$(find . -name '*.nix')";
+  files = "$(find . -not -path './nix/*' -name '*.nix')";
 
   lint = pkgs.writeShellScriptBin "lint" "nix-linter ${files}";
 

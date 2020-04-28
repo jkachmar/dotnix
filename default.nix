@@ -1,4 +1,4 @@
-{ sources ? import ./sources.nix }:
+{ sources ? import ./nix/sources.nix }:
 
 let
   # FIXME: Code duplication; cf. `shell.nix`.

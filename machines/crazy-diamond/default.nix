@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  sources = import ../../sources.nix;
+  sources = import ../../nix/sources.nix;
 in
 
 {
