@@ -3,6 +3,6 @@
 {
   imports = [
     ./nix
-    ./devtools.nix
+    ./devtools
   ];
 }

@@ -1,12 +1,17 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./neovim.nix
+  ];
+
   ###############################################################################
   # System-level configuration.
   environment.systemPackages = with pkgs; [
     curl
     git
     nix-prefetch-git
+    niv
     vim
     wget
   ];
@@ -19,6 +24,7 @@
   primary-user.home-manager = { pkgs, ... }: {
     home.packages = with pkgs; [
       mosh
+      niv
       ripgrep
       # sshuttle
     ];
@@ -70,13 +76,6 @@
             merge-log = "\"!f() { git log --stat \\\"\$1^..\$1\\\"; }; f\"";
           };
         };
-      };
-
-      #########################################################################
-      neovim = {
-        enable = true;
-        viAlias = true;
-        vimAlias = true;
       };
 
       #########################################################################

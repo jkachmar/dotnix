@@ -53,6 +53,7 @@
   # home-manager may install/configure packages based on the user's settings.
   primary-user.home-manager = { pkgs, ... }: {
     home.packages = with pkgs; with kdeApplications; [
+      anki
       discord
       firefox
       irccloud
