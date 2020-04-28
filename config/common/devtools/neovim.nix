@@ -14,10 +14,11 @@
 
       configure = {
         plug.plugins = with pkgs.vimPlugins; [
+          commentary
           direnv-vim
+          gitgutter
           gruvbox-community
           fugitive
-          vim-gitgutter
           vim-nix
         ];
 
