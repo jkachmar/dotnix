@@ -25,7 +25,6 @@ in
   nix = {
     binaryCaches = substituters;
     binaryCachePublicKeys = publicKeys;
-    useSandbox = true;
   };
 
   nixpkgs.config = import nixpkgsCfg;

@@ -13,4 +13,9 @@
   #
   # Maybe this helps...
   security.sudo.enable = true;
+
+  # Sandboxing is much more convoluted under darwin
+  #
+  # See: https://github.com/NixOS/nix/issues/2311
+  nix.useSandbox = true;
 }
