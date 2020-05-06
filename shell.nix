@@ -7,7 +7,7 @@ let
   # TODO: Make this better...
   #
   # Hardcoded list of darwin machine names.
-  darwinMachines = [ "crazy-diamond" ];
+  darwinMachines = [ "crazy-diamond" "highway-star" ];
   machineName = (import ./current-machine {}).networking.hostName;
   isDarwin =
     builtins.any
