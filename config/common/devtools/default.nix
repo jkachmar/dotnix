@@ -87,6 +87,8 @@
           add_newline = false;
           # git_status can hang on large projects
           git_status.disabled = true;
+          # haskell module is very slow for some reason
+          haskell.disabled = true;
           line_break.disabled = true;
           username.show_always = true;
         };
