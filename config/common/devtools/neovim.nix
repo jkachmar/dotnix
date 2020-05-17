@@ -67,29 +67,5 @@
         '';
       };
     };
-    xdg.configFile."nvim/coc-settings.json".text = ''
-      {
-        "languageserver": {
-          "haskell": {
-            "command": "ghcide",
-            "args": [
-              "--lsp"
-            ],
-            "rootPatterns": [
-              ".stack.yaml",
-              ".hie-bios",
-              "BUILD.bazel",
-              "cabal.config",
-              "package.yaml"
-            ],
-            "filetypes": [
-              "hs",
-              "lhs",
-              "haskell"
-            ]
-          }
-        }
-      }
-    '';
   };
 }
