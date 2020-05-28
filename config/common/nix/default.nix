@@ -35,6 +35,10 @@ in
     xdg.configFile."nixpkgs/config.nix".source = userCfg;
 
     xdg.configFile."nix/nix.conf".text = ''
+      # Keep GC roots associated with nix-shell from being cleaned
+      keep-derivations = true
+      keep-outputs = true
+
       trusted-substituters = ${toString substituters}
       trusted-public-keys = ${toString publicKeys}
     '';
