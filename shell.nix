@@ -59,7 +59,7 @@ let
   else nix-path-nixos;
 
   set-nix-path = ''
-    export dotfiles="$(nix-build --no-out-link)"
+    export dotfiles="${builtins.toPath ./.}"
     export NIX_PATH="${nix-path}"
   '';
 
@@ -87,7 +87,7 @@ let
     ${lint}/bin/lint
     ${format}/bin/format
 
-    sudo ${rebuild-cmd} $1
+    sudo -i ${rebuild-cmd} $1
   '';
 
   collect-garbage =
