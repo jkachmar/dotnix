@@ -43,14 +43,18 @@ let
 
   nix-path-nixos = build-nix-path-env-var {
     nixpkgs = pkgSrc;
-    nixpkgs-overlays = "$dotfiles/overlays";
+    # TODO: Evaluate if this is actually useful now that overlays are being
+    # manually applied 
+    # nixpkgs-overlays = "$dotfiles/overlays";
     nixos-config = "$dotfiles/current-machine";
   };
 
   nix-path-darwin = build-nix-path-env-var {
     darwin = sources.nix-darwin;
     nixpkgs = pkgSrc;
-    nixpkgs-overlays = "$dotfiles/overlays";
+    # TODO: Evaluate if this is actually useful now that overlays are being
+    # manually applied 
+    # nixpkgs-overlays = "$dotfiles/overlays";
     darwin-config = "$dotfiles/current-machine";
   };
 
@@ -77,7 +81,8 @@ let
 
   rebuild-cmd = if isDarwin
   then darwin-rebuild-cmd
-  else pkgs.writeShellScriptBin "" "sudo -i ${nixos-rebuild-cmd}";
+  else nixos-rebuild-cmd;
+  # else pkgs.writeShellScriptBin "" "sudo -i ${nixos-rebuild-cmd}";
 
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     set -e

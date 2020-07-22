@@ -31,7 +31,7 @@ in
       ghcide
       libvterm-neovim
       mosh
-      niv
+      # niv
       ripgrep
       shellcheck
       # sshuttle
