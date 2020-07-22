@@ -43,14 +43,14 @@ let
 
   nix-path-nixos = build-nix-path-env-var {
     nixpkgs = pkgSrc;
-    nixpkgs-overlays = "$dotfiles/overlays";
+    nixpkgs-overlays = "$dotfiles/overlays.nix";
     nixos-config = "$dotfiles/current-machine";
   };
 
   nix-path-darwin = build-nix-path-env-var {
     darwin = sources.nix-darwin;
     nixpkgs = pkgSrc;
-    nixpkgs-overlays = "$dotfiles/overlays";
+    nixpkgs-overlays = "$dotfiles/overlays.nix";
     darwin-config = "$dotfiles/current-machine";
   };
 
