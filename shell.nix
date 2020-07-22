@@ -43,14 +43,14 @@ let
 
   nix-path-nixos = build-nix-path-env-var {
     nixpkgs = pkgSrc;
-    nixpkgs-overlays = "$dotfiles/overlays.nix";
+    nixpkgs-overlays = "$dotfiles/overlays";
     nixos-config = "$dotfiles/current-machine";
   };
 
   nix-path-darwin = build-nix-path-env-var {
     darwin = sources.nix-darwin;
     nixpkgs = pkgSrc;
-    nixpkgs-overlays = "$dotfiles/overlays.nix";
+    nixpkgs-overlays = "$dotfiles/overlays";
     darwin-config = "$dotfiles/current-machine";
   };
 
@@ -85,7 +85,7 @@ let
     ${lint}/bin/lint
     ${format}/bin/format
 
-    ${rebuild-cmd} $1
+    sudo -i ${rebuild-cmd} $1
   '';
 
   collect-garbage =

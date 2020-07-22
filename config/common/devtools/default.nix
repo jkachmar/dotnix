@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   ghcideDrv = import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/archive/67493b873e1a5e5d53837401ab6b128b20e8a989.tar.gz") {};
@@ -23,10 +23,7 @@ in
 
   ###############################################################################
   # User-level configuration.
-  #
-  # NOTE: It's important that `pkgs` be taken as an argument here, so that
-  # home-manager may install/configure packages based on the user's settings.
-  primary-user.home-manager = { pkgs, ... }: {
+  primary-user.home-manager = {
     home.packages = with pkgs; [
       cmake
       editorconfig-core-c
@@ -62,8 +59,8 @@ in
       #########################################################################
       git = {
         enable = true;
-        userName = "Joe Kachmar";
-        userEmail = "me@jkachmar.com";
+        userName = config.primary-user.fullname;
+        userEmail = config.primary-user.email;
 
         # TODO: Re-enable when GPG Signing is set up
         # signing = {

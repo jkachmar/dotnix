@@ -10,7 +10,7 @@
   # See: https://github.com/NixOS/nix/issues/2311
   #
   # NOTE: This should be fixed on nix-2.3.5; try enabling it after upgrading.
-  nix.useSandbox = false;
+  nix.useSandbox = true;
 
   # This replicates some of the nix.conf settings configured in 
   # '$dotfiles/config/common/nix/default.nix'.

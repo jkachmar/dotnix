@@ -5,16 +5,22 @@ let
 in
 
 {
+  options.primary-user.email = lib.mkOption {
+    type = lib.types.nullOr lib.types.str;
+    default = null;
+    description = "The primary user's email address.";
+  };
+
   options.primary-user.fullname = lib.mkOption {
     type = lib.types.nullOr lib.types.str;
     default = null;
-    description = "The name of the primary user account.";
+    description = "The primary user's \"full name\".";
   };
 
   options.primary-user.username = lib.mkOption {
     type = lib.types.nullOr lib.types.str;
     default = null;
-    description = "The name of the primary user account.";
+    description = "The primary user's account name (username).";
   };
 
   imports = [

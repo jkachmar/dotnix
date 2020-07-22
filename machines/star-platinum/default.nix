@@ -1,33 +1,22 @@
 { ... }:
 
-let
-  sources = import ../../nix/sources.nix;
-in
-
 {
   imports = [
     ./hardware-configuration.nix
-    "${sources.home-manager}/nixos"
+    ../../config/nix
     ../../modules/nix
     ../../config/common
     ../../config/nixos
   ];
 
+  primary-user.email = "me@jkachmar.com";
   primary-user.fullname = "Joe Kachmar";
   primary-user.username = "jkachmar";
   networking.hostName = "star-platinum";
 
   #############################################################################
-  # Machine-specific time settings
-  #
-  # TODO: Although the `hardwareClockInLocalTime` setting is specific to this
-  # machine (since it's required for dual-booting with windows), perhaps
-  # `timeZone` should be moved up to `../../config/common` since it's very
-  # unlikely that my machines will span multiple time zones.
-  time = {
-    hardwareClockInLocalTime = true; # Required for Windows
-    timeZone = "America/New_York";
-  };
+  # Machine-specific time settings, required for Windows dual-boot.
+  time.hardwareClockInLocalTime = true;
 
   #############################################################################
   # Machine-specific networking configuration
