@@ -1,5 +1,10 @@
 { pkgs, ... }:
 
+let
+  ghcideDrv = import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/archive/67493b873e1a5e5d53837401ab6b128b20e8a989.tar.gz") {};
+  ghcide = ghcideDrv.ghcide-ghc883;
+in
+
 {
   imports = [
     ./neovim.nix
@@ -26,6 +31,7 @@
       cmake
       editorconfig-core-c
       fd
+      ghcide
       libvterm-neovim
       mosh
       niv
@@ -66,21 +72,95 @@
         # };
 
         extraConfig = {
+          alias = {
+            st = "status";
+          };
+
+          core = {
+            editor = "vim";
+            pager = "${pkgs.gitAndTools.delta}/bin/delta";
+          };
+          interactive.diffFilter = "${pkgs.gitAndTools.delta}/bin/delta --color-only";
+          delta = {
+            line-numbers = true;
+            # minus-color = "#340001";
+            # plus-color = "#012800";
+            syntax-theme = "Monokai Extended";
+          };
+
+          color = {
+            #   diff = {
+            #     meta = "yellow";
+            #     frag = "magenta bold";
+            #     commit = "yellow bold";
+            #     old = "red bold";
+            #     new = "green bold";
+            #     whitespace = "red reverse";
+            #   };
+
+            #   diff-highlight = {
+            #     newHighlight = "green bold 22";
+            #     newNormal = "green bold";
+            #     oldNormal = "red bold";
+            #     oldHighlight = "red bold 52";
+            #   };
+
+            ui = "always";
+          };
+
           pull.rebase = true;
-          color.ui = "auto";
           push = {
             default = "simple";
             # TODO: Re-enable once GPG signing is back on
             # gpgsign = "if-asked";
           };
 
-          # TODO: Update as necessary, these were lifted directly from cprussin
-          alias = {
-            tree = "\"log --all --graph --pretty=format:'%C(yellow)%h %C(cyan)%ai (%ar) %Cred%d%Creset\\n        %C(bold)%an <%ae>%Creset\\n        %s\\n'\"";
-            alias = "\"!git config --list | grep 'alias\\\\.' | sed 's/alias\\\\.\\\\([^=]*\\\\)=\\\\(.*\\\\)/\\\\1\\\\\t => \\\\2/' | sort\"";
-            merge-log = "\"!f() { git log --stat \\\"\$1^..\$1\\\"; }; f\"";
-          };
+          rerere.enabled = true;
         };
+
+        ignores = [
+          # Emacs
+          "*~"
+          "*.*~"
+          "\#*"
+          ".\#*"
+
+          # Vim
+          "*.swp"
+          ".*.sw[a-z]"
+          "*.un~"
+          "Session.vim"
+          ".netrwhist"
+
+          # Compiled
+          "*.class"
+          "*.exe"
+          "*.o"
+          "*.so"
+          "*.dll"
+          "*.pyc"
+
+          # Tags (from etags and ctags)
+          "TAGS"
+          "!TAGS/"
+          "tags"
+          "!tags/"
+
+          # General
+          "*.log"
+          "*.cache"
+          ".DS_Store?"
+          ".DS_Store"
+          ".CFUserTextEncoding"
+          ".Trash"
+          ".Xauthority"
+          "thumbs.db"
+          "Icon?"
+          "Thumbs.db"
+          ".cache"
+          ".pid"
+          ".sock"
+        ];
       };
 
       #########################################################################

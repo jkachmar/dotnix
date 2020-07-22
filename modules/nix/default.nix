@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./primary-user.nix
+    ./primary-user
   ];
 }

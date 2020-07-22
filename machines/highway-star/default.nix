@@ -8,12 +8,13 @@ in
   imports = [
     ./hardware.nix
     "${sources.home-manager}/nix-darwin"
-    ../../modules/darwin
+    ../../modules/nix
     ../../config/common
     ../../config/darwin
   ];
 
-  primary-user.name = "jkachmar";
+  primary-user.fullname = "Joe Kachmar";
+  primary-user.username = "jkachmar";
   networking.hostName = "highway-star";
 
   ###############################################################################

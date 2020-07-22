@@ -8,12 +8,13 @@ in
   imports = [
     ./hardware-configuration.nix
     "${sources.home-manager}/nixos"
-    ../../modules/nixos
+    ../../modules/nix
     ../../config/common
     ../../config/nixos
   ];
 
-  primary-user.name = "jkachmar";
+  primary-user.fullname = "Joe Kachmar";
+  primary-user.username = "jkachmar";
   networking.hostName = "star-platinum";
 
   #############################################################################

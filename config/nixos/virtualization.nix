@@ -11,5 +11,5 @@
     enable = true;
     enableExtensionPack = true;
   };
-  users.extraGroups.vboxusers.members = [ config.primary-user.name ];
+  users.extraGroups.vboxusers.members = [ config.primary-user.username ];
 }

@@ -77,21 +77,21 @@ let
 
   rebuild-cmd = if isDarwin
   then darwin-rebuild-cmd
-  else nixos-rebuild-cmd;
+  else pkgs.writeShellScriptBin "" "sudo -i ${nixos-rebuild-cmd}";
 
-  # It's important that _all of_ 'rebuild-root-cmd' be executed under 'sudo'
-  # so that the $NIX_PATH is set appropriately
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     set -e
 
     ${lint}/bin/lint
     ${format}/bin/format
 
-    sudo -i ${rebuild-cmd} $1
+    ${rebuild-cmd} $1
   '';
 
   collect-garbage =
-    pkgs.writeShellScriptBin "collect-garbage" "sudo nix-collect-garbage -d";
+    pkgs.writeShellScriptBin "collect-garbage" ''
+      nix-collect-garbage -d
+    '';
 
   #############################################################################
 
