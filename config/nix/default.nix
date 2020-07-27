@@ -33,6 +33,8 @@ in
   };
 
   nix = {
+    useSandbox = true; # macOS errors should be fixed as of nix-2.3.6
+
     binaryCaches = caches.substituters;
     binaryCachePublicKeys = caches.keys;
 
@@ -41,12 +43,6 @@ in
     # nixPath = nix.nixPath ++ lib.mapAttrsToList (k: v: "${k}=${v}") {
     #   nixpkgs-overlays = overlaysPath;
     # };
-
-    extraOptions = ''
-      # Keep GC roots associated with nix-shell from being cleaned
-      gc-keep-derivations = true
-      gc-keep-outputs = true
-    '';
   };
 
   #############################################################################
@@ -57,14 +53,17 @@ in
       config = import nixpkgsConfig;
     };
 
-    xdg.configFile."nixpkgs/config.nix".source = nixpkgsConfig;
-    xdg.configFile."nix/nix.conf".text = ''
-      # Keep GC roots associated with nix-shell from being cleaned
-      keep-derivations = true
-      keep-outputs = true
+    xdg = {
+      enable = true;
+      configFile."nixpkgs/config.nix".source = nixpkgsConfig;
+      configFile."nix/nix.conf".text = ''
+        # Keep GC roots associated with nix-shell from being cleaned
+        keep-derivations = true
+        keep-outputs = true
 
-      trusted-substituters = ${toString caches.substituters}
-      trusted-public-keys = ${toString caches.keys}
-    '';
+        trusted-substituters = ${toString caches.substituters}
+        trusted-public-keys = ${toString caches.keys}
+      '';
+    };
   };
 }

@@ -5,14 +5,9 @@ let
     singleBinary = false;
     withPrefix = true;
   };
-
 in
 
 {
-  imports = [
-    ./lorri.nix
-  ];
-
   ###############################################################################
   # System-level configuration.
   environment.systemPackages = with pkgs; [ gcoreutils ];
@@ -36,12 +31,9 @@ in
   # User-level configuration.
   primary-user.home-manager = {
     home.packages = with pkgs; [
-      coreutils
-      emacs
+      emacsMacport
       findutils
-      gawk
-      gnugrep
-      gnused
+      lorri
     ];
 
     # Fixes a bug where fish shell doesn't properly set up the nix path on macOS.

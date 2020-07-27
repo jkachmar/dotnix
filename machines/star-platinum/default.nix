@@ -2,17 +2,26 @@
 
 {
   imports = [
+    # Load hardware and Nix base configuration first
     ./hardware-configuration.nix
     ../../config/nix
     ../../modules/nix
-    ../../config/common
-    ../../config/nixos
+
+    # Load additional system/user/env configuration modules after
+    ../../modules/boot
+    ../../modules/desktop
+    ../../modules/development
   ];
 
   primary-user.email = "me@jkachmar.com";
   primary-user.fullname = "Joe Kachmar";
   primary-user.username = "jkachmar";
   networking.hostName = "star-platinum";
+
+  # Remember that one time sudo broke?
+  #
+  # Maybe this helps...
+  security.sudo.enable = true;
 
   #############################################################################
   # Machine-specific time settings, required for Windows dual-boot.

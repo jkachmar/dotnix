@@ -20,13 +20,25 @@ in
     # Automatically detects files in the store that have identical contents.
     autoOptimiseStore = true;
 
-    gc = {
-      # Automatically run the Nix garbage collector daily.
-      automatic = true;
-      dates = "daily";
-      # TODO: This one seems iffy...
-      # # Run the collector automatically every 10 days.
-      # options = "--delete-older-than 10d";
+    extraOptions = ''
+      # Keep GC roots associated with nix-shell from being cleaned
+      keep-derivations = true
+      keep-outputs = true
+    '';
+
+    nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
+      nixpkgs = sources.nixpkgs-nixos;
+      nixpkgs-overlays = ../../overlays;
+      nixos-config = toString <nixos-config>;
     };
+
+    # # TODO: This one seems iffy...
+    # gc = {
+    #   # Automatically run the Nix garbage collector daily.
+    #   automatic = true;
+    #   dates = "daily";
+    #   # Run the collector automatically every 10 days.
+    #   options = "--delete-older-than 10d";
+    # };
   };
 }

@@ -5,8 +5,7 @@
     ./hardware.nix
     ../../config/nix
     ../../modules/nix
-    ../../config/common
-    ../../config/darwin
+    ../../modules/development
   ];
 
   primary-user.email = "me@jkachmar.com";

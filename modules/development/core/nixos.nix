@@ -16,7 +16,7 @@
       fish.enable = true;
       zsh.enable = true;
 
-      # Enable emads
+      # Enable emacs
       emacs.enable = true;
     };
   };

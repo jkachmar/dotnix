@@ -5,14 +5,13 @@
     ./hardware.nix
     ../../config/nix
     ../../modules/nix
-    ../../config/common
-    ../../config/darwin
+    ../../modules/development
   ];
 
-  primary-user.email = ""; # TODO: store this in secrets
+  # primary-user.email = ""; # TODO: store this in secrets
   primary-user.fullname = "Joe Kachmar";
   primary-user.username = ""; # TODO: store this in secrets
-  networking.hostName = "highway-star";
+  # networking.hostName = "highway-star";
 
   ###############################################################################
   # Machine-specific, user-level configuration.

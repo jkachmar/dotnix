@@ -20,12 +20,18 @@ in
 
     # Auto-upgrade Nix package.
     package = pkgs.nix;
-  };
 
-  nix.nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
-    darwin = sources.nix-darwin;
-    nixpkgs = sources.nixpkgs-darwin;
-    nixpkgs-overlays = ../../overlays;
+    extraOptions = ''
+      # Keep GC roots associated with nix-shell from being cleaned
+      gc-keep-derivations = true
+      gc-keep-outputs = true
+    '';
+
+    nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
+      darwin = sources.nix-darwin;
+      nixpkgs = sources.nixpkgs-darwin;
+      nixpkgs-overlays = ../../overlays;
+    };
   };
 
   # Auto-upgrade the daemon service.
