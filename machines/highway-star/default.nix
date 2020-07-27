@@ -20,6 +20,13 @@
     home.packages = with pkgs; [ awscli ];
   };
 
+  # NOTE: If `environment.darwinConfig` is _not_ set, then nix-darwin defaults
+  # to some location in the home directory
+  #
+  # If it's set _in addition to_ `darwin-config` on the NIX_PATH, then
+  # duplicate entries will be present
+  environment.darwinConfig = ./.;
+
   #############################################################################
   # Used for backwards compatibility, please read the changelog before changing
   # $ darwin-rebuild changelog

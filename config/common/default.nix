@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./nix
     ./devtools
   ];
 }
