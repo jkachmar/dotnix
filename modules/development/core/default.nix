@@ -43,6 +43,9 @@ in
         enable = true;
         enableBashIntegration = true;
         enableFishIntegration = true;
+        # 'lorri' is good, but sometimes it breaks, so it's handy to keep this
+        # around .
+        enableNixDirenvIntegration = true;
       };
 
       fish = {
