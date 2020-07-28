@@ -1,6 +1,4 @@
-# { machine ? "crazy-diamond"
-{ sources ? import ./nix/sources.nix
-}:
+{ sources ? import ./nix/sources.nix }:
 
 let
   # TODO: Update this if the architectures diverge.
