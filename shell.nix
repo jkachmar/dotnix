@@ -3,20 +3,18 @@
 }:
 
 let
-  # FIXME: Code duplication; cf. `shell.nix`.
-  # TODO: Make this better...
-  #
-  # Hardcoded list of darwin machine names.
-  darwinMachines = [ "crazy-diamond" "highway-star" ];
-  machineName = (import ./current-machine {}).networking.hostName;
+  # TODO: Update this if the architectures diverge.
   isDarwin =
     builtins.any
-      (darwinMachineName: machineName == darwinMachineName)
-      (builtins.trace machineName darwinMachines);
+      (arch: builtins.currentSystem == arch)
+      [ "x86_64-darwin" ];
 
-  pkgSrc = if isDarwin
-  then builtins.trace "darwin" sources.nixpkgs-darwin
-  else builtins.trace "nixos" sources.nixpkgs-nixos;
+  machineName = (import ./current-machine {}).networking.hostName;
+  pkgSrc = builtins.trace machineName (
+    if isDarwin
+    then builtins.trace "darwin" sources.nixpkgs-darwin
+    else builtins.trace "nixos" sources.nixpkgs-nixos
+  );
 
   pkgs = import pkgSrc {};
 
