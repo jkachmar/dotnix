@@ -21,8 +21,6 @@ nix-shell --run rebuild
 To install based off of a new profile:
 
 * create a new directory with the machine name at `machines/<new-machine-name>`
-* ensure that `isDarwin` is updated in `default.nix` and `shell.nix` to reflect
-the new machine's host platform
 * perform the same steps as above to build and deploy the new machine's
 configuration
 
