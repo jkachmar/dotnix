@@ -31,6 +31,7 @@ in
   # User-level configuration.
   primary-user.home-manager = {
     home.packages = with pkgs; [
+      coreutils # lol, macOS (BSD) coreutils are broken somehow
       emacsMacport
       findutils
       lorri
