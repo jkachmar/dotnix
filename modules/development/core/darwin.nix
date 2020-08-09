@@ -32,7 +32,7 @@ in
   primary-user.home-manager = {
     home.packages = with pkgs; [
       coreutils # lol, macOS (BSD) coreutils are broken somehow
-      emacsMacport
+      emacs-plus # lmao cannot believe I wasted my time with this...
       findutils
       lorri
     ];

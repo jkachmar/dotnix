@@ -2,6 +2,14 @@
 # tree.
 (
   self: _: {
+    emacs-plus = self.callPackage ./../pkgs/emacs-plus {
+      inherit (self.darwin.apple_sdk.frameworks)
+        AppKit Cocoa GSS IOKit ImageIO
+        ;
+      withMojave = true;
+      withNoTitlebar = true;
+    };
+
     irccloud = self.callPackage ./../pkgs/irccloud {};
   }
 )
