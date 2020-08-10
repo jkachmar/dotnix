@@ -3,15 +3,13 @@
 (
   self: super: {
     emacs-plus = self.callPackage ./../pkgs/emacs-plus {
-      inherit (super) gcc;
-      inherit (self.darwin.apple_sdk.frameworks)
-        AppKit Cocoa GSS IOKit ImageIO
-        ;
+      inherit (self.darwin.apple_sdk.frameworks) Cocoa;
 
+      # Arguments.
+      emacsDrv = super.emacsGit;
       # Options.
       withMojave = true;
-      withNativeComp = true;
-      # withNoTitlebar = true;
+      withNoTitlebar = false;
     };
 
     irccloud = self.callPackage ./../pkgs/irccloud {};
