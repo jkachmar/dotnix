@@ -1,16 +1,12 @@
 # Custom packages that are not currently provided within the nixpkgs package
 # tree.
-(
-  self: _: {
-    emacs-plus = self.callPackage ./../pkgs/emacs-plus {
-      inherit (self.darwin.apple_sdk.frameworks)
-        AppKit Cocoa GSS IOKit ImageIO
-        ;
-      withMojave = true;
-      withNativeComp = true;
-      # withNoTitlebar = true;
-    };
+let
+  sources = import ../nix/sources.nix;
+  unstable = import sources.nixpkgs-unstable {};
+in
 
-    irccloud = self.callPackage ./../pkgs/irccloud {};
+(
+  _: _: {
+    libgccjit = import ../pkgs/libgccjit { gcc = unstable.gcc10; };
   }
 )

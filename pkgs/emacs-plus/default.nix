@@ -1,6 +1,5 @@
 { stdenv
 , lib
-, fetchurl
 , fetchFromGitHub
   # Native dependencies.
 , autoconf
@@ -9,6 +8,7 @@
 , texinfo
   # General dependencies.
 , gettext
+, gnused
 , gmp
 , harfbuzz
 , librsvg
@@ -67,9 +67,10 @@ stdenv.mkDerivation {
   inherit pname version;
 
   src = fetchFromGitHub {
+    # NOTE: feature/native-comp
     owner = "emacs-mirror";
     repo = "emacs";
-    rev = "feature/native-comp";
+    rev = "dd814b0a58aebe12168ffde946860e851ecf2b5b";
     sha256 = "0b7lwlpav73q7misvlsp9d9w4vbjfpfka780is1s81jwrsvww24y";
 
     # NOTE: 27.1-rc2
@@ -83,7 +84,17 @@ stdenv.mkDerivation {
     ./patches/emacs-28/clean-env.patch # From nixpkgs.
     "${emacsPlusPatches}/fix-window-role.patch"
     "${emacsPlusPatches}/system-appearance.patch"
-  ] ++ lib.optional withNoTitlebar "${emacsPlusPatches}/no-titlebar.patch";
+  ] ++ lib.optional withNoTitlebar "${emacsPlusPatches}/no-titlebar.patch"
+
+  # TODO: Remove this once the following PR is resolved/merged:
+  # https://github.com/NixOS/nixpkgs/pull/94637
+  #
+  # Patch extracted from the following branch:
+  # https://github.com/emacs-mirror/emacs/compare/feature/native-comp...antifuchs:allow-setting-driver-options
+  #
+  # ...which I found on the following mailing list thread:
+  # https://debbugs.gnu.org/cgi/bugreport.cgi?bug=42761
+  ++ lib.optional withNativeComp "${emacsPlusPatches}/native-comp.patch";
 
   postPatch = lib.concatStringsSep "\n" [
     # Make native compilation work both inside and outside of nix build
@@ -91,9 +102,9 @@ stdenv.mkDerivation {
       lib.optionalString withNativeComp (
         let
           libPath = lib.concatStringsSep ":" [
-            "${lib.getLib libgccjit}/lib/gcc/${targetPlatform.config}/${libgccjit.version}"
+            "${libgccjit}/lib/gcc/${targetPlatform.config}/${libgccjit.version}"
             "${lib.getLib stdenv.cc.cc}/lib"
-            "${lib.getLib stdenv.glibc}/lib"
+            "${lib.getLib stdenv.libc}/lib"
           ];
         in
           ''
@@ -107,7 +118,7 @@ stdenv.mkDerivation {
     "rm -fr .git"
   ];
 
-  nativeBuildInputs = [ autoconf automake makeWrapper pkgconfig ];
+  nativeBuildInputs = [ autoconf automake gnused makeWrapper pkgconfig ];
   buildInputs = [ AppKit Cocoa gettext gmp GSS harfbuzz.dev ImageIO IOKit ncurses texinfo ]
   ++ lib.optional withDbus dbus
   ++ lib.optional withGnuTLS gnutls
@@ -116,8 +127,12 @@ stdenv.mkDerivation {
   ++ lib.optional withNativeComp libgccjit
   ++ lib.optional withXML libxml2;
 
+  makeFlags = [ "NATIVE_FAST_BOOT=1" ];
+
   configureFlags = [
+    "--with-ns"
     "--disable-ns-self-contained"
+    "--with-rsvg"
     (if withDbus then "--with-dbus" else "--without-dbus")
   ]
   ++ lib.optional withGnuTLS "--with-gnutls"
