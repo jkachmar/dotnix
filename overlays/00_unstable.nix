@@ -6,6 +6,7 @@ in
 
 (
   _: _: {
+    gcc = unstable.gcc10;
     lorri = unstable.lorri;
   }
 )

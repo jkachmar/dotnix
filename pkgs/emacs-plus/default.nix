@@ -31,7 +31,7 @@
 , withNativeComp ? false
 , binutils
 , binutils-unwrapped
-, libgccjit
+, gcc
 , makeWrapper
 , targetPlatform
 , withNoTitlebar ? false
@@ -60,6 +60,18 @@ let
     sha256 = "1llkmfnhmc3jlp1m2bvpw374y7hmxnrhzjdm2d8l57bnj1fd0v7c";
   };
   emacsPlusPatches = "${emacsPlusSrc}/patches/emacs-${majorVersion}";
+
+  libgccjit = gcc.cc.overrideAttrs (
+    _: {
+      langFortran = false;
+      langCC = false;
+      langC = false;
+      profiledCompiler = false;
+      langJit = true;
+      enableLTO = false;
+      builder = ./gcc-builder.sh;
+    }
+  );
 
 in
 
