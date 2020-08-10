@@ -7,7 +7,8 @@
         AppKit Cocoa GSS IOKit ImageIO
         ;
       withMojave = true;
-      withNoTitlebar = true;
+      withNativeComp = true;
+      # withNoTitlebar = true;
     };
 
     irccloud = self.callPackage ./../pkgs/irccloud {};

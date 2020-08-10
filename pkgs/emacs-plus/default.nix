@@ -10,6 +10,7 @@
   # General dependencies.
 , gettext
 , gmp
+, harfbuzz
 , librsvg
 , ncurses
   # Darwin-specific dependencies.
@@ -24,9 +25,15 @@
 , withDebug ? false
 , withGnuTLS ? true
 , gnutls
+, withImageMagick ? true
 , withJSON ? true
 , jansson
-, withImageMagick ? true
+, withNativeComp ? false
+, binutils
+, binutils-unwrapped
+, libgccjit
+, makeWrapper
+, targetPlatform
 , withNoTitlebar ? false
 , withXML ? true
 , libxml2
@@ -39,9 +46,11 @@
 
 let
   pname = "emacs-plus";
-  version = "27.1-rc2";
-  emacsName = "emacs-${version}";
+  version = "28.0.50";
   majorVersion = lib.head (lib.splitString "." version);
+
+  # NOTE: Uncomment when not on native comp branch. 
+  # emacsName = "emacs-${version}";
 
   # Used to source and select up-to-date patches.
   emacsPlusSrc = fetchFromGitHub {
@@ -50,41 +59,70 @@ let
     rev = "b6a1d5306afdd3a5b15a0ae6a5d8b3d050575d14";
     sha256 = "1llkmfnhmc3jlp1m2bvpw374y7hmxnrhzjdm2d8l57bnj1fd0v7c";
   };
-  patchDir = "${emacsPlusSrc}/patches/emacs-${majorVersion}";
+  emacsPlusPatches = "${emacsPlusSrc}/patches/emacs-${majorVersion}";
 
 in
 
 stdenv.mkDerivation {
   inherit pname version;
 
-  src = fetchurl {
-    url = "https://alpha.gnu.org/gnu/emacs/pretest/${emacsName}.tar.xz";
-    sha256 = "0h9f2wpmp6rb5rfwvqwv1ia1nw86h74p7hnz3vb3gjazj67i4k2a";
+  src = fetchFromGitHub {
+    owner = "emacs-mirror";
+    repo = "emacs";
+    rev = "feature/native-comp";
+    sha256 = "0b7lwlpav73q7misvlsp9d9w4vbjfpfka780is1s81jwrsvww24y";
+
+    # NOTE: 27.1-rc2
+    # rev = "tags/${emacsName}";
+    # sha256 = "1i50ksf96fxa3ymdb1irpc82vi67861sr4xlcmh9f64qw9imm3ks";
   };
 
   enableParallelBuilding = true;
 
   patches = [
-    ./clean-env.patch # From nixpkgs.
-    "${patchDir}/fix-window-role.patch"
-    "${patchDir}/system-appearance.patch"
-  ] ++ lib.optional withNoTitlebar "${patchDir}/no-titlebar.patch";
+    ./patches/emacs-28/clean-env.patch # From nixpkgs.
+    "${emacsPlusPatches}/fix-window-role.patch"
+    "${emacsPlusPatches}/system-appearance.patch"
+  ] ++ lib.optional withNoTitlebar "${emacsPlusPatches}/no-titlebar.patch";
 
-  postPatch = "rm -fr .git";
+  postPatch = lib.concatStringsSep "\n" [
+    # Make native compilation work both inside and outside of nix build
+    (
+      lib.optionalString withNativeComp (
+        let
+          libPath = lib.concatStringsSep ":" [
+            "${lib.getLib libgccjit}/lib/gcc/${targetPlatform.config}/${libgccjit.version}"
+            "${lib.getLib stdenv.cc.cc}/lib"
+            "${lib.getLib stdenv.glibc}/lib"
+          ];
+        in
+          ''
+            substituteInPlace lisp/emacs-lisp/comp.el --replace \
+              "(defcustom comp-async-env-modifier-form nil" \
+              "(defcustom comp-async-env-modifier-form '((setenv \"LIBRARY_PATH\" (string-join (seq-filter (lambda (v) (null (eq v nil))) (list (getenv \"LIBRARY_PATH\") \"${libPath}\")) \":\")))"
+          ''
+      )
+    )
 
-  nativeBuildInputs = [ autoconf automake pkgconfig ];
-  buildInputs = [ AppKit Cocoa gettext gmp GSS ImageIO IOKit ncurses texinfo ]
+    "rm -fr .git"
+  ];
+
+  nativeBuildInputs = [ autoconf automake makeWrapper pkgconfig ];
+  buildInputs = [ AppKit Cocoa gettext gmp GSS harfbuzz.dev ImageIO IOKit ncurses texinfo ]
   ++ lib.optional withDbus dbus
   ++ lib.optional withGnuTLS gnutls
+  ++ lib.optionals withImageMagick [ imagemagick librsvg ]
   ++ lib.optional withJSON jansson
-  ++ lib.optional withXML libxml2
-  ++ lib.optionals withImageMagick [ imagemagick librsvg ];
+  ++ lib.optional withNativeComp libgccjit
+  ++ lib.optional withXML libxml2;
 
   configureFlags = [
+    "--disable-ns-self-contained"
     (if withDbus then "--with-dbus" else "--without-dbus")
   ]
   ++ lib.optional withGnuTLS "--with-gnutls"
   ++ lib.optional withJSON "--with-json"
+  ++ lib.optional withNativeComp "--with-nativecomp"
   ++ lib.optional withXML "--with-xml2";
 
   CFLAGS = "-DMAC_OS_X_VERSION_MAX_ALLOWED=101200" + (
@@ -98,6 +136,10 @@ stdenv.mkDerivation {
     then "-g -Og"
     else "-O3"
   );
+
+  LIBRARY_PATH = if withNativeComp
+  then "${lib.getLib stdenv.cc.libc}/lib"
+  else "";
 
   preConfigure = ''
     ./autogen.sh
@@ -125,14 +167,25 @@ stdenv.mkDerivation {
     mkdir -p $out/share/emacs/site-lisp/
     cp ${siteStart} $out/share/emacs/site-lisp/site-start.el
 
+    $out/bin/emacs --batch -f batch-byte-compile $out/share/emacs/site-lisp/site-start.el
+
+    siteVersionDir=`ls $out/share/emacs | grep -v site-lisp | head -n 1`
+
+    rm -rf $out/var
+    rm -rf $siteVersionDir
+
     mkdir -p $out/Applications
     mv nextstep/Emacs.app $out/Applications
   '';
 
   # TODO: Verify that this is necessary.
-  postFixup = ''
-    rm -rf $out/bin/ctags
-  '';
+  postFixup = lib.concatStringsSep "\n" [
+    (
+      lib.optionalString withNativeComp ''
+        wrapProgram $out/bin/emacs-* --prefix PATH : "${lib.makeBinPath [ binutils binutils-unwrapped ]}"
+      ''
+    )
+  ];
 
   meta = with stdenv.lib; {
     description = "The extensible, customizable GNU text editor";
