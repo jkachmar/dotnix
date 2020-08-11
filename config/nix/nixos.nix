@@ -17,6 +17,12 @@ in
   };
 
   nix = {
+    # Darwin sandboxing is still broken.
+    # https://github.com/NixOS/nix/issues/2311
+    #
+    # Unify this once everything works again.
+    useSandbox = true;
+
     # Automatically detects files in the store that have identical contents.
     autoOptimiseStore = true;
 

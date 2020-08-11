@@ -33,8 +33,6 @@ in
   };
 
   nix = {
-    useSandbox = true; # macOS errors should be fixed as of nix-2.3.6
-
     binaryCaches = caches.substituters;
     binaryCachePublicKeys = caches.keys;
 

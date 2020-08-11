@@ -14,6 +14,10 @@ in
   # environment.shells = [ pkgs.fish ];
 
   nix = {
+    # Darwin sandboxing is still broken.
+    # https://github.com/NixOS/nix/issues/2311
+    # useSandbox = true;
+
     # TODO: This one seems iffy...
     # # Run the collector automatically every 10 days.
     # options = "--delete-older-than 10d";
