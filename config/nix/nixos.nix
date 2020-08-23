@@ -26,12 +26,6 @@ in
     # Automatically detects files in the store that have identical contents.
     autoOptimiseStore = true;
 
-    extraOptions = ''
-      # Keep GC roots associated with nix-shell from being cleaned
-      keep-derivations = true
-      keep-outputs = true
-    '';
-
     nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
       nixpkgs = sources.nixpkgs-nixos;
       nixpkgs-overlays = ../../overlays;

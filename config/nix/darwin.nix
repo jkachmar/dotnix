@@ -25,12 +25,6 @@ in
     # Auto-upgrade Nix package.
     package = pkgs.nix;
 
-    extraOptions = ''
-      # Keep GC roots associated with nix-shell from being cleaned
-      gc-keep-derivations = true
-      gc-keep-outputs = true
-    '';
-
     nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
       darwin = sources.nix-darwin;
       nixpkgs = sources.nixpkgs-darwin;

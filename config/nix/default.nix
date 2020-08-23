@@ -55,10 +55,6 @@ in
       enable = true;
       configFile."nixpkgs/config.nix".source = nixpkgsConfig;
       configFile."nix/nix.conf".text = ''
-        # Keep GC roots associated with nix-shell from being cleaned
-        keep-derivations = true
-        keep-outputs = true
-
         trusted-substituters = ${toString caches.substituters}
         trusted-public-keys = ${toString caches.keys}
       '';
