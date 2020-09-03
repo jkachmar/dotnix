@@ -66,19 +66,23 @@ let
   #############################################################################
 
   nixos-rebuild-cmd = pkgs.writeShellScript "nixos-rebuild-cmd" ''
-    ${set-nix-path}
-    nixos-rebuild ''${1-switch} --show-trace
+    function nixos_rebuild_impl {
+      ${set-nix-path}
+      nixos-rebuild ''${1-switch} --show-trace
+    }
+    sudo nixos_rebuild_impl
   '';
 
   darwin-rebuild-cmd = pkgs.writeShellScript "darwin-rebuild-cmd" ''
     ${set-nix-path}
-    $(nix-build '<darwin>' -A system --no-out-link --show-trace)/sw/bin/darwin-rebuild ''${1-switch} --show-trace
+    nix build -f '<darwin>' system --show-trace 
+    ./result/sw/bin/darwin-rebuild ''${1-switch} --show-trace
+    rm ./result
   '';
 
   rebuild-cmd = if isDarwin
   then darwin-rebuild-cmd
   else nixos-rebuild-cmd;
-  # else pkgs.writeShellScriptBin "" "sudo -i ${nixos-rebuild-cmd}";
 
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     set -e
@@ -86,7 +90,7 @@ let
     ${lint}/bin/lint
     ${format}/bin/format
 
-    sudo -i ${rebuild-cmd} $1
+    ${rebuild-cmd} $1
   '';
 
   collect-garbage =
