@@ -18,15 +18,6 @@ in
     zsh.enable = true;
   };
 
-  fonts = {
-    enableFontDir = true;
-    fonts = [
-      pkgs.emacs-all-the-icons-fonts
-      pkgs.hack-font
-      pkgs.fira-code
-    ];
-  };
-
   ###############################################################################
   # User-level configuration.
   primary-user.home-manager = {
