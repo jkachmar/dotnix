@@ -5,6 +5,7 @@
     ./hardware.nix
     ../../config/nix
     ../../modules/nix
+    ../../modules/desktop
     ../../modules/development
   ];
 
