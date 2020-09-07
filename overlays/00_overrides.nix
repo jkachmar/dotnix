@@ -18,8 +18,11 @@ let
 in
 
 (
-  _: _: {
+  _self: super: {
     emacsMacport = unstable.emacsMacport;
+    gitAndTools = (super.gitAndTools or {}) // {
+      delta = unstable.gitAndTools.delta;
+    };
     lorri = unstable.lorri;
   }
 )
