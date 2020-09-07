@@ -25,30 +25,28 @@
         };
         interactive.diffFilter = "${pkgs.gitAndTools.delta}/bin/delta --color-only";
         delta = {
-          line-numbers = true;
-          # minus-color = "#340001";
-          # plus-color = "#012800";
-          syntax-theme = "Monokai Extended";
-        };
+          features = "unobtrusive-line-numbers decorations";
 
-        color = {
-          #   diff = {
-          #     meta = "yellow";
-          #     frag = "magenta bold";
-          #     commit = "yellow bold";
-          #     old = "red bold";
-          #     new = "green bold";
-          #     whitespace = "red reverse";
-          #   };
+          decorations = {
+            commit-decoration-style = "bold yellow box ul";
+            file-style = "bold yellow ul";
+            file-decoration-style = "none";
+            hunk-header-decoration-style = "yellow box";
+            minus-color = "#012800";
+            plus-color = "#340001";
+            syntax-theme = "Monokai Extended";
+          };
 
-          #   diff-highlight = {
-          #     newHighlight = "green bold 22";
-          #     newNormal = "green bold";
-          #     oldNormal = "red bold";
-          #     oldHighlight = "red bold 52";
-          #   };
-
-          ui = "always";
+          unobtrusive-line-numbers = {
+            line-numbers = true;
+            line-numbers-minus-style = "#444444";
+            line-numbers-zero-style = "#444444";
+            line-numbers-plus-style = "#444444";
+            line-numbers-left-format = "{nm:>4}┊";
+            line-numbers-right-format = "{np:>4}│";
+            line-numbers-left-style = "blue";
+            line-numbers-right-style = "blue";
+          };
         };
 
         pull.rebase = true;
