@@ -16,8 +16,16 @@
 
   ###############################################################################
   # Machine-specific, user-level configuration.
-  primary-user.home-manager = {
+  primary-user.home-manager = { pkgs, ... }: {
     home.packages = with pkgs; [ awscli ];
+  };
+
+
+  # This machine _must_ be run in single-user mode, so we cannot take advantage
+  # of the Nix daemon.
+  services.nix-daemon = {
+    enable = false;
+    enableSocketListener = false;
   };
 
   # NOTE: If `environment.darwinConfig` is _not_ set, then nix-darwin defaults
