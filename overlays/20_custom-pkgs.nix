@@ -2,6 +2,7 @@
 # package trees.
 (
   _self: super: {
+    customNodePackages = super.callPackage ./../pkgs/node-packages {};
     emacs-plus = super.callPackage ./../pkgs/emacs-plus {
       inherit (super.darwin.apple_sdk.frameworks) Cocoa;
 

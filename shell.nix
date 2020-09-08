@@ -24,7 +24,7 @@ let
 
   #############################################################################
 
-  files = "$(find . -not -path './nix/*' -name '*.nix')";
+  files = "$(find . -not -path './nix/*' -not -path './pkgs/node-packages/*' -name '*.nix')";
 
   lint = pkgs.writeShellScriptBin "lint" "nix-linter ${files}";
 

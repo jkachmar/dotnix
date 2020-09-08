@@ -17,7 +17,10 @@
   ###############################################################################
   # Machine-specific, user-level configuration.
   primary-user.home-manager = { pkgs, ... }: {
-    home.packages = with pkgs; [ awscli ];
+    home.packages = with pkgs; [
+      awscli
+      customNodePackages.aws-azure-login
+    ];
   };
 
 
