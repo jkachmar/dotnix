@@ -35,12 +35,6 @@ in
   nix = {
     binaryCaches = caches.substituters;
     binaryCachePublicKeys = caches.keys;
-
-    # XXX: Can this self-referential, or at least something that can be
-    # non-destructively appended to?
-    # nixPath = nix.nixPath ++ lib.mapAttrsToList (k: v: "${k}=${v}") {
-    #   nixpkgs-overlays = overlaysPath;
-    # };
   };
 
   #############################################################################
@@ -55,7 +49,7 @@ in
       enable = true;
       configFile."nixpkgs/config.nix".source = nixpkgsConfig;
       configFile."nix/nix.conf".text = ''
-        trusted-substituters = ${toString caches.substituters}
+        substituters = ${toString caches.substituters}
         trusted-public-keys = ${toString caches.keys}
       '';
     };
