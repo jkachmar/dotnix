@@ -47,6 +47,7 @@
         "url": "https://github.com/lnl7/nix-darwin/archive/828879f93084fdd5b12925acc016497d2410bdc4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+<<<<<<< HEAD
     "nix-linter": {
         "branch": "master",
         "description": "Linter for the Nix expression language",
@@ -59,6 +60,8 @@
         "url": "https://github.com/synthetica9/nix-linter/archive/2516a8cda41f9bb553a1c3eca38e3dd94ebf53de.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+=======
+>>>>>>> Drops nix-linter
     "nixpkgs-darwin": {
         "branch": "nixpkgs-20.03-darwin",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",

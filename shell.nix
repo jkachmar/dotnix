@@ -21,13 +21,11 @@ let
   niv = (pkgs.callPackage sources.niv {}).niv;
 
   # nix-linter = (pkgs.callPackage sources.nix-linter {}).nix-linter;
-
   #############################################################################
 
   files = "$(find . -not -path './nix/*' -not -path './pkgs/node-packages/*' -name '*.nix')";
 
   # lint = pkgs.writeShellScriptBin "lint" "nix-linter ${files}";
-
   format = pkgs.writeShellScriptBin "format" "nixpkgs-fmt ${files}";
 
   #############################################################################
