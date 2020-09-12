@@ -16,8 +16,8 @@
     trunk.url = "github:nixos/nixpkgs";
     # TODO: Switch to nix-darwin's main branch when flakes have been merged.
     nix-darwin.url = "github:LnL7/nix-darwin/flakes";
-    home.url = "github:nix-community/home-manager";
-    emacs.url = "github:nix-community/emacs-overlay";
+    home-manager.url = "github:nix-community/home-manager";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
   outputs = inputs@{ self, stable, stableDarwin, ... }: {
