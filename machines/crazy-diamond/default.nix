@@ -1,7 +1,12 @@
 { ... }:
 
+let
+  sources = import ../../nix/sources.nix;
+in
+
 {
   imports = [
+    "${sources.home-manager}/nix-darwin"
     ./hardware.nix
     ../../config/nix
     ../../modules/nix

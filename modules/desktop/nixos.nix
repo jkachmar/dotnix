@@ -46,6 +46,15 @@
   # Enable Kwallet auto-signin.
   security.pam.services.sddm.enableKwallet = true;
 
+  # Automatically upgrade NixOS version.
+  #
+  # NOTE: Is this really useful at all, since everything is pinned to exact
+  # commits?
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+  };
+
   ###############################################################################
   # User-level configuration.
   primary-user.home-manager = {

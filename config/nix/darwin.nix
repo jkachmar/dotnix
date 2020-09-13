@@ -1,14 +1,12 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
+
 let
+  inherit (lib) mkIf;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
   sources = import ../../nix/sources.nix;
 in
 
-{
-  imports = [
-    # nix-darwin version of home-manager.
-    "${sources.home-manager}/nix-darwin"
-  ];
-
+mkIf isDarwin {
   # TODO: Should nix-darwin manage the default OS-shell?
   # # Install and configure system shells.
   # environment.shells = [ pkgs.fish ];
@@ -24,8 +22,7 @@ in
 
     nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
       darwin = sources.nix-darwin;
-      nixpkgs = sources.nixpkgs-darwin;
-      nixpkgs-overlays = ../../overlays;
+      nixpkgs = pkgs.path;
     };
   };
 

@@ -1,21 +1,11 @@
-{ ... }:
+{ lib, pkgs, ... }:
+
 let
-  sources = ../../nix/sources.nix;
+  inherit (lib) mkIf;
+  inherit (pkgs.stdenv.targetPlatform) isLinux;
 in
 
-{
-  imports = [
-    "${sources.home-manager}/nixos"
-  ];
-
-  # NixOS version.
-  system = {
-    autoUpgrade = {
-      enable = true;
-      allowReboot = true;
-    };
-  };
-
+mkIf isLinux {
   nix = {
     # Darwin sandboxing is still broken.
     # https://github.com/NixOS/nix/issues/2311
@@ -23,12 +13,8 @@ in
     # Unify this once everything works again.
     useSandbox = true;
 
-    # Automatically detects files in the store that have identical contents.
-    autoOptimiseStore = true;
-
     nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
-      nixpkgs = sources.nixpkgs-nixos;
-      nixpkgs-overlays = ../../overlays;
+      nixpkgs = pkgs.path;
       nixos-config = toString <nixos-config>;
     };
 

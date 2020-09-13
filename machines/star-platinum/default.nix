@@ -1,9 +1,14 @@
 { ... }:
 
+let
+  sources = import ../../nix/sources.nix;
+in
+
 {
   imports = [
     # Load hardware and Nix base configuration first
     ./hardware-configuration.nix
+    "${sources.home-manager}/nixos"
     ../../config/nix
     ../../modules/nix
 

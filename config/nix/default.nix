@@ -1,6 +1,5 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
-  inherit (lib.systems.elaborate { system = builtins.currentSystem; }) isLinux;
   caches = import ./caches.nix;
   nixpkgsConfig = ./nixpkgs-config.nix;
   overlays =
@@ -18,9 +17,7 @@ let
 in
 
 {
-  imports = [
-    (if isLinux then ./nixos.nix else ./darwin.nix)
-  ];
+  imports = [ ./darwin.nix ./nixos.nix ];
 
   #############################################################################
   # System-level configuration.
@@ -35,6 +32,9 @@ in
   nix = {
     binaryCaches = caches.substituters;
     binaryCachePublicKeys = caches.keys;
+    # XXX: Don't enable 'auto-optimise-store = true' 
+    #
+    # cf. https://github.com/NixOS/nix/issues/1522
     extraOptions = ''
       experimental-features = nix-command flakes ca-references
     '';
