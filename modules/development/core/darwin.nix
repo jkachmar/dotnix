@@ -1,13 +1,16 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
+  inherit (lib) mkIf;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
+
   gcoreutils = pkgs.coreutils.override {
     singleBinary = false;
     withPrefix = true;
   };
 in
 
-{
+mkIf isDarwin {
   ###############################################################################
   # System-level configuration.
   environment.systemPackages = with pkgs; [ gcoreutils ];
@@ -23,7 +26,6 @@ in
   primary-user.home-manager = {
     home.packages = with pkgs; [
       coreutils # lol, macOS (BSD) coreutils are broken somehow
-      # emacs-plus # lmao cannot believe I wasted my time with this...
       emacsMacport
       findutils
       lorri

@@ -1,6 +1,11 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
-{
+let 
+  inherit (lib) mkIf;
+  inherit (pkgs.stdenv.targetPlatform) isLinux;
+in
+
+mkIf isLinux {
   ###############################################################################
   # User-level configuration.
   primary-user.home-manager = {

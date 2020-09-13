@@ -1,16 +1,12 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
-  inherit (lib.systems.elaborate { system = builtins.currentSystem; }) isLinux;
-
   # ghcideDrv = import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/archive/67493b873e1a5e5d53837401ab6b128b20e8a989.tar.gz") {};
   # ghcide = ghcideDrv.ghcide-ghc883;
 in
 
 {
-  imports = [
-    (if isLinux then ./nixos.nix else ./darwin.nix)
-  ];
+  imports = [ ./darwin.nix ./nixos.nix ];
 
   ###############################################################################
   # System-level configuration.

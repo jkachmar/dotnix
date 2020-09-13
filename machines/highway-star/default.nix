@@ -10,6 +10,7 @@ in
     ./hardware.nix
     ../../config/nix
     ../../modules/nix
+    ../../modules/system/darwin.nix
     ../../modules/desktop
     ../../modules/development
   ];
