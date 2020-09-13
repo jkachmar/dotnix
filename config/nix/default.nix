@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   inherit (lib.systems.elaborate { system = builtins.currentSystem; }) isLinux;
   caches = import ./caches.nix;
@@ -35,6 +35,9 @@ in
   nix = {
     binaryCaches = caches.substituters;
     binaryCachePublicKeys = caches.keys;
+
+    # Auto-upgrade Nix package; use latest version (i.e. with flakes support).
+    package = pkgs.nixFlakes;
   };
 
   #############################################################################

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 let
   sources = import ../../nix/sources.nix;
 in
@@ -21,9 +21,6 @@ in
     # TODO: This one seems iffy...
     # # Run the collector automatically every 10 days.
     # options = "--delete-older-than 10d";
-
-    # Auto-upgrade Nix package.
-    package = pkgs.nix;
 
     nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
       darwin = sources.nix-darwin;
