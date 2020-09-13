@@ -1,22 +1,22 @@
 # Custom packages that are not currently provided within any of the nixpkgs
 # package trees.
 (
-  _self: super: {
-    customNodePackages = super.callPackage ./../pkgs/node-packages {};
-    emacs-plus = super.callPackage ./../pkgs/emacs-plus {
-      inherit (super.darwin.apple_sdk.frameworks) Cocoa;
+  final: prev: {
+    customNodePackages = prev.callPackage ./../pkgs/node-packages {};
+    emacs-plus = prev.callPackage ./../pkgs/emacs-plus {
+      inherit (prev.darwin.apple_sdk.frameworks) Cocoa;
 
       # NOTE: Should we depend on 'self.emacsGit' (i.e. the final emacsGit
       # produced at the end of the overlay process.
 
       # Arguments.
-      emacsDrv = super.emacsGit;
+      emacsDrv = prev.emacsGit;
 
       # Options.
       withMojave = true;
       withNoTitlebar = false;
     };
 
-    irccloud = super.callPackage ./../pkgs/irccloud {};
+    irccloud = prev.callPackage ./../pkgs/irccloud {};
   }
 )

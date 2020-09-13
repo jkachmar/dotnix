@@ -18,9 +18,9 @@ let
 in
 
 (
-  _self: super: {
+  final: prev: {
     emacsMacport = unstable.emacsMacport;
-    gitAndTools = (super.gitAndTools or {}) // {
+    gitAndTools = (prev.gitAndTools or {}) // {
       delta = unstable.gitAndTools.delta;
     };
     lorri = unstable.lorri;
