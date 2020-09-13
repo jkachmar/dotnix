@@ -5,7 +5,7 @@ let
 in
 
 (
-  final: prev: {
+  _final: prev: {
     inherit (prev.callPackage sources.niv {}) niv;
   }
 )

@@ -18,7 +18,7 @@ let
 in
 
 (
-  final: prev: {
+  _final: prev: {
     emacsMacport = unstable.emacsMacport;
     gitAndTools = (prev.gitAndTools or {}) // {
       delta = unstable.gitAndTools.delta;
