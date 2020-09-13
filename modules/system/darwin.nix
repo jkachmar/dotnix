@@ -4,15 +4,6 @@
 { pkgs, ... }:
 
 {
-  fonts = {
-    enableFontDir = true;
-    fonts = with pkgs; [
-      emacs-all-the-icons-fonts
-      hack-font
-      fira-code
-    ];
-  };
-
   # macOS system settings.
   system = {
     defaults = {

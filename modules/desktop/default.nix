@@ -1,11 +1,14 @@
-{ lib, ... }:
-
-let
-  inherit (lib.systems.elaborate { system = builtins.currentSystem; }) isLinux;
-in
+{ pkgs, ... }:
 
 {
-  imports = [
-    (if isLinux then ./nixos.nix else ./darwin.nix)
-  ];
+  imports = [ ./nixos.nix ];
+
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      emacs-all-the-icons-fonts
+      hack-font
+      fira-code
+    ];
+  };
 }
