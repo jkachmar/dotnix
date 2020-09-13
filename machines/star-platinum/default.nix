@@ -14,6 +14,7 @@ in
 
     # Load additional system/user/env configuration modules after
     ../../modules/boot
+    ../../modules/system/nixos.nix
     ../../modules/desktop
     ../../modules/development
   ];
