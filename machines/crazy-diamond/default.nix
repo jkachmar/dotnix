@@ -14,6 +14,8 @@ in
     ../../modules/development
   ];
 
+  _module.args.sources = sources;
+
   primary-user.email = "me@jkachmar.com";
   primary-user.fullname = "Joe Kachmar";
   primary-user.username = "jkachmar";

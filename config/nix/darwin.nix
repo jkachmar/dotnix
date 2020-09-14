@@ -1,9 +1,8 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, sources, ... }:
 
 let
   inherit (lib) mkIf;
   inherit (pkgs.stdenv.targetPlatform) isDarwin;
-  sources = import ../../nix/sources.nix;
 in
 
 mkIf isDarwin {

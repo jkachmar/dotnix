@@ -14,6 +14,9 @@ in
     ../../modules/development
   ];
 
+  # Inject sources pinned with Niv to be used elsewhere.
+  _module.args.sources = sources;
+
   # primary-user.email = ""; # TODO: store this in secrets
   primary-user.fullname = "Joe Kachmar";
   # primary-user.username = ""; # TODO: store this in secrets

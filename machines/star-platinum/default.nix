@@ -18,6 +18,9 @@ in
     ../../modules/development
   ];
 
+  # Inject sources pinned with Niv to be used elsewhere.
+  _module.args.sources = sources;
+
   primary-user.email = "me@jkachmar.com";
   primary-user.fullname = "Joe Kachmar";
   primary-user.username = "jkachmar";

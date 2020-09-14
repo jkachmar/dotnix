@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, sources, ... }:
 let
   caches = import ./caches.nix;
   nixpkgsConfig = ./nixpkgs-config.nix;
@@ -7,7 +7,7 @@ let
       path = ../../overlays;
     in
       with builtins;
-      map (n: import (path + ("/" + n)))
+      map (n: import (path + ("/" + n)) sources)
         (
           filter (
             n: match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix"))
