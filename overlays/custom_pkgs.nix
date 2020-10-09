@@ -1,7 +1,5 @@
 # Custom packages that are not currently provided within any of the nixpkgs
 # package trees.
-{ ... }:
-
 _final: prev: {
   customNodePackages = prev.callPackage ./../pkgs/node-packages {};
   emacs-plus = prev.callPackage ./../pkgs/emacs-plus {

@@ -6,13 +6,17 @@
     nixosPkgs.url = "github:nixos/nixpkgs-channels/nixos-20.03-small";
     # Stable Darwin nixpkgs package set; pinned to the 20.03 release.
     darwinPkgs.url = "github:nixos/nixpkgs-channels/nixpkgs-20.03-darwin";
-    # Unstable nixpkgs package set.
+    # Tracks nixos/nixpkgs-channels unstable branch.
     #
-    # More recent than the stable set, the results are likely to be cached.
+    # Try to pull new/updated packages from 'unstable' whenever possible, as
+    # these will likely have cached results from the last successful Hydra
+    # jobset.
     unstable.url = "github:nixos/nixpkgs-channels/nixos-unstable";
-    # Primary nixpkgs development repository
+    # Tracks nixos/nixpkgs main branch.
     #
-    # Most recent package set, however the results are unlikely to be cached.
+    # Only pull from 'trunk' when channels are blocked by a Hydra jobset
+    # failure or the 'unstable' channel has not otherwise updated recently for
+    # some other reason.
     trunk.url = "github:nixos/nixpkgs";
     # TODO: Switch to nix-darwin's main branch when flakes have been merged.
     nix-darwin.url = "github:LnL7/nix-darwin/flakes";
@@ -22,9 +26,17 @@
 
   outputs = inputs@{ self, darwinPkgs, nixosPkgs, ... }: {
     overlays = {
-      "00_overrides" = import ./overlays/00_overrides.nix inputs;
-      "10_pins" = import ./overlays/10_pins.nix inputs;
-      "20_custom-pkgs" = import ./overlays/20_custom-pkgs.nix inputs;
+      # Inject 'unstable' and 'trunk' into the overridden package set, so that
+      # the following overlays may access them (along with any system configs
+      # that wish to do so).
+      pkg-sets = (final: prev: {
+        unstable = import inputs.unstable { system = final.system; };
+        trunk = import inputs.trunk { system = final.system; };
+      });
+
+      overridden_pkgs = import ./overlays/overridden_pkgs.nix;
+      pinned_pkgs = import ./overlays/pinned_pkgs.nix;
+      custom_pkgs = import ./overlays/custom_pkgs.nix;
     };
 
     nixosConfigurations = {
