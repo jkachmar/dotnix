@@ -22,12 +22,9 @@
 
   outputs = inputs@{ self, darwinPkgs, nixosPkgs, ... }: {
     overlays = {
-      # "00_overrides" = import ./overlays/00_overrides.nix {
-      #   inherit (inputs) unstable trunk;
-      # };
-      "10_pins" = import ./overlays/10_pins.nix {};
-      "15_emacs" = import inputs.emacs;
-      "20_custom-pkgs" = import ./overlays/20_custom-pkgs.nix {};
+      "00_overrides" = import ./overlays/00_overrides.nix inputs;
+      "10_pins" = import ./overlays/10_pins.nix inputs;
+      "20_custom-pkgs" = import ./overlays/20_custom-pkgs.nix inputs;
     };
 
     nixosConfigurations = {
@@ -38,8 +35,6 @@
       white-album = import machines/white-album {
         inherit (inputs) home nix-darwin;
         stablePkgs = darwinPkgs;
-        unstablePkgs = inputs.unstable;
-        trunkPkgs = inputs.trunk;
         overlays = builtins.attrValues self.overlays;
       };
     };

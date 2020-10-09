@@ -1,19 +1,8 @@
-{ pkgs, sources, ... }:
+{ pkgs, overlays, ... }:
+
 let
   caches = import ./caches.nix;
   nixpkgsConfig = ./nixpkgs-config.nix;
-  overlays =
-    let
-      path = ../../overlays;
-    in
-      with builtins;
-      map (n: import (path + ("/" + n)) sources)
-        (
-          filter (
-            n: match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix"))
-          )
-            (attrNames (readDir path))
-        );
 in
 
 {

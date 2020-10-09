@@ -1,4 +1,4 @@
-{ lib, pkgs, sources, ... }:
+{ lib, pkgs, nix-darwin, ... }:
 
 let
   inherit (lib) mkIf;
@@ -20,7 +20,7 @@ mkIf isDarwin {
     # options = "--delete-older-than 10d";
 
     nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
-      darwin = sources.nix-darwin;
+      darwin = nix-darwin;
       nixpkgs = pkgs.path;
     };
   };
