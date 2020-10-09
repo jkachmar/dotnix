@@ -20,13 +20,13 @@ let
 
   niv = (pkgs.callPackage sources.niv {}).niv;
 
-  nix-linter = (pkgs.callPackage sources.nix-linter {}).nix-linter;
+  # nix-linter = (pkgs.callPackage sources.nix-linter {}).nix-linter;
 
   #############################################################################
 
   files = "$(find . -not -path './nix/*' -not -path './pkgs/node-packages/*' -name '*.nix')";
 
-  lint = pkgs.writeShellScriptBin "lint" "nix-linter ${files}";
+  # lint = pkgs.writeShellScriptBin "lint" "nix-linter ${files}";
 
   format = pkgs.writeShellScriptBin "format" "nixpkgs-fmt ${files}";
 
@@ -87,7 +87,6 @@ let
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     set -e
 
-    ${lint}/bin/lint
     ${format}/bin/format
 
     ${rebuild-cmd} $1
@@ -108,9 +107,9 @@ pkgs.mkShell {
     pkgs.nixpkgs-fmt
 
     niv
-    nix-linter
+    # nix-linter
 
-    lint
+    # lint
     format
 
     rebuild
