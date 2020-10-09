@@ -19,10 +19,6 @@
 let
   unstable = import nixpkgs-unstable {};
   # trunk = import trunk {};
-}:
-
-final: prev:
-
 in
 
 _final: prev: {
