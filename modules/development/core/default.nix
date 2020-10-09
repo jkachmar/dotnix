@@ -14,6 +14,7 @@ in
     curl
     # ghcide
     git
+    libvterm-neovim
     # sshuttle
     vim
     wget
@@ -24,7 +25,6 @@ in
   primary-user.home-manager = {
     home.packages = with pkgs; [
       fd
-      libvterm-neovim
       mosh
       niv
       ripgrep

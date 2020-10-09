@@ -29,10 +29,12 @@
       # Inject 'unstable' and 'trunk' into the overridden package set, so that
       # the following overlays may access them (along with any system configs
       # that wish to do so).
-      pkg-sets = (final: prev: {
-        unstable = import inputs.unstable { system = final.system; };
-        trunk = import inputs.trunk { system = final.system; };
-      });
+      pkg-sets = (
+        final: prev: {
+          unstable = import inputs.unstable { system = final.system; };
+          trunk = import inputs.trunk { system = final.system; };
+        }
+      );
 
       overridden_pkgs = import ./overlays/overridden_pkgs.nix;
       pinned_pkgs = import ./overlays/pinned_pkgs.nix;
@@ -44,11 +46,22 @@
     };
 
     darwinConfigurations = {
-      white-album = import machines/white-album {
-        inherit (inputs) home nix-darwin;
-        stablePkgs = darwinPkgs;
-        overlays = builtins.attrValues self.overlays;
-      };
+      white-album =
+        let
+          configuration = {
+            imports = [
+              inputs.home.darwinModules.home-manager
+              ./machines/white-album
+            ];
+          };
+
+          result = import inputs.nix-darwin {
+            inherit configuration inputs;
+            nixpkgs = darwinPkgs;
+            system = "x86_64-darwin";
+          };
+        in
+          result.system;
     };
   };
 }

@@ -1,8 +1,9 @@
-{ pkgs, overlays, ... }:
+{ inputs, pkgs, ... }:
 
 let
   caches = import ./caches.nix;
   nixpkgsConfig = ./nixpkgs-config.nix;
+  overlays = builtins.attrValues inputs.self.overlays;
 in
 
 {

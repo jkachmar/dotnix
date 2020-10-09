@@ -1,9 +1,11 @@
-_final: prev: {
-  emacsMacport = prev.unstable.emacsMacport;
+final: prev: {
+  emacsMacport = final.unstable.emacsMacport;
+
+  formats = final.unstable.formats;
 
   gitAndTools = (prev.gitAndTools or {}) // {
-    delta = prev.unstable.gitAndTools.delta;
+    delta = final.unstable.gitAndTools.delta;
   };
 
-  lorri = prev.unstable.lorri;
+  lorri = final.unstable.lorri;
 }
