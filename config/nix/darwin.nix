@@ -13,7 +13,7 @@ mkIf isDarwin {
   nix = {
     # Darwin sandboxing is still broken.
     # https://github.com/NixOS/nix/issues/2311
-    # useSandbox = true;
+    useSandbox = false;
 
     # TODO: This one seems iffy...
     # # Run the collector automatically every 10 days.
