@@ -19,10 +19,16 @@ mkIf isDarwin {
     # # Run the collector automatically every 10 days.
     # options = "--delete-older-than 10d";
 
-    nixPath = lib.mapAttrsToList (k: v: "${k}=${v}") {
-      darwin = inputs.nix-darwin;
-      nixpkgs = pkgs.path;
-    };
+    # NOTE: If 'mkForce' isn't applied here, this will merge with the default
+    # 'NIX_PATH', appending 'darwin-config' and 'channels' miscellany.
+    nixPath = lib.mkForce (
+      lib.mapAttrsToList (k: v: "${k}=${v}") {
+        darwin = inputs.nix-darwin;
+        nixpkgs = pkgs.path;
+        unstable = pkgs.unstable.path;
+        trunk = pkgs.trunk.path;
+      }
+    );
   };
 
   # Auto-upgrade the daemon service.
