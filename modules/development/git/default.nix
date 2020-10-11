@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  environment.systemPackages = [ pkgs.unstable.git ];
   primary-user.home-manager = {
     home.packages = with pkgs; [ gitAndTools.delta ];
     programs.git = {
       enable = true;
+      package = pkgs.unstable.git;
       userName = config.primary-user.fullname;
       userEmail = config.primary-user.email;
 

@@ -13,7 +13,6 @@ in
   environment.systemPackages = with pkgs; [
     curl
     # ghcide
-    git
     libvterm-neovim
     # sshuttle
     vim

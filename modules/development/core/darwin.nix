@@ -26,9 +26,9 @@ mkIf isDarwin {
   primary-user.home-manager = {
     home.packages = with pkgs; [
       coreutils # lol, macOS (BSD) coreutils are broken somehow
-      emacsMacport
+      unstable.emacsMacport
       findutils
-      lorri
+      unstable.lorri
     ];
 
     # Fixes a bug where fish shell doesn't properly set up the nix path on macOS.
