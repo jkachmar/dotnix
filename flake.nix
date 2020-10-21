@@ -18,8 +18,7 @@
     # failure or the 'unstable' channel has not otherwise updated recently for
     # some other reason.
     trunk.url = "github:nixos/nixpkgs";
-    # TODO: Switch to nix-darwin's main branch when flakes have been merged.
-    nix-darwin.url = "github:LnL7/nix-darwin/flakes";
+    nix-darwin.url = "github:LnL7/nix-darwin";
     home.url = "github:nix-community/home-manager";
     emacs.url = "github:nix-community/emacs-overlay";
   };
