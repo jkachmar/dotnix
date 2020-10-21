@@ -1,9 +1,0 @@
-{ ... }:
-
-{
-  imports = [
-    ./core
-    ./git
-    ./neovim
-  ];
-}

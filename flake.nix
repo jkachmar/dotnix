@@ -51,7 +51,7 @@
           configuration = {
             imports = [
               inputs.home.darwinModules.home-manager
-              ./machines/white-album
+              ./config/machines/white-album
             ];
           };
 
