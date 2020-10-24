@@ -2,14 +2,14 @@
 let
   sources = import ../../../nix/sources.nix;
 
-  # NOTE: Replicated from flake config for the time being...
+  # NOTE: Replicated (approximately) from flake config for the time being...
   overlays = {
     # Inject 'unstable' and 'trunk' into the overridden package set, so that
     # the following overlays may access them (along with any system configs
     # that wish to do so).
     pkg-sets = final: prev: {
-      unstable = import sources.unstable { inherit (final) system; };
-      trunk = import sources.trunk { inherit (final) system; };
+      unstable = import sources.unstable { };
+      trunk = import sources.trunk { };
     };
 
     overridden_pkgs = import ../../../overlays/overridden_pkgs.nix;
@@ -24,7 +24,7 @@ in
     ../../profiles/macos
   ];
 
-  # NOTE: Replicated from flake config for the time being...
+  # NOTE: Replicated (approximately) from flake config for the time being...
   _module.args.inputs = {
     inherit (sources) darwin-stable nix-darwin unstable trunk;
     self.overlays = overlays;

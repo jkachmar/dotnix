@@ -35,10 +35,6 @@ mkIf isDarwin {
     enableSocketListener = true;
   };
 
-  # TODO: Investigate why this disables home-manager configuration settings.
-  #
-  # This probably has something to do with hm-session-vars
-
-  # # Install per-user packages.
-  # home-manager.useUserPackages = true;
+  # Use the global 'nixpkgs' set for home-manager;
+  home-manager.useGlobalPkgs = true;
 }

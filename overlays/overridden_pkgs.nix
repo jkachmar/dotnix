@@ -1,9 +1,7 @@
 final: prev: {
-  # emacsMacport = final.unstable.emacsMacport;
+  nix-direnv = prev.nix-direnv.override { nix = prev.nixFlakes; };
 
-  # NOTE: Some of the 'flakes' stuff seems to require 'formats', which wasn't
-  # present in '20.03'.
-  formats = final.unstable.formats;
+  # emacsMacport = final.unstable.emacsMacport;
 
   # # NOTE: Updating 'git' for the 2.28.0 changes which provide 'git-init'
   # # templates; this can be removed after updating to '20.09'.

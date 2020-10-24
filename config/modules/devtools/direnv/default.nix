@@ -1,7 +1,11 @@
 { ... }:
 
 {
-  imports = [ ./macos.nix ./nixos.nix ];
+  # NOTE: 'lorri' is kinda rough in terms of tracking what the background
+  # daemon has or hasn't processed; it's hard to tell when you're working with
+  # an up-to-date cached shell or something stale.
+
+  # imports = [ ./macos.nix ./nixos.nix ];
 
   primary-user.home-manager = {
     programs.direnv = {

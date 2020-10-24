@@ -37,11 +37,6 @@ in
   #############################################################################
   # User-level configuration.
   primary-user.home-manager = {
-    nixpkgs = {
-      inherit overlays;
-      config = import nixpkgsConfig;
-    };
-
     xdg = {
       enable = true;
       configFile."nixpkgs/config.nix".source = nixpkgsConfig;
