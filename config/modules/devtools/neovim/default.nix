@@ -2,10 +2,9 @@
 
 {
   primary-user.home-manager = {
-    home.packages = with pkgs; lib.mkForce [ 
-      neovim
+    home.packages = with pkgs; [
       nodejs # required by coc
-    ]; 
+    ];
 
     programs.neovim = {
       enable = true;

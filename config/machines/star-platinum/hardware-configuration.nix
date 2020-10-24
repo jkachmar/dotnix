@@ -12,10 +12,10 @@
   boot = {
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-      kernelModules = [];
+      kernelModules = [ ];
     };
     kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [];
+    extraModulePackages = [ ];
     kernel.sysctl = {
       "vm.swappiness" = 0; # SSDs don't like swappiness
     };

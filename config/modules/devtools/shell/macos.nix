@@ -1,5 +1,4 @@
 { lib, pkgs, ... }:
-
 let
   inherit (lib) mkIf;
   inherit (pkgs.stdenv.targetPlatform) isDarwin;
@@ -9,7 +8,6 @@ let
     withPrefix = true;
   };
 in
-
 mkIf isDarwin {
   # TODO: Should nix-darwin manage the default OS-shell?
   # # Install and configure system shells.

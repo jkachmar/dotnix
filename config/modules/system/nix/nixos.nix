@@ -2,12 +2,10 @@
 # NixOS-specific Nix system configuration.
 ###############################################################################
 { lib, pkgs, ... }:
-
 let
   inherit (lib) mkIf;
   inherit (pkgs.stdenv.targetPlatform) isLinux;
 in
-
 mkIf isLinux {
   nix = {
     # Darwin sandboxing is still broken.

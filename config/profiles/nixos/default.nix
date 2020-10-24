@@ -20,4 +20,4 @@
     ../../modules/devtools/neovim
     ../../modules/devtools/shell
   ]
-}
+    }

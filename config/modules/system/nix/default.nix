@@ -2,13 +2,11 @@
 # Platform-agnostic Nix system configuration.
 ###############################################################################
 { inputs, pkgs, ... }:
-
 let
   caches = import ./caches.nix;
   nixpkgsConfig = ./nixpkgs-config.nix;
   overlays = builtins.attrValues inputs.self.overlays;
 in
-
 {
   imports = [ ./macos.nix ./nixos.nix ];
 

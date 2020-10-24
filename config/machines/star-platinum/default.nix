@@ -1,9 +1,7 @@
 { ... }:
-
 let
   sources = import ../../nix/sources.nix;
 in
-
 {
   imports = [
     # Load hardware and Nix base configuration first

@@ -1,10 +1,8 @@
 { config, lib, pkgs, ... }:
-
 let
   inherit (pkgs.stdenv.targetPlatform) isDarwin;
   cfg = config.primary-user;
 in
-
 {
   config = lib.mkIf (cfg.username != null && isDarwin) {
     primary-user = {

@@ -1,5 +1,4 @@
 { sources ? import ./nix/sources.nix }:
-
 let
   # TODO: Update this if the architectures diverge.
   isDarwin =
@@ -7,18 +6,18 @@ let
       (arch: builtins.currentSystem == arch)
       [ "x86_64-darwin" ];
 
-  machineName = (import ./current-machine {}).networking.hostName;
+  machineName = (import ./current-machine { }).networking.hostName;
   pkgSrc = builtins.trace machineName (
     if isDarwin
-    then builtins.trace "darwin" sources.nixpkgs-darwin
-    else builtins.trace "nixos" sources.nixpkgs-nixos
+    then builtins.trace "darwin" sources.darwin-stable
+    else builtins.trace "nixos" sources.nixos-stable
   );
 
-  pkgs = import pkgSrc {};
+  pkgs = import pkgSrc { };
 
   #############################################################################
 
-  niv = (pkgs.callPackage sources.niv {}).niv;
+  niv = (pkgs.callPackage sources.niv { }).niv;
 
   # nix-linter = (pkgs.callPackage sources.nix-linter {}).nix-linter;
 
@@ -38,28 +37,28 @@ let
     );
 
   nix-path-nixos = build-nix-path-env-var {
+    nixos-config = "$dotfiles/current-machine";
     nixpkgs = pkgSrc;
     # TODO: Evaluate if this is actually useful now that overlays are being
     # manually applied 
     # nixpkgs-overlays = "$dotfiles/overlays";
-    nixos-config = "$dotfiles/current-machine";
   };
 
   nix-path-darwin = build-nix-path-env-var {
     darwin = sources.nix-darwin;
+    darwin-config = "$HOME/.config/dotfiles/current-machine";
     nixpkgs = pkgSrc;
     # TODO: Evaluate if this is actually useful now that overlays are being
     # manually applied 
     # nixpkgs-overlays = "$dotfiles/overlays";
-    darwin-config = "$dotfiles/current-machine";
   };
 
-  nix-path = if isDarwin
-  then nix-path-darwin
-  else nix-path-nixos;
+  nix-path =
+    if isDarwin
+    then nix-path-darwin
+    else nix-path-nixos;
 
   set-nix-path = ''
-    export dotfiles="${builtins.toPath ./.}"
     export NIX_PATH="${nix-path}"
   '';
 
@@ -75,14 +74,13 @@ let
 
   darwin-rebuild-cmd = pkgs.writeShellScript "darwin-rebuild-cmd" ''
     ${set-nix-path}
-    nix build -f '<darwin>' system --show-trace 
-    ./result/sw/bin/darwin-rebuild ''${1-switch} --show-trace
-    rm ./result
+    $(nix-build '<darwin>' -A system)/sw/bin/darwin-rebuild ''${1-switch} --show-trace
   '';
 
-  rebuild-cmd = if isDarwin
-  then darwin-rebuild-cmd
-  else nixos-rebuild-cmd;
+  rebuild-cmd =
+    if isDarwin
+    then darwin-rebuild-cmd
+    else nixos-rebuild-cmd;
 
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     set -e
@@ -100,7 +98,6 @@ let
   #############################################################################
 
 in
-
 pkgs.mkShell {
   buildInputs = [
     pkgs.git
@@ -115,4 +112,8 @@ pkgs.mkShell {
     rebuild
     collect-garbage
   ];
+
+  shellHook = ''
+    export NIX_PATH="${nix-path}"
+  '';
 }

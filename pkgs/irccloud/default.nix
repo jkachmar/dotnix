@@ -1,5 +1,4 @@
 { appimageTools, fetchurl, lib }:
-
 let
   pname = "irccloud";
   version = "0.14.1";

@@ -27,7 +27,6 @@ let
     nix-community
   ];
 in
-
 {
   substituters = builtins.map (cache: cache.url) caches;
   keys = builtins.map (cache: cache.key) caches;

@@ -2,10 +2,10 @@
   description = "jkachmar's personal dotfiles and machine configurations";
 
   inputs = {
-    # Stable NixOS nixpkgs package set; pinned to the 20.03 release.
-    nixosPkgs.url = "github:nixos/nixpkgs-channels/nixos-20.03-small";
-    # Stable Darwin nixpkgs package set; pinned to the 20.03 release.
-    darwinPkgs.url = "github:nixos/nixpkgs-channels/nixpkgs-20.03-darwin";
+    # Stable NixOS nixpkgs package set; pinned to the 20.09 release.
+    nixosPkgs.url = "github:nixos/nixpkgs/nixos-20.09-small";
+    # Stable Darwin nixpkgs package set; pinned to the 20.09 release.
+    darwinPkgs.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
     # Tracks nixos/nixpkgs-channels unstable branch.
     #
     # Try to pull new/updated packages from 'unstable' whenever possible, as
@@ -18,49 +18,34 @@
     # failure or the 'unstable' channel has not otherwise updated recently for
     # some other reason.
     trunk.url = "github:nixos/nixpkgs";
-    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "darwinPkgs";
+    };
     home.url = "github:nix-community/home-manager";
     emacs.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = inputs@{ self, darwinPkgs, nixosPkgs, ... }: {
+  outputs = inputs@{ self, darwinPkgs, nixosPkgs, nix-darwin, ... }: {
     overlays = {
       # Inject 'unstable' and 'trunk' into the overridden package set, so that
       # the following overlays may access them (along with any system configs
       # that wish to do so).
-      pkg-sets = (
-        final: prev: {
-          unstable = import inputs.unstable { system = final.system; };
-          trunk = import inputs.trunk { system = final.system; };
-        }
-      );
+      pkg-sets = final: prev: {
+        unstable = import inputs.unstable { inherit (final) system; };
+        trunk = import inputs.trunk { inherit (final) system; };
+      };
 
       overridden_pkgs = import ./overlays/overridden_pkgs.nix;
       pinned_pkgs = import ./overlays/pinned_pkgs.nix;
       custom_pkgs = import ./overlays/custom_pkgs.nix;
     };
 
-    nixosConfigurations = {
-      star-platinum = {};
-    };
+    nixosConfigurations.star-platinum = { };
 
-    darwinConfigurations = {
-      white-album =
-        let
-          configuration = {
-            imports = [
-              inputs.home.darwinModules.home-manager
-              ./config/machines/white-album
-            ];
-          };
-
-          result = import inputs.nix-darwin {
-            inherit configuration inputs;
-            nixpkgs = darwinPkgs;
-            system = "x86_64-darwin";
-          };
-        in
-          result.system;
+    darwinConfigurations.white-album = nix-darwin.lib.darwinSystem {
+      inherit inputs;
+      modules = [ ./config/machines/white-album ];
     };
   };
 }

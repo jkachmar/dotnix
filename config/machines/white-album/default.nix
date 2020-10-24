@@ -19,6 +19,7 @@
 
   ###########################################################################
   # nix-darwin configuration.
+  environment.darwinConfig = builtins.toPath ./.;
 
   # Everything is being managed with flakes, so <darwin> and <darwin-config>
   # won't be set up as-expected.

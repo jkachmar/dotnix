@@ -1,13 +1,11 @@
 { lib, pkgs, ... }:
-
 let
   inherit (lib) mkForce;
 in
-
 {
   imports = [ ./macos.nix ];
 
-  environment.systemPackages = with pkgs; mkForce [
+  environment.systemPackages = with pkgs; [
     # Shells.
     bash
     fish
@@ -26,7 +24,7 @@ in
   };
 
   primary-user.home-manager = {
-    home.packages = with pkgs; mkForce [
+    home.packages = with pkgs; [
       # Shells.
       mosh
       # Misc. common programs without a better place to go.

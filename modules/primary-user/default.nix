@@ -1,10 +1,8 @@
 { config, lib, options, ... }:
-
 let
   inherit (lib) mkAliasDefinitions mkOption types;
   cfg = config.primary-user;
 in
-
 {
   options.primary-user.email = mkOption {
     type = types.nullOr types.str;

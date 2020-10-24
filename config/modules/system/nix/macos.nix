@@ -2,12 +2,10 @@
 # macOS-specitic Nix system configuration.
 ###############################################################################
 { inputs, lib, pkgs, ... }:
-
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkForce mkIf;
   inherit (pkgs.stdenv.targetPlatform) isDarwin;
 in
-
 mkIf isDarwin {
   nix = {
     # Darwin sandboxing is still broken.
@@ -20,8 +18,9 @@ mkIf isDarwin {
 
     # NOTE: If 'mkForce' isn't applied here, this will merge with the default
     # 'NIX_PATH', appending 'darwin-config' and 'channels' miscellany.
-    nixPath = lib.mkForce (
+    nixPath = mkForce (
       lib.mapAttrsToList (k: v: "${k}=${v}") {
+        darwin-config = builtins.toString <darwin-config>;
         darwin = inputs.nix-darwin;
         nixpkgs = pkgs.path;
         unstable = pkgs.unstable.path;
