@@ -17,7 +17,6 @@
   # macOS version options.
 , withMojave ? false
 }:
-
 let
   pname = "emacs-plus";
   version = emacsDrv.version;
@@ -34,30 +33,29 @@ let
   };
   emacsPlusPatches = "${emacsPlusSrc}/patches/emacs-${majorVersion}";
 in
-
 (emacsDrv.override { withNS = true; }).overrideAttrs (
   old: {
     inherit pname version;
 
-    patches = (old.patches or []) ++ [
+    patches = (old.patches or [ ]) ++ [
       "${emacsPlusPatches}/fix-window-role.patch"
       "${emacsPlusPatches}/system-appearance.patch"
     ] ++ lib.optional withNoTitlebar "${emacsPlusPatches}/no-titlebar.patch";
 
     postPatch = "rm -fr .git";
 
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ gnused ];
-    buildInputs = (old.buildInputs or []) ++ [ Cocoa gmp ]
-    ++ lib.optional withDbus dbus
-    ++ lib.optional withXML libxml2;
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ gnused ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ Cocoa gmp ]
+      ++ lib.optional withDbus dbus
+      ++ lib.optional withXML libxml2;
 
-    makeFlags = (old.makeFlags or []) ++ [ "NATIVE_FAST_BOOT=1" ];
+    makeFlags = (old.makeFlags or [ ]) ++ [ "NATIVE_FAST_BOOT=1" ];
 
-    configureFlags = (old.configureFlags or []) ++ [
+    configureFlags = (old.configureFlags or [ ]) ++ [
       (if withDbus then "--with-dbus" else "--without-dbus")
     ]
-    ++ lib.optional withGnuTLS "--with-gnutls"
-    ++ lib.optional withXML "--with-xml2";
+      ++ lib.optional withGnuTLS "--with-gnutls"
+      ++ lib.optional withXML "--with-xml2";
 
     CFLAGS = (old.CFLAGS or "") + (
       if withDebug
