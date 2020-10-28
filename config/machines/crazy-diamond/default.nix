@@ -4,17 +4,16 @@ let
 
   # NOTE: Replicated (approximately) from flake config for the time being...
   overlays = {
-    # Inject 'unstable' and 'trunk' into the overridden package set, so that
-    # the following overlays may access them (along with any system configs
-    # that wish to do so).
-    pkg-sets = final: prev: {
+    # Inject 'unstable' into the overridden package set, so that the following
+    # overlays  may access them (along with any system configs that wish to do
+    # so).
+    pkgSets = final: prev: {
       unstable = import sources.unstable { };
-      trunk = import sources.trunk { };
     };
 
-    overridden_pkgs = import ../../../overlays/overridden_pkgs.nix;
-    pinned_pkgs = import ../../../overlays/pinned_pkgs.nix;
-    custom_pkgs = import ../../../overlays/custom_pkgs.nix;
+    overriddenPkgs = import ../../../overlays/overridden_pkgs.nix;
+    pinnedPkgs = import ../../../overlays/pinned_pkgs.nix;
+    customPkgs = import ../../../overlays/custom_pkgs.nix;
   };
 in
 {
@@ -26,7 +25,7 @@ in
 
   # NOTE: Replicated (approximately) from flake config for the time being...
   _module.args.inputs = {
-    inherit (sources) darwin-stable nix-darwin unstable trunk;
+    inherit (sources) darwin-stable nix-darwin unstable;
     self.overlays = overlays;
   };
 

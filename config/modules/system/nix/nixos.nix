@@ -18,7 +18,6 @@ mkIf isLinux {
       nixos-config = toString <nixos-config>;
       nixpkgs = pkgs.path;
       unstable = pkgs.unstable.path;
-      trunk = pkgs.trunk.path;
     };
 
     # # TODO: This one seems iffy...

@@ -24,7 +24,6 @@ mkIf isDarwin {
         darwin = inputs.nix-darwin;
         nixpkgs = pkgs.path;
         unstable = pkgs.unstable.path;
-        trunk = pkgs.trunk.path;
       }
     );
   };
