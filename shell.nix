@@ -6,7 +6,11 @@ let
       (arch: builtins.currentSystem == arch)
       [ "x86_64-darwin" ];
 
-  machineName = (import ./current-machine { }).networking.hostName;
+  # FIXME: This bit with 'lib = null' is a hack to just pull the hostName out.
+  #
+  # The config is never evaluated in this step; consider just extracting
+  # hostname to its own file.
+  machineName = (import ./current-machine { lib = null; }).networking.hostName;
   pkgSrc = builtins.trace machineName (
     if isDarwin
     then builtins.trace "darwin" sources.darwin-stable

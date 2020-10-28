@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 let
   sources = import ../../../nix/sources.nix;
 
@@ -45,12 +45,15 @@ in
     home.packages = with pkgs; [
       awscli
       customNodePackages.aws-azure-login
+      # TODO: Make a generalized emacs module under 'config/modules/devtools'
+      # TODO: Extract doom config into this repo and use an out-of-store symlink
+      emacsMacport
     ];
   };
 
   # This machine _must_ be run in single-user mode, so we cannot take advantage
   # of the Nix daemon.
-  services.nix-daemon.enable = lib.mkForce {
+  services.nix-daemon = lib.mkForce {
     enable = false;
     enableSocketListener = false;
   };
