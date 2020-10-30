@@ -29,7 +29,7 @@ in
     self.overlays = overlays;
   };
 
-  primary-user.email = "joseph.kachmar@well.com";
+  primary-user.email = "joseph.kachmar@well.co";
   primary-user.fullname = "Joe Kachmar";
   primary-user.username = "jkachmar";
   networking.hostName = "highway-star";
