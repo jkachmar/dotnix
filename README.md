@@ -48,16 +48,22 @@ The next time a `nix-shell` is entered, or any of the scripts defined in
 `shell.nix` are run, the new sources will be pulled from.
 
 
-### [`lorri`]
+### [`nix-direnv`]
 
-This project contains a `.envrc` file that will trigger [`lorri`] via
-[`direnv`]. This _should_ mean that any changes that would modify the Nix
-environment will be evaluated and cached as a [GC Root] thanks to the `lorri`
-daemon running in the background.
+This project contains a `.envrc` file that works with the [`nix-direnv`]
+integration for [`direnv`]. This _should_ mean that, upon entering this
+directory, a user is immediately dropped into the environment defined in this
+repository's [`shell.nix`](./shell.nix) file.
 
-Just in case, `lorri --watch-once` can be used to make sure everything's
-buttoned up before running `nix-collect-garbage -d` to clear out unused
-dependencies and free up space.
+Additionally, `nix-direnv` should also automatically register a [GC Root]
+similar to [`lorri`]*.
+
+Before running `nix-collect-garbage -d`, `nix-direnv`'s cached evaluation can be
+"manually refreshed" by calling `touch .envrc` in this directory; this should
+ensure that a GC Root is installed for an up-to-date version of `shell.nix`.
+
+*I have a slight preference for `nix-direnv` over `lorri`
+due to some issues I've had in the past with `lorri`'s daemon.
 
 ## Resources
 
@@ -65,6 +71,7 @@ TODO: Start linking to the stuff that helped me set this repository up in the
 first place.
 
 [`niv`]: https://www.github.com/nmattia/niv
+[`nix-direnv`]: https://github.com/nix-community/nix-direnv
 [`lorri`]: https://www.gitub.com/target/lorri
 [`direnv`]: https://www.gitub.com/direnv/direnv
 [GC Root]: https://nixos.org/nixos/nix-pills/garbage-collector.html#idm140737315973184
