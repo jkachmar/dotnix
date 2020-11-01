@@ -2,6 +2,10 @@
 
 ## Installation
 
+Clone this repository to `$XDG_HOME_DIRECTORY/dotfiles` (i.e.
+`$HOME/.config/dotfiles`); this is a hardcoded path, however it should be the
+_only_ one that is expected by the configuration.
+
 ### Existing Profile
 
 To install based off of a profile for an existing machine, symlink the machine
