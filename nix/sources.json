@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4b30f5ca85d7016ae450f9a5a69076b931e17e66",
-        "sha256": "14fd8v64ipsccf7pwpyl84v3n4ckghngwnyj6m23c20p5ns225gp",
+        "rev": "98e46cec92fb877abaee7ed8f78cee722fd58a7e",
+        "sha256": "19khdgb8dp28rx4wyb2m2dxdcq83dhidj6046rynb91dfdm6893n",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/4b30f5ca85d7016ae450f9a5a69076b931e17e66.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/98e46cec92fb877abaee7ed8f78cee722fd58a7e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
@@ -17,10 +17,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "28eb093a1e6999d52e60811008b4bfc7e20cc591",
-        "sha256": "0nfpby733q96vnmp2cbz25bnp3d7vkgmramn4hs1sn5xavhb1mbp",
+        "rev": "9e01441c5c1111cfd6f1d021c742949760f29d4f",
+        "sha256": "0yg6ww630kjbbmdzdmz8gbc2wqj9dcq7ll20bps0npzdsvv0fqz2",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/28eb093a1e6999d52e60811008b4bfc7e20cc591.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/9e01441c5c1111cfd6f1d021c742949760f29d4f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -29,10 +29,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "9d35b9e4837ab88517210b1701127612c260eccf",
-        "sha256": "0q50xhnm8g2yfyakrh0nly4swyygxpi0a8cb9gp65wcakcgvzvdh",
+        "rev": "ba57d5a29b4e0f2085917010380ef3ddc3cf380f",
+        "sha256": "1kpsvc53x821cmjg1khvp1nz7906gczq8mp83664cr15h94sh8i4",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/9d35b9e4837ab88517210b1701127612c260eccf.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/ba57d5a29b4e0f2085917010380ef3ddc3cf380f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-darwin": {
@@ -41,10 +41,10 @@
         "homepage": "",
         "owner": "lnl7",
         "repo": "nix-darwin",
-        "rev": "c2124383f47315c23b0fbe8b75a1190b6d7929d0",
-        "sha256": "1iy54j7c94bdwgj3z5p7gxrlgicm8i25lhpb6d9hpfawp2201qg8",
+        "rev": "6bd5208e7ffd141f2b2c4bd639e11ca5b96aec8c",
+        "sha256": "1iiki0gyvdf8rk8vd41s51cq88sqwcbr3gd69gd5nqpyrnz3h450",
         "type": "tarball",
-        "url": "https://github.com/lnl7/nix-darwin/archive/c2124383f47315c23b0fbe8b75a1190b6d7929d0.tar.gz",
+        "url": "https://github.com/lnl7/nix-darwin/archive/6bd5208e7ffd141f2b2c4bd639e11ca5b96aec8c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-stable": {
@@ -53,10 +53,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6a5fea3755073adf6342139a726e3532b7eae5fb",
-        "sha256": "0fv8fa1xkrglaxn2gn73wq64sv76jl9vnj1f3zcv7v7yn5gv5x40",
+        "rev": "98e46cec92fb877abaee7ed8f78cee722fd58a7e",
+        "sha256": "19khdgb8dp28rx4wyb2m2dxdcq83dhidj6046rynb91dfdm6893n",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/6a5fea3755073adf6342139a726e3532b7eae5fb.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/98e46cec92fb877abaee7ed8f78cee722fd58a7e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "unstable": {
@@ -65,10 +65,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c29ded49b19ada4355a95157c118abfc6acbcd28",
-        "sha256": "1qw5xvh3sh76b7sml1s3m98lzlrcsas1aql3n1z51mphvxwprfzi",
+        "rev": "7f42b0a5abfd5bddf6d687dad7e682109fd9d5bc",
+        "sha256": "0lgj6c81ymqqhpwjbgnknl4k6vsnm9vgyfr4cwx8n5hdlbpx2wv0",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/c29ded49b19ada4355a95157c118abfc6acbcd28.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/7f42b0a5abfd5bddf6d687dad7e682109fd9d5bc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
