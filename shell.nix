@@ -78,7 +78,7 @@ let
 
   darwin-rebuild-cmd = pkgs.writeShellScript "darwin-rebuild-cmd" ''
     ${set-nix-path}
-    $(nix-build '<darwin>' -A system)/sw/bin/darwin-rebuild ''${1-switch} --show-trace
+    $(nix-build '<darwin>' -A system --no-out-link)/sw/bin/darwin-rebuild ''${1-switch} --show-trace
   '';
 
   rebuild-cmd =
