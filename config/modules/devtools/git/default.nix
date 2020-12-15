@@ -16,14 +16,18 @@
       # };
 
       extraConfig = {
-        alias = {
-          st = "status";
-        };
+        alias.st = "status";
+        core.editor = "vim";
+        init.defaultBranch = "trunk";
+        pull.rebase = true;
+        push.default = "simple";
+        # TODO: Re-enable once GPG signing is back on
+        # push.gpgsign = "if-asked";
+        rerere.enabled = true;
 
-        core = {
-          editor = "vim";
-          pager = "${pkgs.gitAndTools.delta}/bin/delta";
-        };
+        # git-delta settings/configuration
+        core.pager = "${pkgs.gitAndTools.delta}/bin/delta";
+        interactive.diffFilter = "${pkgs.gitAndTools.delta}/bin/delta --color-only";
 
         delta = {
           features = "unobtrusive-line-numbers decorations";
@@ -50,16 +54,6 @@
           };
         };
 
-        interactive.diffFilter = "${pkgs.gitAndTools.delta}/bin/delta --color-only";
-        pull.rebase = true;
-
-        push = {
-          default = "simple";
-          # TODO: Re-enable once GPG signing is back on
-          # gpgsign = "if-asked";
-        };
-
-        rerere.enabled = true;
       };
 
       ignores = [
