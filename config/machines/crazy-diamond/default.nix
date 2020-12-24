@@ -34,6 +34,10 @@ in
   primary-user.username = "jkachmar";
   networking.hostName = "crazy-diamond";
 
+  primary-user.home-manager = { pkgs, ... }: {
+    home.packages = with pkgs; [ emacsMacport ];
+  };
+
   #############################################################################
   # Used for backwards compatibility, please read the changelog before changing
   # $ darwin-rebuild changelog
