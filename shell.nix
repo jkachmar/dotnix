@@ -21,8 +21,6 @@ let
 
   #############################################################################
 
-  niv = (pkgs.callPackage sources.niv { }).niv;
-
   # nix-linter = (pkgs.callPackage sources.nix-linter {}).nix-linter;
 
   #############################################################################
@@ -106,8 +104,8 @@ pkgs.mkShell {
   buildInputs = [
     pkgs.git
     pkgs.nixpkgs-fmt
+    pkgs.niv
 
-    niv
     # nix-linter
 
     # lint
