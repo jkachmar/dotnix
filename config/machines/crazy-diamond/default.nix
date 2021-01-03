@@ -35,7 +35,11 @@ in
   networking.hostName = "crazy-diamond";
 
   primary-user.home-manager = { pkgs, ... }: {
-    home.packages = with pkgs; [ emacsMacport ];
+    home.packages = with pkgs; [
+      ((emacsPackagesNgGen emacsMacport).emacsWithPackages (epkgs: [
+        epkgs.vterm
+      ]))
+    ];
   };
 
   #############################################################################
