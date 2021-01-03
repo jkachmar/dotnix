@@ -22,8 +22,8 @@ mkIf isDarwin {
       lib.mapAttrsToList (k: v: "${k}=${v}") {
         darwin-config = builtins.toString <darwin-config>;
         darwin = inputs.nix-darwin;
-        nixpkgs = pkgs.path;
-        unstable = pkgs.unstable.path;
+        nixpkgs = inputs.darwin-stable;
+        unstable = inputs.unstable;
       }
     );
   };
