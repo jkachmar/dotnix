@@ -47,7 +47,10 @@ in
       customNodePackages.aws-azure-login
       # TODO: Make a generalized emacs module under 'config/modules/devtools'
       # TODO: Extract doom config into this repo and use an out-of-store symlink
-      emacsMacport
+      ((emacsPackagesNgGen emacsMacport).emacsWithPackages (epkgs: [
+        epkgs.emacsql-sqlite
+        epkgs.vterm
+      ]))
     ];
   };
 

@@ -37,6 +37,7 @@ in
   primary-user.home-manager = { pkgs, ... }: {
     home.packages = with pkgs; [
       ((emacsPackagesNgGen emacsMacport).emacsWithPackages (epkgs: [
+        epkgs.emacsql-sqlite
         epkgs.vterm
       ]))
     ];
