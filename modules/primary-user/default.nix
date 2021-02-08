@@ -61,5 +61,5 @@ in
   config.primary-user.user.uid =
     mkAliasDefinitions options.primary-user.uid;
 
-  imports = [ ./darwin.nix ./nixos.nix ];
+  imports = [ ./macos.nix ./nixos.nix ];
 }

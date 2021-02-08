@@ -1,9 +1,12 @@
+###############################################################################
+# Neovim configuration.
+###############################################################################
 { lib, pkgs, ... }:
 
 {
   primary-user.home-manager = {
     home.packages = with pkgs; [
-      nodejs # required by coc
+      nodejs # Required by `coc`.
     ];
 
     programs.neovim = {

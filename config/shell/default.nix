@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkForce;
 in
@@ -31,10 +31,17 @@ in
       bat
       fd
       htop
-      niv
       ripgrep
       shellcheck
     ];
+
+    programs.direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+      enableNixDirenvIntegration = true;
+    };
 
     # My preferred shell; it should be installed and enabled globally, but
     # preferentially configured by 'home-manager'.

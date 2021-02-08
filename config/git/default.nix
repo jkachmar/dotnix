@@ -1,10 +1,14 @@
+###############################################################################
+# Platform-agnostic `git` configuration.
+###############################################################################
 { config, lib, pkgs, ... }:
 
 {
   primary-user.home-manager = {
     programs.git = {
       enable = true;
-      package = pkgs.unstable.git;
+      # FIXME: Figure out how to get unstable packages embedded with flakes.
+      # package = pkgs.unstable.git;
 
       userName = config.primary-user.fullname;
       userEmail = config.primary-user.email;

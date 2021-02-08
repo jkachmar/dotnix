@@ -5,7 +5,6 @@
 let
   caches = import ./caches.nix;
   nixpkgsConfig = ./nixpkgs-config.nix;
-  overlays = builtins.attrValues inputs.self.overlays;
 in
 {
   imports = [ ./macos.nix ./nixos.nix ];
@@ -27,7 +26,6 @@ in
   };
 
   nixpkgs = {
-    inherit overlays;
     config = import nixpkgsConfig;
   };
 

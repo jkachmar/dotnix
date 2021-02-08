@@ -20,10 +20,9 @@ mkIf isDarwin {
     # 'NIX_PATH', appending 'darwin-config' and 'channels' miscellany.
     nixPath = mkForce (
       lib.mapAttrsToList (k: v: "${k}=${v}") {
-        darwin-config = builtins.toString <darwin-config>;
-        darwin = inputs.nix-darwin;
-        nixpkgs = inputs.darwin-stable;
-        unstable = inputs.unstable;
+        inherit (inputs) darwin unstable;
+        darwin-config = inputs.config;
+        nixpkgs = pkgs.path;
       }
     );
   };

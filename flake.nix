@@ -7,38 +7,42 @@
     # Stable Darwin nixpkgs package set; pinned to the 20.09 release.
     darwinPkgs.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
     # Tracks nixos/nixpkgs-channels unstable branch.
-    #
-    # Try to pull new/updated packages from 'unstable' whenever possible, as
-    # these will likely have cached results from the last successful Hydra
-    # jobset.
     unstable.url = "github:nixos/nixpkgs";
-    nix-darwin = {
+    darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "darwinPkgs";
     };
-    home.url = "github:nix-community/home-manager";
-    emacs.url = "github:nix-community/emacs-overlay";
+    home.url = "github:nix-community/home-manager/release-20.09";
+    # emacs.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = inputs@{ self, darwinPkgs, nixosPkgs, nix-darwin, ... }: {
-    overlays = {
-      # Inject 'unstable' into the overridden package set, so that the following
-      # overlays  may access them (along with any system configs that wish to
-      # do so).
-      pkgSets = final: prev: {
-        unstable = import sources.unstable { };
+  outputs = inputs@{ self, darwin, darwinPkgs, nixosPkgs, unstable, ... }: {
+    # Personal MacBook Pro configuration.
+    darwinConfigurations = {
+      # Experimental darwin flake setup.
+      #
+      # TODO: Factor some of this back out, or unify with other machine
+      # configruations.
+      crazy-diamond = darwin.lib.darwinSystem {
+        inputs = {
+          inherit darwin unstable;
+          config = "$HOME/.config/dotfiles/current-machine";
+          nixpkgs = darwinPkgs;
+        };
+        modules = [
+          inputs.home.darwinModules.home-manager
+          ./machines/crazy-diamond
+        ];
       };
-
-      overriddenPkgs = import ../../../overlays/overridden_pkgs.nix;
-      pinnedPkgs = import ../../../overlays/pinned_pkgs.nix;
-      customPkgs = import ../../../overlays/custom_pkgs.nix;
     };
-
-    nixosConfigurations.star-platinum = { };
-
-    darwinConfigurations.white-album = nix-darwin.lib.darwinSystem {
-      inherit inputs;
-      modules = [ ./config/machines/white-album ];
+    devShell = {
+      x86_64-darwin = import ./shell.nix {
+        inherit inputs;
+        config = "$HOME/.config/dotfiles/current-machine";
+        pkgs = import darwinPkgs {
+          system = "x86_64-darwin";
+        };
+      };
     };
   };
 }
