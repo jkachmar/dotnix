@@ -26,7 +26,7 @@
       crazy-diamond = darwin.lib.darwinSystem {
         inputs = {
           inherit darwin unstable;
-          config = "$HOME/.config/dotfiles/current-machine";
+          config-path = "$HOME/.config/dotfiles/current-machine";
           nixpkgs = darwinPkgs;
         };
         modules = [
@@ -38,7 +38,7 @@
     devShell = {
       x86_64-darwin = import ./shell.nix {
         inherit inputs;
-        config = "$HOME/.config/dotfiles/current-machine";
+        config-path = "$HOME/.config/dotfiles/current-machine";
         pkgs = import darwinPkgs {
           system = "x86_64-darwin";
         };

@@ -1,8 +1,4 @@
-{ pkgs, ... }:
-
-let
-  inherit (pkgs) lib;
-in
+{ ... }:
 {
   imports = [
     ./hardware.nix

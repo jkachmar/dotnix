@@ -21,7 +21,7 @@ mkIf isDarwin {
     nixPath = mkForce (
       lib.mapAttrsToList (k: v: "${k}=${v}") {
         inherit (inputs) darwin unstable;
-        darwin-config = inputs.config;
+        darwin-config = inputs.config-path;
         nixpkgs = pkgs.path;
       }
     );
