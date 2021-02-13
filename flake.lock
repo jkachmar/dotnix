@@ -36,6 +36,21 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1610051610,
+        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -52,6 +67,28 @@
         "owner": "nix-community",
         "ref": "release-20.09",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "kropsMacOS": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "darwinPkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1613189912,
+        "narHash": "sha256-1hmajKN9KS3dXKzPZAiLq72Yn+nVOEXNLFxKMgwfX4c=",
+        "owner": "jkachmar",
+        "repo": "krops",
+        "rev": "7ead34152af94ab2b2a527ed730436a9c8c67ade",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jkachmar",
+        "ref": "flake",
+        "repo": "krops",
         "type": "github"
       }
     },
@@ -90,6 +127,7 @@
         "darwin": "darwin",
         "darwinPkgs": "darwinPkgs",
         "home": "home",
+        "kropsMacOS": "kropsMacOS",
         "nixosPkgs": "nixosPkgs",
         "unstable": "unstable"
       }

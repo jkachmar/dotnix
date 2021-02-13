@@ -14,9 +14,21 @@
     };
     home.url = "github:nix-community/home-manager/release-20.09";
     # emacs.url = "github:nix-community/emacs-overlay";
+
+    # TODO: Ping someone about merging Mic92's PR for this functionality.
+    kropsMacOS = {
+      url = "github:jkachmar/krops/flake";
+      inputs.nixpkgs.follows = "darwinPkgs";
+    };
   };
 
   outputs = inputs@{ self, darwin, darwinPkgs, nixosPkgs, unstable, ... }: {
+    deployMacOS = import ./krops.nix {
+      inherit (inputs) darwin;
+      inherit (inputs.kropsMacOS.packages.x86_64-darwin) writeCommand;
+      lib = inputs.kropsMacOS.lib;
+    };
+
     # Personal MacBook Pro configuration.
     darwinConfigurations = {
       # Experimental darwin flake setup.
@@ -26,7 +38,7 @@
       crazy-diamond = darwin.lib.darwinSystem {
         inputs = {
           inherit darwin unstable;
-          config-path = "$HOME/.config/dotfiles/current-machine";
+          config-path = "/var/src/dotfiles/machines/crazy-diamond";
           nixpkgs = darwinPkgs;
         };
         modules = [
