@@ -1,44 +1,109 @@
 {
-  description = "jkachmar's personal dotfiles and machine configurations";
+  description = "jkachmar's personal dotfiles and machine configurations.";
 
   inputs = {
-    # Stable NixOS nixpkgs package set; pinned to the 20.09 release.
-    nixosPkgs.url = "github:nixos/nixpkgs/nixos-20.09-small";
-    # Stable Darwin nixpkgs package set; pinned to the 20.09 release.
-    darwinPkgs.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
-    # Tracks nixos/nixpkgs-channels unstable branch.
+    ################
+    # PACKAGE SETS #
+    ################
+
+    # Stable macOS package set; pinned to the latest 20.09 release.
     #
-    # Try to pull new/updated packages from 'unstable' whenever possible, as
-    # these will likely have cached results from the last successful Hydra
-    # jobset.
+    # `darwin` is used to indicate the most up-to-date stable packages tested
+    # against macOS.
+    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
+    # Stable NixOS package set; pinned to the latest 20.09 release.
+    #
+    # `small` is used to indicate the most up-to-date stable packages.
+    nixosPkgs.url = "github:nixos/nixpkgs/nixos-20.09-small";
+    # Unstable (rolling-release) NixOS package set.
     unstable.url = "github:nixos/nixpkgs";
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "darwinPkgs";
+
+    #############
+    # UTILITIES #
+    #############
+
+    # Declarative, NixOS-style configuration for macOS.
+    darwin = {
+      inputs.nixpkgs.follows = "macosPkgs";
+      url = "github:lnl7/nix-darwin";
     };
-    home.url = "github:nix-community/home-manager";
-    emacs.url = "github:nix-community/emacs-overlay";
+
+    # Declarative user configuration for macOS systems.
+    macosHome = {
+      inputs.nixpkgs.follows = "macosPkgs";
+      url = "github:nix-community/home-manager/release-20.09";
+    };
+    # Declarative user configuration for NixOS systems.
+    nixosHome = {
+      inputs.nixpkgs.follows = "nixosPkgs";
+      url = "github:nix-community/home-manager/release-20.09";
+    };
+
+    # Declarative, persistent state management for ephemeral systems.
+    impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = inputs@{ self, darwinPkgs, nixosPkgs, nix-darwin, ... }: {
-    overlays = {
-      # Inject 'unstable' into the overridden package set, so that the following
-      # overlays  may access them (along with any system configs that wish to
-      # do so).
-      pkgSets = final: prev: {
-        unstable = import sources.unstable { };
+  outputs = inputs@{ self, macosPkgs, nixosPkgs, ... }:
+    let
+      # Utility function to construct a package set based on the given system
+      # along with the shared `nixpkgs` configuration defined in this repo.
+      mkPkgsFor = system: pkgset:
+        import pkgset {
+          inherit system;
+          config = import ./config/modules/system/nixpkgs/config.nix;
+        };
+
+      # Utility function to construct a macOS configuration for arbitrary
+      # systems.
+      #
+      # TODO: Push more of this functionality down down into the
+      # `./config/machines` modules to avoid # cluttering up `flake.nix` any
+      # more than is necessary.
+      mkMacOSConfiguration = hostname: system: inputs.darwin.lib.darwinSystem {
+        # inputs = { nixpkgs = macosPkgs };
+        modules = [
+          inputs.macosHome.darwinModules.home-manager
+          # XXX: Nix needs to believe we have an absolute path here.
+          (./. + "/config/machines/${hostname}")
+        ];
+        specialArgs = {
+          inputs = inputs // {
+            nixpkgs = macosPkgs;
+          };
+          pkgs = mkPkgsFor system macosPkgs;
+          unstable = mkPkgsFor system inputs.unstable;
+        };
       };
 
-      overriddenPkgs = import ../../../overlays/overridden_pkgs.nix;
-      pinnedPkgs = import ../../../overlays/pinned_pkgs.nix;
-      customPkgs = import ../../../overlays/custom_pkgs.nix;
-    };
+      # Utility function to construct a NixOS configuration for arbitrary
+      # systems.
+      #
+      # TODO: Push more of this functionality down down into the
+      # `./config/machines` modules to avoid # cluttering up `flake.nix` any
+      # more than is necessary.
+      mkNixOSConfiguration = hostname: system: nixosPkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          nixosPkgs.nixosModules.notDetected
+          inputs.nixosHome.nixosModules.home-manager
+          inputs.impermanence.nixosModules.impermanence
+          # XXX: Nix needs to believe we have an absolute path here.
+          (./. + "/config/machines/${hostname}")
+        ];
+        specialArgs = {
+          inherit inputs;
+          pkgs = mkPkgsFor system nixosPkgs;
+          unstable = mkPkgsFor system inputs.unstable;
+        };
+      };
+    in
+    {
+      darwinConfigurations = {
+        crazy-diamond = mkMacOSConfiguration "crazy-diamond" "x86_64-darwin";
+      };
 
-    nixosConfigurations.star-platinum = { };
-
-    darwinConfigurations.white-album = nix-darwin.lib.darwinSystem {
-      inherit inputs;
-      modules = [ ./config/machines/white-album ];
+      nixosConfigurations = {
+        star-platinum = mkNixOSConfiguration "star-platinum" "x86_64-linux";
+      };
     };
-  };
 }

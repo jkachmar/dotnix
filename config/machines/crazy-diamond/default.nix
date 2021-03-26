@@ -1,50 +1,27 @@
-{ ... }:
-let
-  sources = import ../../../nix/sources.nix;
-
-  # NOTE: Replicated (approximately) from flake config for the time being...
-  overlays = {
-    # Inject 'unstable' into the overridden package set, so that the following
-    # overlays  may access them (along with any system configs that wish to do
-    # so).
-    pkgSets = final: prev: {
-      unstable = import sources.unstable { };
-    };
-
-    overriddenPkgs = import ../../../overlays/overridden_pkgs.nix;
-    pinnedPkgs = import ../../../overlays/pinned_pkgs.nix;
-    customPkgs = import ../../../overlays/custom_pkgs.nix;
-  };
-in
+{ config, ... }:
 {
   imports = [
-    "${sources.home-manager}/nix-darwin"
     ./hardware.nix
-    ../../profiles/macos
+    ../../profiles/macos.nix
   ];
 
-  # NOTE: Replicated (approximately) from flake config for the time being...
-  _module.args.inputs = {
-    inherit (sources) darwin-stable nix-darwin unstable;
-    self.overlays = overlays;
+  config = {
+    networking.hostName = "crazy-diamond";
+
+    primary-user = {
+      name = "jkachmar";
+      git.user.name = config.primary-user.name;
+      git.user.email = "me@jkachmar.com";
+    };
+
+    # TODO: Abstract this out.
+    services.nix-daemon.enable = true;
+
+    ###########################################################################
+    # Used for backwards compatibility, please read the changelog before
+    # changing.
+    #
+    # $ darwin-rebuild changelog
+    system.stateVersion = 4;
   };
-
-  primary-user.email = "me@jkachmar.com";
-  primary-user.fullname = "Joe Kachmar";
-  primary-user.username = "jkachmar";
-  networking.hostName = "crazy-diamond";
-
-  primary-user.home-manager = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      ((emacsPackagesNgGen emacsMacport).emacsWithPackages (epkgs: [
-        epkgs.emacsql-sqlite
-        epkgs.vterm
-      ]))
-    ];
-  };
-
-  #############################################################################
-  # Used for backwards compatibility, please read the changelog before changing
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
 }

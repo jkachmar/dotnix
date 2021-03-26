@@ -2,23 +2,64 @@
 
 ## Installation
 
-Clone this repository to `$XDG_HOME_DIRECTORY/dotfiles` (i.e.
-`$HOME/.config/dotfiles`); this is a hardcoded path, however it should be the
-_only_ one that is expected by the configuration.
+### Clone
+
+#### macOS
+
+Clone this repository to `$HOME/.config/dotfiles`; this is a hardcoded path,
+however it should be the _only_ one that is expected by the configuration.
+
+After cloning, `cd` into the directory.
+
+#### NixOS
+
+The system-level prerequisites of the NixOS configuration is significantly more
+involved than the macOS configuration.
+
+In general it follows the same principles as [Graham Christensen] described in
+his [Erase Your Darlings] blog post; in this case, `/state` is being used as
+the persistent directory.
+
+Due to a few idiosyncracies with the persistence framework, this configuration
+should be cloned to `/state/nixos/etc/nixos`.
+
+After cloning, `cd` into the directory.
 
 ### Existing Profile
 
-To install based off of a profile for an existing machine, symlink the machine
-configuration directory to the repository root directory with the name
-`current-machine`.
+#### macOS
 
-For example, to configure `star-platinum`, one would run the following command
-in the root directory after a fresh clone of this repository:
+From the configuration directory, build the darwin activation utilities and
+then invoke them directly for the desired profile.
+
+For example, the following will build and activate the `crazy-diamond` profile:
 
 ```bash
-ln -s ./machines/star-platinum ./current-machine
-nix-shell --run rebuild
+nix build .#darwinConfigurations.crazy-diamond.system
+./result/sw/bin/darwin-rebuild --flake $(pwd)#crazy-diamond switch
 ```
+
+At the time of writing, `nix-darwin` hasn't been fully updated to work with
+Flakes so this will have to be repeated every time the configuration is to be
+updated.
+
+##### TODO
+
+- [ ] package the above into a script available within the `nix develop` shell
+
+#### NixOS
+
+From the configuration directory, build the NixOS configuration and activate
+it.
+
+For example, the following will build and activate the `crazy-diamond` profile:
+
+```bash
+nixos-rebuild switch --flake '.#star-platinum'
+```
+
+The initial activation will set the machine's host name, which means that
+subsequent activations can be performed with `nixos-rebuild switch`.
 
 ### New Profile
 
@@ -31,22 +72,18 @@ configuration
 ### Post-Install
 
 Once everything's been installed and is up and running, `direnv allow` will
-enable `lorri` and most of the `nix-shell --run` nonsense below can be elided.
+enable `nix-direnv` and most of the `nix-shell --run` nonsense below can be
+elided.
 
 ## Maintenance
 
 ### Updates
 
-The pinned sources tracked in `./nix/sources.json` are managed with [`niv`],
-and can be updated as follows:
+Sources are pinned and tracked using "Nix Flakes".
 
-```bash
-nix-shell --run "niv update"
-```
+#### TODO
 
-The next time a `nix-shell` is entered, or any of the scripts defined in
-`shell.nix` are run, the new sources will be pulled from.
-
+- [ ] add example commands showing how to update pinned flake sources.
 
 ### [`nix-direnv`]
 
@@ -67,9 +104,11 @@ due to some issues I've had in the past with `lorri`'s daemon.
 
 ## Resources
 
-TODO: Start linking to the stuff that helped me set this repository up in the
-first place.
+**TODO**: Link against some of the Nix configurations that I referenced when
+figuring this out for myself.
 
+[Graham Christensen]: https://github.com/grahamc
+[Erase Your Darlings]: https://grahamc.com/blog/erase-your-darlings
 [`niv`]: https://www.github.com/nmattia/niv
 [`nix-direnv`]: https://github.com/nix-community/nix-direnv
 [`lorri`]: https://www.gitub.com/target/lorri
