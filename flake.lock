@@ -1,23 +1,22 @@
 {
   "nodes": {
-    "home": {
+    "darwin": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "macosPkgs"
         ]
       },
       "locked": {
-        "lastModified": 1612902587,
-        "narHash": "sha256-VZ7Z1OMFf5ReObu3CCVBsC2DWloTYDjqW1onUKejVrE=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "209566c752c4428c7692c134731971193f06b37c",
+        "lastModified": 1616437843,
+        "narHash": "sha256-mOrPTDNW2hwryNBAVkmWuDdb9Owjb7AcSwob7ecfRIk=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "1a760930266ac00b7d422320c0b01d583d294ec7",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "ref": "release-20.09",
-        "repo": "home-manager",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
         "type": "github"
       }
     },
@@ -36,36 +35,71 @@
         "type": "github"
       }
     },
-    "nixops": {
+    "macosHome": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "utils"
+          "macosPkgs"
         ]
       },
       "locked": {
-        "lastModified": 1614711931,
-        "narHash": "sha256-In+aL5PrOWCjEMDBv+Yv93epJijt24NfGY6Vdy/aIVo=",
+        "lastModified": 1612902587,
+        "narHash": "sha256-VZ7Z1OMFf5ReObu3CCVBsC2DWloTYDjqW1onUKejVrE=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "209566c752c4428c7692c134731971193f06b37c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-20.09",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "macosPkgs": {
+      "locked": {
+        "lastModified": 1616628936,
+        "narHash": "sha256-AlrgEUkhV4nulv35iNV7iRIcssqvbjNg8+mf5B6SM2Q=",
         "owner": "nixos",
-        "repo": "nixops",
-        "rev": "45256745cef246dabe1ae8a7d109988f190cd7ef",
+        "repo": "nixpkgs",
+        "rev": "d395190b24b27a65588f4539c423d9807ad8d4e7",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "repo": "nixops",
+        "ref": "nixpkgs-20.09-darwin",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "nixosHome": {
+      "inputs": {
+        "nixpkgs": [
+          "nixosPkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1614975450,
-        "narHash": "sha256-guQeKuY2xJXAV8U5Wnz9h43yd80AEtnrfR7KumemBeQ=",
+        "lastModified": 1612902587,
+        "narHash": "sha256-VZ7Z1OMFf5ReObu3CCVBsC2DWloTYDjqW1onUKejVrE=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "209566c752c4428c7692c134731971193f06b37c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-20.09",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixosPkgs": {
+      "locked": {
+        "lastModified": 1616678473,
+        "narHash": "sha256-o9fzriluI4XZudMDz92VwjlsHAKVhTE6RWkqRTzPZtM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1ac507ba981970c8e864624542e31eb1f4049751",
+        "rev": "71394689602c3c38e4a51160a89ce8175e8da3d3",
         "type": "github"
       },
       "original": {
@@ -77,12 +111,13 @@
     },
     "root": {
       "inputs": {
-        "home": "home",
+        "darwin": "darwin",
         "impermanence": "impermanence",
-        "nixops": "nixops",
-        "nixpkgs": "nixpkgs",
-        "unstable": "unstable",
-        "utils": "utils"
+        "macosHome": "macosHome",
+        "macosPkgs": "macosPkgs",
+        "nixosHome": "nixosHome",
+        "nixosPkgs": "nixosPkgs",
+        "unstable": "unstable"
       }
     },
     "unstable": {
@@ -97,21 +132,6 @@
       "original": {
         "owner": "nixos",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "utils": {
-      "locked": {
-        "lastModified": 1614513358,
-        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
         "type": "github"
       }
     }

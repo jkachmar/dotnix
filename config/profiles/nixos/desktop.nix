@@ -16,7 +16,7 @@
     ../../modules/security/fail2ban.nix
     ../../modules/security/gpg.nix
     ../../modules/security/openssh.nix
-    # UI configuration modules.
+    # "UI" configuration modules.
     ../../modules/ui/alacritty.nix
     ../../modules/ui/bash/nixos.nix
     ../../modules/ui/command-not-found.nix

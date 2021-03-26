@@ -1,18 +1,24 @@
 ########################################
 # OS-agnostic `nixpkgs` configuration. #
 ########################################
-{ inputs, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
-  inherit (pkgs.stdenv.targetPlatform) isLinux;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
 in
 {
   nix = {
-    nixPath = [
-      "nixpkgs=${inputs.nixpkgs}"
+    nixPath = lib.mkForce ([
       "unstable=${inputs.unstable}"
-    ];
+    ] ++ lib.optionals isDarwin [
+      "nixpkgs=${inputs.macosPkgs}"
+      "darwin=${inputs.darwin}"
+      (lib.traceVal "darwin-config=$HOME/.config/dotfiles/config/machines/${config.networking.hostName}")
+    ] ++ lib.optionals isLinux [
+      "nixpkgs=${inputs.nixosPkgs}"
+    ]);
+
     registry = {
-      nixpkgs.flake = inputs.nixpkgs;
+      nixpkgs.flake = if isDarwin then inputs.macosPkgs else inputs.nixosPkgs;
       unstable.flake = inputs.unstable;
     };
   };
