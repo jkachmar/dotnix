@@ -12,13 +12,19 @@ To install based off of a profile for an existing machine, symlink the machine
 configuration directory to the repository root directory with the name
 `current-machine`.
 
-For example, to configure `star-platinum`, one would run the following command
+For example, to configure `crazy-diamond`, one would run the following command
 in the root directory after a fresh clone of this repository:
 
 ```bash
-ln -s ./machines/star-platinum ./current-machine
-nix-shell --run rebuild
+ln -s ./machines/crazy-diamond ./current-machine
+nix develop
+nix build .#darwinConfigurations.crazy-diamond.system
+./result/sw/bin/darwin-rebuild --flake $(pwd)#crazy-diamond switch
 ```
+
+#### TODO
+
+- [ ] package the above into a script available within the `nix develop` shell
 
 ### New Profile
 
