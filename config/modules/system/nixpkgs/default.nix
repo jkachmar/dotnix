@@ -36,7 +36,9 @@ in
   # and Flakes, but this deserves a more rigorous explanation.
   home-manager = {
     useGlobalPkgs = true;
-    useUserPackages = true;
+    # NOTE: For some reason if this enabled on macOS it totally breaks
+    # home-manager's package installation.
+    useUserPackages = isLinux;
   };
   primary-user.home-manager.xdg.configFile."nixpkgs/config.nix".source = ./config.nix;
 }
