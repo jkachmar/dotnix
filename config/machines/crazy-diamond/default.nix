@@ -17,6 +17,17 @@
     # TODO: Abstract this out.
     services.nix-daemon.enable = true;
 
+    nix.distributedBuilds = true;
+    nix.buildMachines = [
+      {
+        hostName = "10.0.1.150";
+        sshUser = "jkachmar";
+        sshKey = "/Users/jkachmar/.ssh/id_enigma";
+        systems = [ "x86_64-linux" ];
+        maxJobs = 2;
+      }
+    ];
+
     ###########################################################################
     # Used for backwards compatibility, please read the changelog before
     # changing.
