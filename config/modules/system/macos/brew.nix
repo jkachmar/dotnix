@@ -12,5 +12,9 @@
     # NOTE: Uninstalls all formulas not listed in the generated `Brewfile`; if
     # the formula is a cask, removes all files associated with the cask.
     cleanup = "zap";
+    extraConfig = ''
+      # Needed to silence a non-fatal error if any casks are installed. 
+      tap "homebrew/cask"
+    '';
   };
 }

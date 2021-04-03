@@ -5,12 +5,21 @@
 
 {
   homebrew = {
-    brews = [ "mas" ];
+    brews = [ ];
     casks = [
       "amethyst" # Tiling window manager.
       "discord"
       "itsycal" # Titlebar calendar.
       "sensiblesidebuttons"
     ];
+    # Mac App Store applications.
+    #
+    # NOTE: Use the `mas` CLI to search for the number associated with a given
+    # application name.
+    #
+    # e.g. `mas search 1Password`
+    masApps = {
+      "1Password 7 - Password Manager" = 1333542190;
+    };
   };
 }
