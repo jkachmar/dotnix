@@ -7,9 +7,9 @@
     # Base configuration modules for all NixOS systems.
     ./base.nix
     # Desktop configuration modules.
-    ../../modules/desktop/applications.nix
-    ../../modules/desktop/kde.nix
-    ../../modules/desktop/sound.nix
+    ../../modules/desktop/nixos/applications.nix
+    ../../modules/desktop/nixos/kde.nix
+    ../../modules/desktop/nixos/sound.nix
     # "Data" configuration modules.
     ../../modules/data/git.nix
     # Security configuration modules.

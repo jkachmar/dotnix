@@ -10,7 +10,7 @@
     # System configuration modules.
     ../../modules/system/nix/nixos.nix
     ../../modules/system/nixpkgs
-    ../../modules/system/systemd-boot.nix
+    ../../modules/system/nixos/systemd-boot.nix
     ../../modules/system/tools/common.nix
     # "Data" configuration modules.
     ../../modules/data/xdg.nix
