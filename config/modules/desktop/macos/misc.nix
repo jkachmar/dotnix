@@ -9,6 +9,7 @@
     casks = [
       "amethyst" # Tiling window manager.
       "discord"
+      "iterm2"
       "itsycal" # Titlebar calendar.
       "sensiblesidebuttons"
     ];
@@ -20,6 +21,7 @@
     # e.g. `mas search 1Password`
     masApps = {
       "1Password 7 - Password Manager" = 1333542190;
+      "Slack" = 803453959;
     };
   };
 }

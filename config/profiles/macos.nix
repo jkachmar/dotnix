@@ -21,6 +21,7 @@
     ../modules/ui/bash/common.nix
     ../modules/ui/direnv/common.nix
     ../modules/ui/fish/macos.nix
+    ../modules/ui/fonts.nix
     ../modules/ui/htop.nix
     ../modules/ui/neovim
     ../modules/ui/starship.nix

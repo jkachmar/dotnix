@@ -9,6 +9,7 @@
     #
     # cf. https://github.com/malob/nixpkgs/blob/bd20ba8cccfa10957af1c1afd4ebf9aa2651ada7/darwin/modules/programs/nix-index.nix
     interactiveShellInit = ''
+      set fish_greeting
       fish_vi_key_bindings
     '';
   };

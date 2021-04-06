@@ -3,6 +3,9 @@
 ####################################
 { config, lib, pkgs, ... }:
 {
+  primary-user.home-manager.home.packages = [
+    pkgs.gitAndTools.delta
+  ];
   primary-user.home-manager.programs.git = {
     enable = true;
 

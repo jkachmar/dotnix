@@ -1,10 +1,16 @@
 #! /bin/sh
 
+set -euo pipefail
+
+NIX_OPTS="--experimental-features 'flakes nix-command' '$@'"
+
 machine=$1
 
 CONFIG_PATH="${HOME}/.config/dotfiles"
 
-nix build --no-link "${CONFIG_PATH}/#darwinConfigurations.${machine}.system"
+nix build \
+  --experimental-features 'flakes nix-command' \
+  --no-link "${CONFIG_PATH}/#darwinConfigurations.${machine}.system"
 
 result=$(nix path-info "${HOME}/.config/dotfiles/#darwinConfigurations.${machine}.system")
 

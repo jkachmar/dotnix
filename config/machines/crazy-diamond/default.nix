@@ -16,6 +16,7 @@
 
     # TODO: Abstract this out.
     services.nix-daemon.enable = true;
+    users.nix.configureBuildUsers = true;
 
     nix.distributedBuilds = true;
     nix.buildMachines = [
