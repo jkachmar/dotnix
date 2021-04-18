@@ -58,16 +58,15 @@
     },
     "macosPkgs": {
       "locked": {
-        "lastModified": 1617649763,
-        "narHash": "sha256-M7Ci3pS2Vo6kTaUxgf+hLAbDtMsVJFvMmJiDvyDB1gc=",
+        "lastModified": 1618775889,
+        "narHash": "sha256-9nUNu+3SVxiXLV1vI3l9PS6wdJA2Mi016lj2TCegkQ0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cb2fbad3456863402ff74d8ac05ecf358ce5797d",
+        "rev": "3d703cfc9e14b3db8e84cab28aec83ed509397f1",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixpkgs-20.09-darwin",
         "repo": "nixpkgs",
         "type": "github"
       }

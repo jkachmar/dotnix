@@ -10,7 +10,11 @@
     #
     # `darwin` is used to indicate the most up-to-date stable packages tested
     # against macOS.
-    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
+    #
+    # TODO: macOS Big Sur (11.x) has issues with the 20.09 branch of nixpkgs.
+    #
+    # cf. https://github.com/LnL7/nix-darwin/issues/255
+    macosPkgs.url = "github:nixos/nixpkgs";
     # Stable NixOS package set; pinned to the latest 20.09 release.
     #
     # `small` is used to indicate the most up-to-date stable packages.
