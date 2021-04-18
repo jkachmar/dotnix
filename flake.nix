@@ -33,9 +33,12 @@
     };
 
     # Declarative user configuration for macOS systems.
+    #
+    # XXX: Updated to the latest unstable branch for compatibility with
+    # `macosPkgs`.
     macosHome = {
       inputs.nixpkgs.follows = "macosPkgs";
-      url = "github:nix-community/home-manager/release-20.09";
+      url = "github:nix-community/home-manager";
     };
     # Declarative user configuration for NixOS systems.
     nixosHome = {
