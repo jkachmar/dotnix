@@ -12,6 +12,8 @@
       "iterm2"
       "itsycal" # Titlebar calendar.
       "sensiblesidebuttons"
+      "virtualbox"
+      "virtualbox-extension-pack"
     ];
     # Mac App Store applications.
     #
