@@ -14,7 +14,9 @@
       "sensiblesidebuttons"
       "virtualbox" # Virtualization (duh).
       "virtualbox-extension-pack" # Virtualization helpers.
-      "zotero" # Research paper catalog & organizer.
+      # XXX: For now, the Safari connector is only available in the Zotero beta
+      # (which is not available on homebrew).
+      # "zotero" # Research paper catalog & organizer.
     ];
     # Mac App Store applications.
     #
