@@ -8,12 +8,13 @@
     brews = [ ];
     casks = [
       "amethyst" # Tiling window manager.
-      "discord"
-      "iterm2"
+      "discord" # Nerd chat.
+      "iterm2" # A terminal emulator with font rendering & tmux support.
       "itsycal" # Titlebar calendar.
       "sensiblesidebuttons"
-      "virtualbox"
-      "virtualbox-extension-pack"
+      "virtualbox" # Virtualization (duh).
+      "virtualbox-extension-pack" # Virtualization helpers.
+      "zotero" # Research paper catalog & organizer.
     ];
     # Mac App Store applications.
     #
