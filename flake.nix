@@ -10,11 +10,7 @@
     #
     # `darwin` is used to indicate the most up-to-date stable packages tested
     # against macOS.
-    #
-    # TODO: macOS Big Sur (11.x) has issues with the 20.09 branch of nixpkgs.
-    #
-    # cf. https://github.com/LnL7/nix-darwin/issues/255
-    macosPkgs.url = "github:nixos/nixpkgs";
+    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
     # Stable NixOS package set; pinned to the latest 20.09 release.
     #
     # `small` is used to indicate the most up-to-date stable packages.
@@ -27,17 +23,24 @@
     #############
 
     # Declarative, NixOS-style configuration for macOS.
+    #
+    # XXX: Updated to the latest unstable branch due to compatibility issues
+    # with macOS 11.x (Big Sur); revisit when 21.05 drops.
+    #
+    # cf. https://github.com/LnL7/nix-darwin/issues/255
     darwin = {
-      inputs.nixpkgs.follows = "macosPkgs";
+      inputs.nixpkgs.follows = "unstable";
       url = "github:lnl7/nix-darwin";
     };
 
     # Declarative user configuration for macOS systems.
     #
-    # XXX: Updated to the latest unstable branch for compatibility with
-    # `macosPkgs`.
+    # XXX: Updated to the latest unstable branch due to compatibility issues
+    # with macOS 11.x (Big Sur); revisit when 21.05 drops.
+    #
+    # cf. https://github.com/LnL7/nix-darwin/issues/255
     macosHome = {
-      inputs.nixpkgs.follows = "macosPkgs";
+      inputs.nixpkgs.follows = "unstable";
       url = "github:nix-community/home-manager";
     };
     # Declarative user configuration for NixOS systems.
@@ -50,7 +53,7 @@
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = inputs@{ self, macosPkgs, nixosPkgs, ... }:
+  outputs = inputs@{ self, darwin, nixosPkgs, unstable, ... }:
     let
       # Utility function to construct a package set based on the given system
       # along with the shared `nixpkgs` configuration defined in this repo.
@@ -64,21 +67,24 @@
       # systems.
       #
       # TODO: Push more of this functionality down down into the
-      # `./config/machines` modules to avoid # cluttering up `flake.nix` any
+      # `./config/machines` modules to avoid cluttering up `flake.nix` any
       # more than is necessary.
-      mkMacOSConfiguration = hostname: system: inputs.darwin.lib.darwinSystem {
-        # inputs = { nixpkgs = macosPkgs };
+      mkMacOSConfiguration = hostname: system: darwin.lib.darwinSystem {
         modules = [
           inputs.macosHome.darwinModules.home-manager
           # XXX: Nix needs to believe we have an absolute path here.
           (./. + "/config/machines/${hostname}")
         ];
         specialArgs = {
+          # XXX: Tracking unstable to work around compatibility issues with
+          # macOS 11.x (Big Sur).
           inputs = inputs // {
-            nixpkgs = macosPkgs;
+            nixpkgs = unstable;
           };
-          pkgs = mkPkgsFor system macosPkgs;
-          unstable = mkPkgsFor system inputs.unstable;
+          # XXX: Tracking unstable to work around compatibility issues with
+          # macOS 11.x (Big Sur).
+          pkgs = mkPkgsFor system unstable;
+          unstable = mkPkgsFor system unstable;
         };
       };
 
