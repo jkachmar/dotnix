@@ -19,6 +19,7 @@
   };
 
   services.dnscrypt-proxy2.enable = true;
+
   # See the upstream TOML configuration example for a documented list of
   # available settings:
   #
@@ -33,15 +34,21 @@
       "quad9-doh-ip4-nofilter-pri"
     ];
 
+    # TODO: Set these up after updating nixpkgs to something that provides
+    # the latest version of `dnscrypt-proxy`.
+    #
+    # bootstrap_resolvers = [ "9.9.9.9:53" "1.1.1.1:53" ];
+    # ignore_system_dns = true;
+
     # This is the address that the PiHole listens on for its DNS resolution;
-    # for now it just uses the default Docker gateway IP, but it would be nice
-    # to explicitly specify this as a Docker network setting.
+    # for now it just uses the default Podman gateway IP, but it would be nice
+    # to explicitly specify this as a CNI network setting.
     #
     # TODO: Look into switching to the PiHole Nix module whenever
     # https://github.com/NixOS/nixpkgs/pull/108055 whenever is finished/merged.
     #
     # TODO: Set this somewhere else in the `config`
-    listen_addresses = [ "172.17.0.1:5053" ];
+    listen_addresses = [ "10.88.0.1:5053" ];
 
     # Prefer DNS-Over-HTTPS and require DNSSEC verification for the proxies.
     doh_servers = true;
