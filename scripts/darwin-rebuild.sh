@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-NIX_OPTS="--experimental-features 'flakes nix-command' '$@'"
-
 machine=$1
 
 CONFIG_PATH="${HOME}/.config/dotfiles"
