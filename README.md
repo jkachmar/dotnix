@@ -78,6 +78,6 @@ first place.
 
 [`niv`]: https://www.github.com/nmattia/niv
 [`nix-direnv`]: https://github.com/nix-community/nix-direnv
-[`lorri`]: https://www.gitub.com/target/lorri
-[`direnv`]: https://www.gitub.com/direnv/direnv
+[`lorri`]: https://www.github.com/target/lorri
+[`direnv`]: https://www.github.com/direnv/direnv
 [GC Root]: https://nixos.org/nixos/nix-pills/garbage-collector.html#idm140737315973184
