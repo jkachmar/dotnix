@@ -19,10 +19,10 @@ in
 {
   primary-user = {
     home-manager.home.packages = with pkgs; [
-      # From `pkgs`.
       discord
       firefox
       slack
+      xclip # Clipboard selection a la `cat foo | xclip -selection clipboard`
       updated-signal-desktop
     ];
     persistence.home.misc.directories = [

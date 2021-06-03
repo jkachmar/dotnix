@@ -7,6 +7,7 @@
     # Misc. common programs without a better place to go.
     curl
     libvterm-neovim
+    nixpkgs-fmt
     vim
     wget
 

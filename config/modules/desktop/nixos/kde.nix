@@ -12,7 +12,7 @@
     displayManager.sddm.enable = true;
   };
 
-  primary-user.home-manager.home.packages = with pkgs.kdeApplications; [
+  primary-user.home-manager.home.packages = with pkgs.plasma5Packages.kdeApplications; [
     ark
     kate
     kcalc
