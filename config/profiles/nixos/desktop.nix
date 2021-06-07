@@ -25,7 +25,7 @@
     ../../modules/ui/fonts.nix
     ../../modules/ui/htop.nix
     ../../modules/ui/neovim
-    ../../modules/ui/vscode
+    ../../modules/ui/vscode/nixos.nix
     ../../modules/ui/starship.nix
   ];
 }
