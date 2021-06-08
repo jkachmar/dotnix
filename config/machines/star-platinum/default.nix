@@ -59,11 +59,28 @@
         # directories, but it seems that NixOS works best if these files are
         # present at `/etc/nixos`.
         nixos.directories = [ "/etc/nixos" ];
+        # Miscellaneous stateful configuration files and directories.
+        #
+        # This is often a staging ground for things before they're broken out
+        # into dedicated modules or stateful directory trees.
+        misc = {
+          directories = [
+            "/var/lib/docker"
+            "/etc/NetworkManager"
+          ];
+          files = [ "/etc/docker/key.json" ];
+        };
       };
       # Miscellaneous user-level persistent state.
       persistence.home.misc.directories = [
         "code" # Misc. software projects.
         ".ssh" # SSH keys and configurations.
+
+        # TODO: Move this out to a dedicated Haskell development module.
+        ".cabal" # `cabal-install` artifacts.
+
+        # TODO: Move this out to a more generic module.
+        ".config/obsidian" # Obsidian notes configuration.
       ];
     };
 
@@ -77,8 +94,16 @@
         enp4s0.useDHCP = true;
         wlp5s0.useDHCP = true;
       };
+      networkmanager.enable = true;
       # TODO: Work around some issues w/ stateless WPA supplicant.
-      # wireless.enable = true;
+      # wireless = {
+      #   enable = false;
+      #   userControlled.enable = true;
+      #   networks = {
+      #     "king-crimson".pskRaw =
+      #       "f30641e23c4da508d59c1d258bd2a39b33e93d473358b65f699b64387d431d86";
+      #   };
+      # };
     };
 
     ##############
