@@ -21,6 +21,10 @@
     spectacle
   ];
 
+  #
+  # TODO: Abstract this out to the `primary-user` configuration.
+  security.pam.services.jkachmar.enableKwallet = true;
+
   # KDE's stateful components, which should be persisted across reboots.
   #
   # Since KDE clutters things up quite a bit, all of its state is organized
@@ -56,15 +60,23 @@
       ".config/kscreenlockerrc"
       ".config/ksmserverrc"
       ".config/ktimezonedrc"
+      ".config/kwalletmanager5rc"
+      ".config/kwalletrc"
       ".config/kwinrc"
       ".config/kwinrulesrc"
       ".config/kxkbrc"
       ".config/plasma-localerc"
+      ".config/plasma-nm" # NetworkManager.
       ".config/plasmanotifyrc"
       ".config/plasma-org.kde.plasma.desktop-appletsrc"
       ".config/plasmashellrc"
       ".config/powermanagementprofilesrc"
       ".config/spectaclerc"
+
+      # XXX: Just persisting the `kwalletd` directory doesn't seem to work...
+      ".local/share/kwalletd/kdewallet.kwl"
+      ".local/share/kwalletd/kdewallet.salt"
+
       # XXX: Looks like KDE will always recreate this...
       # ".config/Trolltech.conf"
     ];
