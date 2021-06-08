@@ -10,6 +10,8 @@
     ../../modules/desktop/nixos/applications.nix
     ../../modules/desktop/nixos/kde.nix
     ../../modules/desktop/nixos/sound.nix
+    # XXX: Contains NVIDIA-specific config.
+    ../../modules/desktop/nixos/virtualization.nix
     # "Data" configuration modules.
     ../../modules/data/git.nix
     # Security configuration modules.
