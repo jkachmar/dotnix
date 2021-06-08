@@ -1,7 +1,7 @@
 #####################################
 # Misc. NixOS desktop applications. #
 #####################################
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 let
   # # TODO: Move this out to an overlay (i.e. figure out how overlays are going
   # # to work with a Flakes-based configuration).
@@ -20,8 +20,8 @@ in
   primary-user = {
     home-manager.home.packages = with pkgs; [
       discord
-      firefox
-      slack
+      unstable.firefox # NOTE: 21.05 = v88.x, unstable = v89
+      slack # NOTE: 21.05 = v4.15.0; unstable = v4.16.0
       xclip # Clipboard selection a la `cat foo | xclip -selection clipboard`
       updated-signal-desktop
     ];
