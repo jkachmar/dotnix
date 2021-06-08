@@ -65,8 +65,9 @@
         # into dedicated modules or stateful directory trees.
         misc = {
           directories = [
-            "/var/lib/docker"
             "/etc/NetworkManager"
+            "/var/lib/bluetooth" # Stateful bluetooth connection info.
+            "/var/lib/docker"
           ];
           files = [ "/etc/docker/key.json" ];
         };
@@ -81,6 +82,12 @@
 
         # TODO: Move this out to a more generic module.
         ".config/obsidian" # Obsidian notes configuration.
+
+        # TODO: Move this stuff to its own module and use `mkOutOfStoreSymlink`
+        # (cf. `home-manager` )to store the doom emacs config in this repository.
+        ".doom.d" # Doom emacs configuration directory.
+        ".emacs.d" # Emacs state directory.
+        "org" # Org mode directory.
       ];
     };
 

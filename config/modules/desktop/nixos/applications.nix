@@ -20,6 +20,7 @@ in
   primary-user = {
     home-manager.home.packages = with pkgs; [
       discord
+      emacs # TODO: Move this out to a dedicated Emacs module.
       unstable.firefox # NOTE: 21.05 = v88.x, unstable = v89
       slack # NOTE: 21.05 = v4.15.0; unstable = v4.16.0
       xclip # Clipboard selection a la `cat foo | xclip -selection clipboard`
