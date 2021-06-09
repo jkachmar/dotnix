@@ -21,9 +21,12 @@ in
     home-manager.home.packages = with pkgs; [
       discord
       emacs # TODO: Move this out to a dedicated Emacs module.
-      unstable.firefox # NOTE: 21.05 = v88.x, unstable = v89
+      firefox
       slack # NOTE: 21.05 = v4.15.0; unstable = v4.16.0
       xclip # Clipboard selection a la `cat foo | xclip -selection clipboard`
+      zoom-us
+
+      # Custom/overridden packages.
       updated-signal-desktop
     ];
     persistence.home.misc.directories = [
@@ -49,6 +52,7 @@ in
       defaultApplications = {
         "x-scheme-handler/slack" = "slack.desktop";
         "x-scheme-handler/sgnl" = "signal-desktop.desktop";
+        "x-scheme-handler/zoommtg" = "zoom.desktop";
       };
     };
   };
