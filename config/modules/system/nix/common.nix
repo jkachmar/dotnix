@@ -8,7 +8,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes ca-references
     '';
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
   };
   primary-user.home-manager.xdg.configFile."nix/nix.conf".text = ''
     experimental-features = nix-command flakes ca-references
