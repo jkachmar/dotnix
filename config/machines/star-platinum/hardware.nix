@@ -89,7 +89,8 @@
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/e2489f5d-e66c-460d-bc55-53a2cdd7febb"; }];
+  # TODO: Find a way to link this 
+  swapDevices = [ { device = "/dev/mapper/cryptswap"; } ];
 
   ##################
   # NVIDIA Support #
@@ -98,13 +99,7 @@
   #
   #   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
   #   services.xserver.videoDrivers = [ "nvidia" ];
-  #
-  # TODO: Override NVIDIA drivers to work around i2c bug; in the meantime
-  # it's "easier" to just block the module.
-  # 
-  # cf. https://github.com/NixOS/nixpkgs/pull/69429
-  # cf. https://stackoverflow.com/questions/53864609/how-to-override-default-stable-nvidia-driver
-  boot.blacklistedKernelModules = [ "i2c_nvidia_gpu" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
   services.xserver.videoDrivers = [ "nvidia" ];
   primary-user.persistence.home.nvidia.directories = [ ".nv" ];
 
