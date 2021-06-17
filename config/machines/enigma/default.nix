@@ -7,25 +7,13 @@
     ./hardware.nix
 
     ../../profiles/nixos/base.nix
+    ../../modules/security/fail2ban.nix
+    ../../modules/security/openssh.nix
 
     ../../modules/services/dns/dnscrypt-proxy.nix
     ../../modules/services/dns/podman-pihole.nix
     ../../modules/services/media/hardware-acceleration.nix
     ../../modules/services/media/plex.nix
-  ];
-
-  #############################################################################
-  # PACKAGE MANAGEMENT
-  #############################################################################
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    bind.dnsutils
-    ripgrep
-    wireguard
-    vim
-    zfs
   ];
 
   #############################################################################
@@ -56,7 +44,7 @@
   # };
 
   #############################################################################
-  # SYSTEM USER SETTINGS
+  # GLOBAL SYSTEM USER SETTINGS
   #############################################################################
 
   # XXX: Would it be better to explicitly add `NOPASSWD` for my username in 
@@ -68,11 +56,9 @@
     users.root.initialHashedPassword = "$6$W19HRt8s/zk$BlnuJqAugFV7Pb2kNEM7qFnUUJrfDl6lHHRbuftE8Dr4/wPgSRyws5SZHFl9jefrxn1yqyjzlhPQptlP0vm6d0";
   };
 
-
   #############################################################################
   # PRIMARY USER SETTINGS
   #############################################################################
-  # 
   primary-user = {
     name = "jkachmar";
 
@@ -109,7 +95,7 @@
   #############################
   # ENVIRONMENTAL PERSISTENCE #
   #############################
-
+  # Ensure that the machine ID is statically assigned and cannot be wiped.
   environment.etc."machine-id".text = "4b632b7bbd1940ecaceab8ecc74be662";
 
   # Declare base directories under which the primary account holder's
@@ -138,19 +124,10 @@
   };
 
   #############################################################################
-  # BOOT
-  #############################################################################
-  # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
-
-  #############################################################################
   # NETWORKING
   #############################################################################
-
-  networking.hostId = "8425e349"; # Required by ZFS.
+  # Required by ZFS.
+  networking.hostId = "8425e349";
   networking.hostName = "enigma";
 
   # Network interface settings
@@ -177,31 +154,20 @@
     # trustedInterfaces = [ "wg1" ];
   };
 
-  # TODO: Configure specific fail2ban rules.
-  services.fail2ban = {
-    enable = true;
-  };
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-
-    challengeResponseAuthentication = false;
-    permitRootLogin = "no";
-    passwordAuthentication = false;
-
-    hostKeys = [
-      {
-        path = "/secrets/ssh/host/ssh_host_ed25519_key";
-        type = "ed25519";
-      }
-      {
-        path = "/secrets/ssh/host/ssh_host_rsa_key";
-        type = "rsa";
-        bits = 4096;
-      }
-    ];
-  };
+  # Set OpenSSH host keys.
+  #
+  # TODO: Find a nicer way to unify this with the OpenSSH config module.
+  services.openssh.hostKeys = lib.mkForce [
+    {
+      path = "/secrets/ssh/host/ssh_host_ed25519_key";
+      type = "ed25519";
+    }
+    {
+      path = "/secrets/ssh/host/ssh_host_rsa_key";
+      type = "rsa";
+      bits = 4096;
+    }
+  ];
 
   #############################################################################
   # SYSTEM SETTINGS
