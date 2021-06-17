@@ -39,8 +39,8 @@ in
         pname = attrs.pname + "-plexpass";
         version = "1.23.2.4656-85f0adf5b";
         src = builtins.fetchurl {
-          url = "https://downloads.plex.tv/plex-media-server-new/1.23.2.4656-85f0adf5b/redhat/plexmediaserver-1.23.2.4656-85f0adf5b.x86_64.rpm";
-          sha256 = "1xkasddnkwwi1a1hn967fhqnazqs61riylif349mhvkd4v2z5rrc";
+          url = "https://downloads.plex.tv/plex-media-server-new/1.23.2.4656-85f0adf5b/debian/plexmediaserver_1.23.2.4656-85f0adf5b_amd64.deb";
+          sha256 = "0iwq502z3nar6jd50gc0wcndqk6j3c4v3d69cafj3l7ljm9f3d2m";
         };
       });
     };
