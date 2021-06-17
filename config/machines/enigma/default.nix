@@ -4,9 +4,11 @@
 
 {
   imports = [
+    # Import the base profile first to load up some of the modules used in
+    # 'hardware.nix'.
+    ../../profiles/nixos/base.nix
     ./hardware.nix
 
-    ../../profiles/nixos/base.nix
     ../../modules/security/fail2ban.nix
     ../../modules/security/openssh.nix
 
@@ -76,6 +78,10 @@
   # USER HOME CONFIGURATION #
   primary-user.home-manager = {
     imports = [ "${inputs.impermanence}/home-manager.nix" ];
+    home.packages = with pkgs; [
+      bind.dnsutils
+    ];
+
     programs = {
       git.enable = true;
       ssh = {
@@ -121,6 +127,7 @@
       # present at `/etc/nixos`.
       nixos.directories = [ "/etc/nixos" ];
     };
+    home.misc.files = [ ".bash_history" ];
   };
 
   #############################################################################

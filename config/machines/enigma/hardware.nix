@@ -1,10 +1,7 @@
 # Hardware configuration.
 
 { config, lib, pkgs, modulesPath, ... }:
-let
-  # TODO: Replace this with the SD card.
-  secure = "/dev/disk/by-label/secure";
-in
+
 {
   imports =
     [
@@ -18,35 +15,22 @@ in
     extraModulePackages = [ ];
     supportedFilesystems = [ "zfs" ];
 
+    # Temporary, read-only filesystem mounted before the LVM boot unit &
+    # unmounted thereafter.
+    preLVMTempMount."/key" = {
+      device = "/dev/disk/by-label/secure";
+      fsType = "vfat";
+    };
+
     initrd = {
-      # Kernel modules needed for mounting USB VFAT devices in 'initrd' stage.
+      # FIXME: Comment explaining why these modules were made available.
       availableKernelModules = [ "ahci" "nvme" "rtsx_pci_sdmmc" "sd_mod" "usbhid" "xhci_pci" ];
-      kernelModules = [ "dm-snapshot" "nls_cp437" "nls_iso8859_1" "usb_storage" "loop" "vfat" ];
+      # FIXME: Comment explaining why these modules were enabled.
+      kernelModules = [ "dm-snapshot" "nls_cp437" "nls_iso8859_1" ];
 
-      preLVMCommands = lib.mkMerge [
-        (
-          lib.mkBefore ''
-            echo -n "Waiting for temp mount filesystem to appear.."
-            while [ ! -e ${secure} ]
-            do
-              echo -n "."
-              sleep 0.25
-            done
-            echo -n " done!"
-            echo
-            mkdir -m 0755 -p /key
-            mount -n -t vfat -o ro ${secure} /key
-          ''
-        )
-        (
-          lib.mkAfter ''
-            echo -n "Closing temp mount filesystem..."
-            umount /key
-            rmdir /key
-          ''
-        )
-      ];
-
+      #####################
+      # ENCRYPTED VOLUMES #
+      #####################
       luks.devices."crypt" = {
         device = "/dev/disk/by-id/nvme-Force_MP510_20338292000128874861-part2";
         header = "/key/enigma/crypt/header";
@@ -121,7 +105,7 @@ in
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/c3b6852d-41ac-4ee8-b9bd-bbaea1911512"; }];
+  swapDevices = [{ device = "/dev/mapper/system-swap"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware = {
