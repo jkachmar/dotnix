@@ -1,7 +1,7 @@
 ###################################################
 # NixOS-specific `dnscrypt-proxy2` configuration. #
 ###################################################
-{ ... }:
+{ lib, ... }:
 
 {
   # Ensure that any relevant stateful files are persisted across reboots.
@@ -15,7 +15,7 @@
   # TODO: Document why this is necessary; should be something on the NixOS
   # wiki to link to.
   systemd.services.dnscrypt-proxy2.serviceConfig = {
-    StateDirectory = "dnscrypt-proxy2";
+    StateDirectory = lib.mkForce "dnscrypt-proxy2";
   };
 
   services.dnscrypt-proxy2.enable = true;

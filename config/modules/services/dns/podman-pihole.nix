@@ -1,14 +1,25 @@
 #####################################################
 # NixOS-specific, Docker-based PiHole configuration #
 #####################################################
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
+  #############################################################################
+  # VIRTUALIZATION
+  #############################################################################
+
   # Use Podman to run OCI containers.
   #
   # TODO: Factor OCI container backend configuration out to a more generic
   # module if/when more OCI-based services are added.
-  virtualisation.oci-containers.backend = "podman";
+  virtualisation = {
+    podman = {
+      enable = true;
+      # NOTE: Workaround for https://github.com/NixOS/nixpkgs/pull/112443
+      extraPackages = [ pkgs.zfs ];
+    };
+    oci-containers.backend = "podman";
+  };
 
   # TODO: Factor pod state persistence out to a more generic module if/when
   # more OCI-based services are added.
@@ -26,6 +37,14 @@
     mountopt="nodev"
   '';
 
+  #############################################################################
+  # NETWORKING
+  #############################################################################
+
+  # TODO: See if this is still necessary now that `dnscrypt-proxy` supports
+  # bootstrap resolvers.
+  networking.nameservers = [ "127.0.0.1" "9.9.9.9" ];
+
   # Firewall settings.
   networking.firewall = {
     # TODO: Remap `80` and `443` at some point; this is for a
@@ -41,6 +60,10 @@
       allowedUDPPorts = [ 5053 ];
     };
   };
+
+  #############################################################################
+  # PIHOLE
+  #############################################################################
 
   virtualisation.oci-containers.containers.pihole = {
     image = "pihole/pihole:latest";
