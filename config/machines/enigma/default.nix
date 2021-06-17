@@ -6,6 +6,8 @@
   imports = [
     ./hardware.nix
 
+    ../../profiles/nixos/base.nix
+
     ../../modules/services/dns/dnscrypt-proxy.nix
     ../../modules/services/dns/podman-pihole.nix
     ../../modules/services/media/hardware-acceleration.nix
@@ -54,25 +56,7 @@
   # };
 
   #############################################################################
-  # SYSTEM PERSISTENCE
-  #############################################################################
-
-  environment.etc."machine-id".text = "4b632b7bbd1940ecaceab8ecc74be662";
-
-  # Persistent logs that should _NOT_ be tracked within ZFS snapshots.
-  #
-  # XXX: Maybe place this closer to the ZFS filesystem declaration.
-  environment.persistence."/state/logs" = {
-    directories = [ "/var/log" ];
-  };
-
-  # Misc. global NixOS persistence (e.g. system configuration)
-  environment.persistence."/state/nixos" = {
-    directories = [ "/etc/nixos" ];
-  };
-
-  #############################################################################
-  # USER SETTINGS
+  # SYSTEM USER SETTINGS
   #############################################################################
 
   # XXX: Would it be better to explicitly add `NOPASSWD` for my username in 
@@ -82,46 +66,74 @@
   users = {
     mutableUsers = false;
     users.root.initialHashedPassword = "$6$W19HRt8s/zk$BlnuJqAugFV7Pb2kNEM7qFnUUJrfDl6lHHRbuftE8Dr4/wPgSRyws5SZHFl9jefrxn1yqyjzlhPQptlP0vm6d0";
-
-    users.jkachmar = {
-      extraGroups = [ "wheel" ];
-      isNormalUser = true;
-      initialHashedPassword = "$6$0LBk.zAnK$QjEiGbc9G1N49MtOXWEpvYooII/8zY7a8t92hZiTu0xx58P7ORf/WzLqiTF7usj9pgjveBJHSSvXPQvI7H/Lx/";
-      uid = 1000;
-
-      # TODO: Investigate using keyFiles instead.
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrZAwektbexTFUtSn0vuCHP6lvTvA/jdOb+SF5TD9VA me@jkachmar.com"
-      ];
-    };
   };
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.jkachmar = { pkgs, ... }: {
+
+  #############################################################################
+  # PRIMARY USER SETTINGS
+  #############################################################################
+  # 
+  primary-user = {
+    name = "jkachmar";
+
+    git.user.name = config.primary-user.name;
+    git.user.email = "git@jkachmar.com";
+
+    initialHashedPassword = "$6$0LBk.zAnK$QjEiGbc9G1N49MtOXWEpvYooII/8zY7a8t92hZiTu0xx58P7ORf/WzLqiTF7usj9pgjveBJHSSvXPQvI7H/Lx/";
+
+    # TODO: Investigate using keyFiles instead.
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrZAwektbexTFUtSn0vuCHP6lvTvA/jdOb+SF5TD9VA me@jkachmar.com"
+    ];
+  };
+
+  # USER HOME CONFIGURATION #
+  primary-user.home-manager = {
     imports = [ "${inputs.impermanence}/home-manager.nix" ];
-    programs.home-manager.enable = true;
-    programs.git.enable = true;
-    programs.ssh = {
-      enable = true;
-      userKnownHostsFile = "/secrets/ssh/jkachmar/known_hosts";
-      matchBlocks = {
-        "github.com" = {
-          hostname = "github.com";
-          user = "git";
-          identityFile = ["/secrets/ssh/jkachmar/id_github"];
+    programs = {
+      git.enable = true;
+      ssh = {
+        enable = true;
+        userKnownHostsFile = "/secrets/ssh/jkachmar/known_hosts";
+        matchBlocks = {
+          "github.com" = {
+            hostname = "github.com";
+            user = "git";
+            identityFile = ["/secrets/ssh/jkachmar/id_github"];
+          };
         };
       };
     };
+  };
 
-    xdg = {
-      enable = true;
-      configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }";
-      configFile."nix/nix.conf".text = "experimental-features = nix-command flakes ca-references";
+  #############################
+  # ENVIRONMENTAL PERSISTENCE #
+  #############################
+
+  environment.etc."machine-id".text = "4b632b7bbd1940ecaceab8ecc74be662";
+
+  # Declare base directories under which the primary account holder's
+  # persistent content shall be stored.
+  #
+  # TODO: Should there only be one base directory, with the "local" state
+  # automatically placed under `${config.primary-user.name}/home`?
+  primary-user.persistence = {
+    base-directories = {
+      global = "/state";
+      home = "/state/jkachmar/home";
     };
+    global = {
+      # Persistent logs that should _NOT_ be tracked within ZFS snapshots.
+      #
+      # XXX: Maybe place this closer to the ZFS filesystem declaration.
+      logs.directories = [ "/var/log" ];
 
-    home.persistence."/state/jkachmar/home/misc" = {
-      files = [ ".bash_history" ];
-      allowOther = true;
+      # NixOS system configuration (et al.) files.
+      #
+      # NOTE: Ideally this could be declaratively set to one of the stateful
+      # directories, but it seems that NixOS works best if these files are
+      # present at `/etc/nixos`.
+      nixos.directories = [ "/etc/nixos" ];
     };
   };
 
@@ -194,14 +206,6 @@
   #############################################################################
   # SYSTEM SETTINGS
   #############################################################################
-
-  nix.trustedUsers = [ "root" "jkachmar" ];
-
-  nix.package = pkgs.nixUnstable;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes ca-references
-  '';
-  nixpkgs.config.allowUnfree = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
