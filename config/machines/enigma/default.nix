@@ -15,7 +15,7 @@
     ../../modules/services/dns/dnscrypt-proxy.nix
     ../../modules/services/dns/podman-pihole.nix
     ../../modules/services/media/hardware-acceleration.nix
-    ../../modules/services/media/plex.nix
+    ../../modules/services/media/plex
   ];
 
   #############################################################################
