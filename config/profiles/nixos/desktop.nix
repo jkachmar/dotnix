@@ -14,6 +14,7 @@
     ../../modules/desktop/nixos/virtualization.nix
     # "Data" configuration modules.
     ../../modules/data/git.nix
+    ../../modules/data/xdg.nix
     # Security configuration modules.
     ../../modules/security/fail2ban.nix
     ../../modules/security/gpg.nix
