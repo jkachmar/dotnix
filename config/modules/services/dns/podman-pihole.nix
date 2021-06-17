@@ -51,11 +51,14 @@
     # general-purpose server and it's dumb that PiHole hijacks these ports.
     allowedTCPPorts = [ 53 80 443 ];
     allowedUDPPorts = [ 53 ];
+
+    # Open up ports on the "cni-podman0" bridge network.
+    #
     # The NixOS firewall is conservative by default, so these ports must be
     # explicitly allowed in order for the PiHole to listen on `5053` (which
     # should be configured to supply local DNS resolution from
     # `dnscrypt-proxy`) .
-    interfaces.docker0 = {
+    interfaces.cni-podman0 = {
       allowedTCPPorts = [ 5053 ];
       allowedUDPPorts = [ 5053 ];
     };

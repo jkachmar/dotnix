@@ -36,9 +36,8 @@
 
     # TODO: Set these up after updating nixpkgs to something that provides
     # the latest version of `dnscrypt-proxy`.
-    #
-    # bootstrap_resolvers = [ "9.9.9.9:53" "1.1.1.1:53" ];
-    # ignore_system_dns = true;
+    fallback_resolvers = [ "9.9.9.9:53" "1.1.1.1:53" ];
+    ignore_system_dns = true;
 
     # This is the address that the PiHole listens on for its DNS resolution;
     # for now it just uses the default Podman gateway IP, but it would be nice
