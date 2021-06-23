@@ -1,14 +1,25 @@
 #####################################################
 # NixOS-specific, Docker-based PiHole configuration #
 #####################################################
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
+  #############################################################################
+  # VIRTUALIZATION
+  #############################################################################
+
   # Use Podman to run OCI containers.
   #
   # TODO: Factor OCI container backend configuration out to a more generic
   # module if/when more OCI-based services are added.
-  virtualisation.oci-containers.backend = "podman";
+  virtualisation = {
+    podman = {
+      enable = true;
+      # NOTE: Workaround for https://github.com/NixOS/nixpkgs/pull/112443
+      extraPackages = [ pkgs.zfs ];
+    };
+    oci-containers.backend = "podman";
+  };
 
   # TODO: Factor pod state persistence out to a more generic module if/when
   # more OCI-based services are added.
@@ -26,21 +37,36 @@
     mountopt="nodev"
   '';
 
+  #############################################################################
+  # NETWORKING
+  #############################################################################
+
+  # TODO: See if this is still necessary now that `dnscrypt-proxy` supports
+  # bootstrap resolvers.
+  networking.nameservers = [ "127.0.0.1" "9.9.9.9" ];
+
   # Firewall settings.
   networking.firewall = {
     # TODO: Remap `80` and `443` at some point; this is for a
     # general-purpose server and it's dumb that PiHole hijacks these ports.
     allowedTCPPorts = [ 53 80 443 ];
     allowedUDPPorts = [ 53 ];
+
+    # Open up ports on the "cni-podman0" bridge network.
+    #
     # The NixOS firewall is conservative by default, so these ports must be
     # explicitly allowed in order for the PiHole to listen on `5053` (which
     # should be configured to supply local DNS resolution from
     # `dnscrypt-proxy`) .
-    interfaces.docker0 = {
+    interfaces.cni-podman0 = {
       allowedTCPPorts = [ 5053 ];
       allowedUDPPorts = [ 5053 ];
     };
   };
+
+  #############################################################################
+  # PIHOLE
+  #############################################################################
 
   virtualisation.oci-containers.containers.pihole = {
     image = "pihole/pihole:latest";

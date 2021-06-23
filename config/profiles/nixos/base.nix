@@ -12,8 +12,8 @@
     ../../modules/system/nixpkgs
     ../../modules/system/nixos/systemd-boot.nix
     ../../modules/system/tools/common.nix
-    # "Data" configuration modules.
-    ../../modules/data/xdg.nix
+    # Security configuration modules.
+    ../../modules/security/openssh.nix
     # "UI" configuration modules.
     ../../modules/ui/tmux.nix
   ];

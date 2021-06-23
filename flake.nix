@@ -112,6 +112,7 @@
       };
 
       nixosConfigurations = {
+        enigma = mkNixOSConfiguration "enigma" "x86_64-linux";
         star-platinum = mkNixOSConfiguration "star-platinum" "x86_64-linux";
       };
     };
