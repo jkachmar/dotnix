@@ -5,7 +5,7 @@
 {
   primary-user.home-manager.programs.direnv = {
     enable = true;
-    enableNixDirenvIntegration = true;
+    nix-direnv.enable = true;
 
     # Conditionally enable shell integrations.
     enableBashIntegration =

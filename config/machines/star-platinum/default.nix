@@ -74,20 +74,22 @@
       };
       # Miscellaneous user-level persistent state.
       persistence.home.misc.directories = [
-        "code" # Misc. software projects.
+        # TODO: Declarative SSH key configuration.
         ".ssh" # SSH keys and configurations.
-
-        # TODO: Move this out to a dedicated Haskell development module.
-        ".cabal" # `cabal-install` artifacts.
 
         # TODO: Move this out to a more generic module.
         ".config/obsidian" # Obsidian notes configuration.
+
+        # TODO: Move these out to some module/directory for coding. 
+        ".cache/bazel" # Bazel build cache.
+        "code" # Misc. software projects.
+        ".cabal" # `cabal-install` artifacts.
+        "org" # Org mode directory.
 
         # TODO: Move this stuff to its own module and use `mkOutOfStoreSymlink`
         # (cf. `home-manager` )to store the doom emacs config in this repository.
         ".doom.d" # Doom emacs configuration directory.
         ".emacs.d" # Emacs state directory.
-        "org" # Org mode directory.
       ];
     };
 
