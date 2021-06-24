@@ -29,15 +29,7 @@ in
       # Custom/overridden packages.
       updated-signal-desktop
     ];
-    persistence.home.misc.directories = [
-      # XDG config home directories.
-      ".config/discord" # Discord config/local state.
-      ".config/Signal" # Signal config/local state.
-      ".config/Slack" # Slack config/local state.
-      # XXX: Is this really necessary to persist?
-      ".cache/mozilla" # Firefox local cache.
-      ".mozilla" # Firefox config/local state.
-    ];
+
     # XXX: The `mimeApps` stuff is a little weird, see the following issues for
     # more information:
     #

@@ -121,4 +121,7 @@
     buildCores = lib.mkDefault 3;
     maxJobs = lib.mkDefault 4;
   };
+
+  # Play nice with Windows hardware clock settings.
+  time.hardwareClockInLocalTime = true;
 }

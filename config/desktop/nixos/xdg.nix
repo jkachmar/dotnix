@@ -20,20 +20,4 @@ in
       videos = "${home}/videos";
     };
   };
-  # XXX: Should the home-manager module just point directly towards the state
-  # directory?
-  #
-  # As it stands, there's maybe a bit _too_ much indirection going on here...
-  primary-user.persistence.home.xdg = {
-    directories = [
-      "desktop"
-      "documents"
-      "downloads"
-      "music"
-      "pictures"
-      "public"
-      "templates"
-      "videos"
-    ];
-  };
 }

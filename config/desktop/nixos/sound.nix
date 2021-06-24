@@ -28,12 +28,3 @@
       };
     };
   };
-  primary-user.persistence.home.sound = {
-    directories = [
-      ".config/pulse"
-    ];
-    files = [
-      ".config/bluedevilglobalrc"
-    ];
-  };
-}

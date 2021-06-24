@@ -95,9 +95,8 @@
         modules = [
           nixosPkgs.nixosModules.notDetected
           inputs.nixosHome.nixosModules.home-manager
-          inputs.impermanence.nixosModules.impermanence
           # XXX: Nix needs to believe we have an absolute path here.
-          (./. + "/config/machines/${hostname}")
+          (./. + "/hosts/${hostname}")
         ];
         specialArgs = {
           inherit inputs;
