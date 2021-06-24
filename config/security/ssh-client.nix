@@ -8,7 +8,7 @@
       "github.com" = {
         hostname = "github.com";
         user = "git";
-        identityFile = ["/secrets/ssh/jkachmar/id_github"];
+        identityFile = ["/secrets/openssh/client/jkachmar/id_github"];
       };
     };
   };
