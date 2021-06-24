@@ -8,6 +8,7 @@
     ../../modules/system/preLVMTempMount.nix
     ../../modules/system/primary-user/nixos.nix
     # System configuration modules.
+    ../../config/system/location.nix
     ../../config/system/nix/nixos.nix
     ../../config/system/nixpkgs
     ../../config/system/nixos/systemd-boot.nix
