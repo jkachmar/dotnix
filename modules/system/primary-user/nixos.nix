@@ -3,109 +3,11 @@
 ########################################################################
 { config, lib, options, pkgs, ... }:
 let
-  inherit (lib) mkAliasDefinitions mkAliasOptionModule mkDefault mkIf mkMerge mkOption types;
-  inherit (lib.options) showOption;
-  inherit (pkgs.stdenv.targetPlatform) isLinux;
+  inherit (lib) mkAliasDefinitions mkAliasOptionModule mkDefault mkIf;
 
   cfg = config.primary-user;
 in
 {
-  options.primary-user.persistence.base-directories.global = mkOption {
-    type = types.nullOr types.str;
-    default = null;
-    description = ''
-      The base directory for "global" persistent state associated with the
-      primary account holder.
-
-      This is state which typically resides under top-level directories such as
-      `/etc` or `/var`.
-    '';
-  };
-  options.primary-user.persistence.global =
-    let
-      suboptions = types.submodule {
-        options = {
-          directories = mkOption {
-            type = types.listOf types.str;
-            default = [ ];
-            description = ''
-              A list of directories that shall be bind-mounted to paths within
-              the given subdirectory of the user's global persistent storage
-              directory.
-            '';
-          };
-          files = mkOption {
-            type = types.listOf types.str;
-            default = [ ];
-            description = ''
-              A list of files that shall be symlinked to paths within the
-              given subdirectory of the user's global persistent storage
-              directory.
-            '';
-          };
-        };
-      };
-    in
-    mkOption {
-      default = { };
-      type = types.attrsOf suboptions;
-      description = ''
-        Persistent storage locations for "global" state declared by the primary
-        account holder.
-
-        Each attribute should be the relative path to a subdirectory within
-        the "global" persistent state directory.
-      '';
-    };
-
-  options.primary-user.persistence.base-directories.home = mkOption {
-    type = types.nullOr types.str;
-    default = null;
-    description = ''
-      The base directory for persistent state associated with the primary
-      account holder's personal home directory.
-
-      This is state which typically resides under top-level directories such as
-      `/home/alice/.bash_history` or `/home/bob/.config/Signal`.
-    '';
-  };
-  options.primary-user.persistence.home =
-    let
-      suboptions = types.submodule {
-        options = {
-          directories = mkOption {
-            type = types.listOf types.str;
-            default = [ ];
-            description = ''
-              A list of directories under the primary user's home directory
-              that shall be bind-mounted to paths within the persistent state
-              directory.
-            '';
-          };
-          files = mkOption {
-            type = types.listOf types.str;
-            default = [ ];
-            description = ''
-              A list of files under the primary user's home directory that
-              shall be symlinked to paths within the persistent state
-              directory.
-            '';
-          };
-        };
-      };
-    in
-    mkOption {
-      default = { };
-      type = types.attrsOf suboptions;
-      description = ''
-        Persistent storage locations for state within the primary account
-        holder's personal home directory.
-
-        Each attribute should be the relative path to a subdirectory within
-        the "home" persistent state directory.
-      '';
-    };
-
   imports = [
     ../sudo-cmds.nix
     # OS-agnostic option aliases.
@@ -134,5 +36,5 @@ in
       allowedUsers = [ "root" cfg.name ];
       trustedUsers = [ "root" cfg.name ];
     };
-  }
+  };
 }
