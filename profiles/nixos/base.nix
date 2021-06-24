@@ -13,7 +13,6 @@
     ../../config/system/nixos/systemd-boot.nix
     # Security configuration modules.
     ../../config/security/openssh.nix
-    ../../config/security/process-information-hiding.nix
     # Shell configuration modules.
     ../../config/shell/bash.nix
     ../../config/shell/htop.nix

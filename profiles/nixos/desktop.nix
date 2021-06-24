@@ -20,6 +20,7 @@
     ../../config/desktop/nixos/applications.nix
     ../../config/desktop/nixos/gnome.nix
     ../../config/desktop/nixos/sound.nix
+    ../../config/desktop/nixos/xserver.nix
     # Development configuration modules.
     ../../config/development/direnv.nix
     ../../config/development/neovim
