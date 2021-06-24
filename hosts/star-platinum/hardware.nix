@@ -8,17 +8,21 @@
 
   boot = {
     kernel.sysctl."vm.swappiness" = 1;
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ "kvm-amd" "sg" ];
     extraModulePackages = [ ];
     initrd = {
-      kernelModules = [ "dm-snapshot" ];
+      # FIXME: Comment explaining why these modules were enabled.
+      kernelModules = [ "dm-snapshot" 
+        "nls_cp437"
+        "nls_iso8859_1"
+      ];
       availableKernelModules = [
-        "nvme"
-        "xhci_pci"
         "ahci"
+        "nvme"
+        "sd_mod"
         "usbhid"
         "usb_storage"
-        "sd_mod"
+        "xhci_pci"
       ];
     };
 
