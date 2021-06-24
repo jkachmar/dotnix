@@ -60,7 +60,7 @@
       mkPkgsFor = system: pkgset:
         import pkgset {
           inherit system;
-          config = import ./config/modules/system/nixpkgs/config.nix;
+          config = import ./config/system/nixpkgs/config.nix;
         };
 
       # Utility function to construct a macOS configuration for arbitrary

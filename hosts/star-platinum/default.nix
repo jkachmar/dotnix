@@ -3,7 +3,7 @@
 {
   imports = [
     # NixOS desktop configuration profile.
-    ../profiles/nixos/desktop.nix
+    ../../profiles/nixos/desktop.nix
     # Machine-specific hardware configuration.
     ./hardware.nix
   ];
@@ -39,6 +39,19 @@
   # Global persistence.
   #############################################################################
 
+  environment.etc = {
+    "nixos".source = "/persist/etc/nixos";
+  	"NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
+    "docker/key.json".source = "/persist/etc/docker/key.json";
+  };
+
+  systemd.tmpfiles.rules = [
+    "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
+    "L /var/lib/docker    - - - - /persist/var/lib/docker"
+    # TODO: Logs should be handled by a separate ZFS dataset 
+    "L /var/lib/log       - - - - /persist/var/lib/log"
+  ];
+
   #############################################################################
   # Machine identification.
   #############################################################################
@@ -58,6 +71,11 @@
       wlp5s0.useDHCP = true;
     };
     networkmanager.enable = true;
+
+    wireguard.interfaces.wg0 = {
+      generatePrivateKeyFile = true;
+      privateKeyFile = "/secrets/wireguard/wg0";
+    };
   };
 
   #############################################################################

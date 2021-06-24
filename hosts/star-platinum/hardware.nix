@@ -30,7 +30,7 @@
       fsType = "vfat";
     };
 
-    boot.initrd.luks.devices = {
+    initrd.luks.devices = {
       "crypt" = {
         device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_500GB_S62ANJ0NC37730N-part1";
         header = "/key/star-platinum/crypt/header";
@@ -77,11 +77,11 @@
       neededForBoot = true;
     };
 
-    # # [NEW] Persistent '/home' state.
-    # "/home" = {
-    #   device = "star-platinum/persist/home";
-    #   fsType = "zfs";
-    # };
+    # [NEW] Persistent '/home' state.
+    "/home" = {
+      device = "star-platinum/persist/home";
+      fsType = "zfs";
+    };
 
     # [NEW] Persistent global state.
     "/persist" = {
@@ -127,6 +127,6 @@
   #############################################################################
   hardware = {
     cpu.amd.updateMicrocode = true;
-    video.hidpi.enable = lib.mkDefault = true;
+    video.hidpi.enable = lib.mkDefault true;
   };
 }

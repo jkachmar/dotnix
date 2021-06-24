@@ -119,69 +119,20 @@ in
   ];
 
   # Define NixOS-specific `primary-user` configuration.
-  config = mkIf (cfg.name != null) (mkMerge [
-    # General primary-user configuration settings.
-    ({
-      users.users.${cfg.name} = {
-        name = cfg.name;
-        uid = mkDefault 1000;
-        home = "/home/${cfg.name}";
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
-      };
+  config = mkIf (cfg.name != null) {
+    users.users.${cfg.name} = {
+      name = cfg.name;
+      uid = mkDefault 1000;
+      home = "/home/${cfg.name}";
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+    };
 
-      # TODO: Should this use `lib.mkMerge` and _only_ specify the primary user
-      # as an allowed and/or trusted user?
-      nix = {
-        allowedUsers = [ "root" cfg.name ];
-        trustedUsers = [ "root" cfg.name ];
-      };
-    })
-
-    # Persistence for global state associated with the primary account holder.
-    (mkIf (cfg.persistence.base-directories.global != null) (
-      let
-        baseDir = cfg.persistence.base-directories.global;
-        subDirs = lib.attrNames cfg.persistence.global;
-        mkPersistDirs = subDir: {
-          "${baseDir}/${subDir}" = {
-            inherit (cfg.persistence.global.${subDir})
-              directories
-              files;
-          };
-        };
-        persistDirs = builtins.map mkPersistDirs subDirs;
-      in
-      {
-        environment.persistence =
-          lib.foldl' lib.recursiveUpdate { } persistDirs;
-      }
-    ))
-
-    # Persistent state associated with the primary account holder's home
-    # directory
-    (mkIf (cfg.persistence.base-directories.home != null) (
-      let
-        baseDir = cfg.persistence.base-directories.home;
-        subDirs = lib.attrNames cfg.persistence.home;
-        mkPersistDirs = subDir: {
-          "${baseDir}/${subDir}" = {
-            inherit (cfg.persistence.home.${subDir})
-              directories
-              files;
-            # Allow other users (e.g. root) to access these directories/files.
-            allowOther = true;
-          };
-        };
-        persistDirs = builtins.map mkPersistDirs subDirs;
-      in
-      {
-        # Set up the user-level persistent state mount points and allow other
-        # users (e.g. root) to access files via the bind-mounted directories.
-        programs.fuse.userAllowOther = true;
-        primary-user.home-manager.home.persistence =
-          lib.foldl' lib.recursiveUpdate { } persistDirs;
-      }
-    ))
-  ]);
+    # TODO: Should this use `lib.mkMerge` and _only_ specify the primary user
+    # as an allowed and/or trusted user?
+    nix = {
+      allowedUsers = [ "root" cfg.name ];
+      trustedUsers = [ "root" cfg.name ];
+    };
+  }
 }
