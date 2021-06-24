@@ -8,4 +8,13 @@
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
   };
+
+  environment.systemPackages = (with pkgs.gnome; [
+    dconf-editor
+    gnome-tweaks
+  ]) ++ (with pkgs.gnomeExtensions; [
+    appindicator
+    gtile
+    sound-output-device-chooser
+  ]);
 }

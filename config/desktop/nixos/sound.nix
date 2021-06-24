@@ -4,12 +4,16 @@
 { pkgs, ... }:
 {
   sound.enable = true;
+
   hardware = {
     # Enable bluetooth...
     bluetooth = {
       enable = true;
+      # https://wiki.archlinux.org/title/Bluetooth_headset#Apple_AirPods_have_low_volume
+      disabledPlugins = [ "avrcp" ];
       settings = {
         General = {
+          ControllerMode = "bredr"; # NOTE: Need this to connect to AirPods.
           Enable = "Source,Sink,Media,Socket";
         };
       };
