@@ -48,8 +48,6 @@
   systemd.tmpfiles.rules = [
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
     "L /var/lib/docker    - - - - /persist/var/lib/docker"
-    # TODO: Logs should be handled by a separate ZFS dataset 
-    "L /var/lib/log       - - - - /persist/var/lib/log"
   ];
 
   #############################################################################

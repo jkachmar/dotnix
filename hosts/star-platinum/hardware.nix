@@ -10,9 +10,12 @@
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" "sg" ];
     extraModulePackages = [ ];
+    supportedFilesystems = [ "zfs" ];
+
     initrd = {
       # FIXME: Comment explaining why these modules were enabled.
-      kernelModules = [ "dm-snapshot" 
+      kernelModules = [
+        "dm-snapshot" 
         "nls_cp437"
         "nls_iso8859_1"
       ];
@@ -92,6 +95,16 @@
       device = "star-platinum/persist/root";
       fsType = "zfs";
     };
+
+    # # [NEW] systemd-logging.
+    # #
+    # # Symlinking this with systemd-tmpfiles won't work since there's already
+    # # an entry for '/var/log' present by default.
+    # "/var/log" = {
+    #   device = "star-platinum/persist/systemd-logs";
+    #   fsType = "zfs";
+    #   neededForBoot = true;
+    # };
 
     # [NEW] Local secret storage; sometimes needed for boot.
     "/secrets" = {
