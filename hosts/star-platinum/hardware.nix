@@ -96,15 +96,15 @@
       fsType = "zfs";
     };
 
-    # # [NEW] systemd-logging.
-    # #
-    # # Symlinking this with systemd-tmpfiles won't work since there's already
-    # # an entry for '/var/log' present by default.
-    # "/var/log" = {
-    #   device = "star-platinum/persist/systemd-logs";
-    #   fsType = "zfs";
-    #   neededForBoot = true;
-    # };
+    # [NEW] systemd-logging.
+    #
+    # Symlinking this with systemd-tmpfiles won't work since there's already
+    # an entry for '/var/log' present by default.
+    "/var/log" = {
+      device = "star-platinum/persist/systemd-logs";
+      fsType = "zfs";
+      neededForBoot = true;
+    };
 
     # [NEW] Local secret storage; sometimes needed for boot.
     "/secrets" = {
@@ -123,6 +123,7 @@
     };
   };
 
+  swapDevices = [ { device = "/dev/mapper/cryptswap"; } ];
   #############################################################################
   # NVIDIA
   #############################################################################
