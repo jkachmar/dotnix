@@ -73,7 +73,7 @@
         modules = [
           inputs.macosHome.darwinModules.home-manager
           # XXX: Nix needs to believe we have an absolute path here.
-          (./. + "/config/machines/${hostname}")
+          (./. + "/hosts/${hostname}")
         ];
         specialArgs = {
           inputs = inputs // {

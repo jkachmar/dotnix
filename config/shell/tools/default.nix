@@ -2,6 +2,15 @@
 # OS-agnostic system tools. #
 #############################
 { lib, pkgs, unstable, ... }:
+let
+  inherit (lib) optionals;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
+
+  gcoreutils = pkgs.coreutils.override {
+    singleBinary = false;
+    withPrefix = true;
+  };
+in
 {
   environment.systemPackages = with pkgs; [
     # Misc. common programs without a better place to go.
@@ -10,10 +19,9 @@
     nixpkgs-fmt
     vim
     wget
-
-    # TODO: Move this into its own module so each shell can be appropriately
-    # configured if it is enabled.
-    # nix-index
+  ] ++ optionals isDarwin [
+    gcoreutils
+  ] ++ optionals isLinux [
   ];
 
   primary-user.home-manager.home.packages = with pkgs; [
@@ -23,8 +31,11 @@
     findutils
     htop
     mosh
-    nix-index
     ripgrep
     shellcheck
+  ] ++ optionals isDarwin [
+    coreutils # XXX: lol, macOS (BSD) coreutils are broken?
+  ] ++ optionals isLinux [
+    nix-index # NOTE: Build is broken on macOS for now.
   ];
 }

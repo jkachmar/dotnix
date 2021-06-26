@@ -10,6 +10,8 @@
     ../config/system/macos/brew.nix
     ../config/system/nix/macos.nix
     ../config/system/nixpkgs
+    # Security configuration modules.
+    ../config/security/ssh-client.nix
     # Desktop configuration modules.
     ../config/desktop/macos/applications.nix
     ../config/desktop/macos/dock.nix
@@ -23,7 +25,7 @@
     ../config/shell/bash.nix
     ../config/shell/fish/macos.nix
     ../config/shell/htop.nix
-    ../config/shell/tools/macos.nix
+    ../config/shell/tools
     ../config/shell/starship.nix
     ../config/shell/tmux.nix
   ];

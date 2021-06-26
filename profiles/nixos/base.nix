@@ -19,7 +19,7 @@
     ../../config/shell/bash.nix
     ../../config/shell/htop.nix
     ../../config/shell/tmux.nix
-    ../../config/shell/tools/common.nix
+    ../../config/shell/tools
     # Development configuration modules.
     ../../config/development/git.nix
   ];

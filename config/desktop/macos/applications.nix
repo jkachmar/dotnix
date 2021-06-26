@@ -12,8 +12,8 @@
       "iterm2" # A terminal emulator with font rendering & tmux support.
       "itsycal" # Titlebar calendar.
       "sensiblesidebuttons"
-      "virtualbox" # Virtualization (duh).
-      "virtualbox-extension-pack" # Virtualization helpers.
+      # "virtualbox" # Virtualization (duh).
+      # "virtualbox-extension-pack" # Virtualization helpers.
       # XXX: For now, the Safari connector is only available in the Zotero beta
       # (which is not available on homebrew).
       # "zotero" # Research paper catalog & organizer.

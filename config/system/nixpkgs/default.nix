@@ -4,6 +4,8 @@
 { config, inputs, lib, pkgs, ... }:
 let
   inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
+  macosDotfiles = "$HOME/.config/dotfiles";
+  darwinCfg = "${macosDotfiles}/hosts/${config.networking.hostName}";
 in
 {
   nix = {
@@ -12,7 +14,7 @@ in
     ] ++ lib.optionals isDarwin [
       "nixpkgs=${inputs.macosPkgs}"
       "darwin=${inputs.darwin}"
-      (lib.traceVal "darwin-config=$HOME/.config/dotfiles/config/machines/${config.networking.hostName}")
+      "darwin-config=${lib.traceVal darwinCfg}"
     ] ++ lib.optionals isLinux [
       "nixpkgs=${inputs.nixosPkgs}"
     ]);
