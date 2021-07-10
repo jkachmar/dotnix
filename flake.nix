@@ -60,7 +60,7 @@
       mkPkgsFor = system: pkgset:
         import pkgset {
           inherit system;
-          config = import ./config/modules/system/nixpkgs/config.nix;
+          config = import ./config/system/nixpkgs/config.nix;
         };
 
       # Utility function to construct a macOS configuration for arbitrary
@@ -73,7 +73,7 @@
         modules = [
           inputs.macosHome.darwinModules.home-manager
           # XXX: Nix needs to believe we have an absolute path here.
-          (./. + "/config/machines/${hostname}")
+          (./. + "/hosts/${hostname}")
         ];
         specialArgs = {
           inputs = inputs // {
@@ -95,9 +95,8 @@
         modules = [
           nixosPkgs.nixosModules.notDetected
           inputs.nixosHome.nixosModules.home-manager
-          inputs.impermanence.nixosModules.impermanence
           # XXX: Nix needs to believe we have an absolute path here.
-          (./. + "/config/machines/${hostname}")
+          (./. + "/hosts/${hostname}")
         ];
         specialArgs = {
           inherit inputs;
