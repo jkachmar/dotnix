@@ -17,11 +17,11 @@ The system-level prerequisites of the NixOS configuration is significantly more
 involved than the macOS configuration.
 
 In general it follows the same principles as [Graham Christensen] described in
-his [Erase Your Darlings] blog post; in this case, `/state` is being used as
+his [Erase Your Darlings] blog post; in this case, `/persist` is being used as
 the persistent directory.
 
 Due to a few idiosyncracies with the persistence framework, this configuration
-should be cloned to `/state/nixos/etc/nixos`.
+should be cloned to `/persist/etc/nixos`.
 
 After cloning, `cd` into the directory.
 
@@ -52,7 +52,7 @@ updated.
 From the configuration directory, build the NixOS configuration and activate
 it.
 
-For example, the following will build and activate the `crazy-diamond` profile:
+For example, the following will build and activate the `star-platinum` profile:
 
 ```bash
 nixos-rebuild switch --flake '.#star-platinum'
