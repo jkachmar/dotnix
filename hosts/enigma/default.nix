@@ -89,9 +89,9 @@
       ];
     };
 
-    wireguard.interfaces.wg0 = {
+    wireguard.interfaces.enigma = {
       generatePrivateKeyFile = true;
-      privateKeyFile = "/secrets/wireguard/wg0";
+      privateKeyFile = "/secrets/wireguard/enigma";
     };
   };
 
