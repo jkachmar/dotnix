@@ -63,11 +63,6 @@
     "nixos".source = "/persist/etc/nixos";
   };
 
-  systemd.tmpfiles.rules = [
-    "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
-    "L /var/lib/docker    - - - - /persist/var/lib/docker"
-  ];
-
   #############################################################################
   # Machine identification.
   #############################################################################
@@ -82,8 +77,8 @@
     hostName = "enigma";
 
     interfaces = {
-      enp4s0.useDHCP = true;
-      wlp5s0.useDHCP = true;
+      eno1.useDHCP = true;
+      wlp0s20f3.useDHCP = true;
     };
 
     firewall = {

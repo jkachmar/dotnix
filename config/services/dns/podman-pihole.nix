@@ -24,15 +24,14 @@
   # TODO: Factor pod state persistence out to a more generic module if/when
   # more OCI-based services are added.
   systemd.tmpfiles.rules = [
-    "L /var/lib/cni        - - - - /persist/var/lib/cni"
-    "L /var/lib/containers - - - - /persist/var/lib/containers"
+    "L /var/lib/cni - - - - /persist/var/lib/cni"
   ];
 
   # FIXME: Documentation.
   environment.etc."containers/storage.conf".text = ''
     [storage]
     driver = "zfs"
-    graphroot = "/var/lib/containers"
+    graphroot = "/persist/podman/containers"
 
     [storage.options.zfs]
     mountopt="nodev"

@@ -63,26 +63,6 @@
       neededForBoot = true;
     };
 
-    # [OLD] Persistent state.
-    "/state" = {
-      device = "enigma/state";
-      fsType = "zfs";
-      neededForBoot = true;
-    };
-
-    # [OLD] 'systemd' logging.
-    # NOTE: Logs are persisted within their own ZFS dataset to avoid being
-    # included in the ZFS snapshots.
-    #
-    # `journalctl` (and presumably all other well-behaved application loggers)
-    # will manage its own rotation, cleanup, etc. and ZFS shouldn't try to
-    # duplicate this effort.
-    "/state/logs" = {
-      device = "enigma/state/logs";
-      fsType = "zfs";
-      neededForBoot = true;
-    };
-
     # [NEW] Persistent '/home' state.
     "/home" = {
       device = "enigma/persist/home";
@@ -92,6 +72,15 @@
     # [NEW] Persistent global state.
     "/persist" = {
       device = "enigma/persist/root";
+      fsType = "zfs";
+    };
+
+    # [NEW] Persistent podman containers.
+    # 
+    # NOTE: Symlinking this with 'systemd-tmpfiles' won't work since the ZFS
+    # storage driver expects an actual ZFS dataset.
+    "/persist/podman/containers" = {
+      device = "enigma/persist/podman-containers";
       fsType = "zfs";
     };
 
