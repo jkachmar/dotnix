@@ -6,6 +6,7 @@
     ../../profiles/nixos/base.nix
 
     # Home server service configuration.
+    ../../config/services/dns/ddclient.nix
     ../../config/services/dns/dnscrypt-proxy.nix
     ../../config/services/dns/podman-pihole.nix
     ../../config/services/media/hardware-acceleration.nix
