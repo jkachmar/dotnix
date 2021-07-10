@@ -8,8 +8,8 @@
   #
   # NOTE: `/var/lib/private` is due to the upstream `systemd` unit definition
   # using `DynamicUser = true`.
-  environment.persistence."/state/dns".directories = [
-    "/var/lib/private/dnscrypt-proxy2"
+  systemd.tmpfiles.rules = [
+    "L /var/lib/private/dnscrypt-proxy2 - - - - /persist/var/lib/private/dnscrypt-proxy2"
   ];
 
   # TODO: Document why this is necessary; should be something on the NixOS

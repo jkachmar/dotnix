@@ -13,6 +13,7 @@
     ../../config/system/nixpkgs
     ../../config/system/nixos/systemd-boot.nix
     # Security configuration modules.
+    ../../config/security/fail2ban.nix
     ../../config/security/openssh.nix
     ../../config/security/ssh-client.nix
     # Shell configuration modules.

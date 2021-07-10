@@ -63,12 +63,14 @@
       neededForBoot = true;
     };
 
+    # [OLD] Persistent state.
     "/state" = {
       device = "enigma/state";
       fsType = "zfs";
       neededForBoot = true;
     };
 
+    # [OLD] 'systemd' logging.
     # NOTE: Logs are persisted within their own ZFS dataset to avoid being
     # included in the ZFS snapshots.
     #
@@ -81,6 +83,32 @@
       neededForBoot = true;
     };
 
+    # [NEW] Persistent '/home' state.
+    "/home" = {
+      device = "enigma/persist/home";
+      fsType = "zfs";
+    };
+
+    # [NEW] Persistent global state.
+    "/persist" = {
+      device = "enigma/persist/root";
+      fsType = "zfs";
+    };
+
+    # [NEW] 'systemd' logging.
+    #
+    # `journalctl` (and presumably all other well-behaved application loggers)
+    # will manage its own rotation, cleanup, etc. and ZFS shouldn't try to
+    # duplicate this effort.
+    #
+    # NOTE: Symlinking this with 'systemd-tmpfiles' won't work since there's
+    # already an entry for '/var/log' present by default.
+    "/var/log" = {
+      device = "enigma/persist/systemd-logs";
+      fsType = "zfs";
+      neededForBoot = true;
+    };
+  
     # TODO: Permissions, fine-grained shares with the Synology, etc.
     "/mnt/moodyblues/media" = {
       device = "10.0.1.250:/volume1/media";

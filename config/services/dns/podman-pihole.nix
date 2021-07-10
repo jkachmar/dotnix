@@ -23,15 +23,16 @@
 
   # TODO: Factor pod state persistence out to a more generic module if/when
   # more OCI-based services are added.
-  environment.persistence."/state/podman" = {
-    directories = [ "/var/lib/cni" ];
-  };
+  systemd.tmpfiles.rules = [
+    "L /var/lib/cni        - - - - /persist/var/lib/cni"
+    "L /var/lib/containers - - - - /persist/var/lib/containers"
+  ];
 
   # FIXME: Documentation.
   environment.etc."containers/storage.conf".text = ''
     [storage]
     driver = "zfs"
-    graphroot = "/state/podman/containers"
+    graphroot = "/var/lib/containers"
 
     [storage.options.zfs]
     mountopt="nodev"
@@ -77,8 +78,8 @@
       "443:443"
     ];
     volumes = [
-      "/state/dns/pihole:/etc/pihole/"
-      "/state/dns/dnsmasq.d:/etc/dnsmasq.d/"
+      "/persist/etc/pihole:/etc/pihole/"
+      "/persist/etc/dnsmasq.d:/etc/dnsmasq.d/"
     ];
     # TODO: Set `dnscrypt-proxy` resolver using an environment variable.
     environment = {

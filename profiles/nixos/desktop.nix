@@ -8,7 +8,6 @@
     # XXX: Contains NVIDIA-specific config.
     ../../config/system/nixos/virtualization.nix
     # Security configuration modules.
-    ../../config/security/fail2ban.nix
     ../../config/security/gpg.nix
     # Shell configuration modules.
     ../../config/shell/alacritty.nix

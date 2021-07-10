@@ -19,7 +19,7 @@
 
   services.plex = {
     enable = true;
-    dataDir = "/state/plex";
+    dataDir = "/persist/var/lib/plex";
     user = "plexuser"; # XXX: Matches custom Plex user defined below.
     group = "plexgroup"; # XXX: Matches custom Plex group defined below.
     openFirewall = true;
