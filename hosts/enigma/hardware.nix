@@ -97,7 +97,7 @@
       fsType = "zfs";
       neededForBoot = true;
     };
-  
+
     # TODO: Permissions, fine-grained shares with the Synology, etc.
     "/mnt/moodyblues/media" = {
       device = "10.0.1.250:/volume1/media";

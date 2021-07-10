@@ -88,12 +88,26 @@
         51820
       ];
     };
+  };
 
-    wireguard.interfaces.enigma = {
+  # Wireguard server.
+  #
+  # TODO: Extract this (and the above firewall settings) out into a module.
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+  };
+
+  networking.wireguard = {
+    enable = true;
+    interfaces.enigma = {
       generatePrivateKeyFile = true;
       privateKeyFile = "/secrets/wireguard/enigma";
+
+      ips = [ ];
+      peers = [ ];
     };
   };
+
 
   #############################################################################
   # System.
