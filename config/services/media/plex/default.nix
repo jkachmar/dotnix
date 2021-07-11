@@ -17,6 +17,11 @@
   };
   users.groups.plexgroup.gid = 1002;
 
+  # Ensure that Plex waits for its media to be available.
+  systemd.services.plex = {
+    after = [ "network.target" "mnt-moodyblues-media.mount" ];
+  };
+
   services.plex = {
     enable = true;
     dataDir = "/persist/var/lib/plex";
