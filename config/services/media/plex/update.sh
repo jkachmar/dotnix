@@ -13,8 +13,7 @@ declare -A platforms=(
 )
 
 token=$(cat "/secrets/plex/token")
-# manifest=$(curl -s "https://plex.tv/api/downloads/5.json?channel=plexpass" -H "X-Plex-Token: ${token}")
-manifest=$(curl -s "https://plex.tv/api/downloads/5.json" -H "X-Plex-Token: ${token}")
+manifest=$(curl -s "https://plex.tv/api/downloads/5.json?channel=plexpass" -H "X-Plex-Token: ${token}")
 version=$(echo "$manifest" | jq -r '.computer.Linux.version | split("-") | .[0]')
 
 tmp="$path/sources.tmp.json"
