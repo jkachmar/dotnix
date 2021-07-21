@@ -14,6 +14,7 @@
     gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
     appindicator
+    bluetooth-quick-connect
     gtile
     sound-output-device-chooser
   ]);

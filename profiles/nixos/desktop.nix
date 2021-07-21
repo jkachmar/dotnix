@@ -15,7 +15,6 @@
     ../../config/shell/htop.nix
     ../../config/shell/fish/nixos.nix
     ../../config/shell/starship.nix
-    ../../config/shell/tools/common.nix
     # Desktop configuration modules.
     ../../config/desktop/nixos/applications.nix
     ../../config/desktop/nixos/gnome.nix
