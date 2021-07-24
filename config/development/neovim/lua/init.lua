@@ -15,9 +15,9 @@ vim.cmd [[set cursorline]] -- Highlight the current cursor line.
 vim.g.gruvbox_material_background = 'soft'
 vim.g.gruvbox_material_palette = 'original'
 -- Everforest settings.
-vim.g.everforest_background = 'hard'
+vim.g.everforest_background = 'soft'
 -- Set theme.
-vim.o.background = 'dark'
+vim.o.background = 'light'
 vim.cmd [[colorscheme gruvbox-material]]
 
 -- Statusbar

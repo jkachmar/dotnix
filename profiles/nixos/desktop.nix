@@ -22,6 +22,7 @@
     ../../config/desktop/nixos/xdg.nix
     ../../config/desktop/nixos/xserver.nix
     # Development configuration modules.
+    ../../config/development/bat.nix
     ../../config/development/direnv.nix
     ../../config/development/neovim
     ../../config/development/vscode.nix

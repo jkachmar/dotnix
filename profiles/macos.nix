@@ -17,6 +17,7 @@
     ../config/desktop/macos/dock.nix
     ../config/desktop/macos/inputs.nix
     # Development configuration modules.
+    ../config/development/bat.nix
     ../config/development/direnv.nix
     ../config/development/git.nix
     ../config/development/neovim

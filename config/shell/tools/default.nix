@@ -26,7 +26,6 @@ in
 
   primary-user.home-manager.home.packages = with pkgs; [
     # Misc. common programs without a better place to go.
-    bat
     fd
     findutils
     htop
