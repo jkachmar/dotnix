@@ -12,6 +12,7 @@
       name = "jkachmar";
       git.user.name = config.primary-user.name;
       git.user.email = "me@jkachmar.com";
+      user.home = /Users/jkachmar;
     };
 
     # TODO: Abstract this out.
