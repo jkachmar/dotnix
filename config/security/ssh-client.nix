@@ -24,6 +24,15 @@ in
 
     # NOTE: lol this is awful, there's gotta be a better way to handle these.
     matchBlocks = {
+      "10.0.1.150" = {
+        hostname = "10.0.1.150";
+        user = "jkachmar";
+      } // optionalAttrs isDarwin {
+        identityFile = [ "~/.ssh/id_enigma" ];
+      } // optionalAttrs isLinux {
+        identityFile = [ "/secrets/openssh/client/${username}/id_enigma" ];
+      };
+
       "github.com" = {
         hostname = "github.com";
         user = "git";

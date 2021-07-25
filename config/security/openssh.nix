@@ -3,8 +3,21 @@
 {
   services.openssh = {
     enable = true;
+    allowSFTP = false;
+    challengeResponseAuthentication = false;
     passwordAuthentication = false;
     permitRootLogin = "no";
+
+    # Stealing some "paranoid" OpenSSH configuration options.
+    #
+    # cf. https://christine.website/blog/paranoid-nixos-2021-07-18
+    extraConfig = ''
+      AllowAgentForwarding yes
+      AllowStreamLocalForwarding no
+      AllowTcpForwarding yes
+      AuthenticationMethods publickey
+      X11Forwarding no
+    '';
 
     hostKeys =  [
       {
