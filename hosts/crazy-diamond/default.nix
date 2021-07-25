@@ -11,7 +11,7 @@
     primary-user = {
       name = "jkachmar";
       git.user.name = config.primary-user.name;
-      git.user.email = "me@jkachmar.com";
+      git.user.email = "git@jkachmar.com";
       user.home = /Users/jkachmar;
     };
 
