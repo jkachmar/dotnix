@@ -36,7 +36,6 @@
   # Primary user configuration.
   #############################################################################
   primary-user = {
-    home-manager.imports = [ "${inputs.impermanence}/home-manager.nix" ];
     name = "jkachmar";
     git.user.name = config.primary-user.name;
     git.user.email = "git@jkachmar.com";

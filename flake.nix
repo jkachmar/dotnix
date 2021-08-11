@@ -48,9 +48,6 @@
       inputs.nixpkgs.follows = "nixosPkgs";
       url = "github:nix-community/home-manager/release-21.05";
     };
-
-    # Declarative, persistent state management for ephemeral systems.
-    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = inputs@{ self, darwin, macosPkgs, nixosPkgs, unstable, ... }:
