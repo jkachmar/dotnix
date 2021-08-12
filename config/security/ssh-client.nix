@@ -50,9 +50,10 @@ in
       } // optionalAttrs isLinux { };
 
       "build.stackage.org" = {
+        user = "curators";
         hostname = "build.stackage.org";
       } // optionalAttrs isDarwin {
-        identityFile = [ "~/.ssh/id_github" ];
+        identityFile = [ "~/.ssh/id_rsa_stackage" ];
       } // optionalAttrs isLinux { };
     };
   };
