@@ -43,6 +43,9 @@
     git.user.name = config.primary-user.name;
     git.user.email = "git@jkachmar.com";
 
+    # The primary user should be able to administrate all media & downloads.
+    extraGroups = [ "downloads" ];
+
     # FIXME: Change this to a different password from the root user.
     # TODO: Source this from a file in '/secrets'.
     initialHashedPassword =
