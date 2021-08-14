@@ -47,9 +47,7 @@
 
   # Firewall settings.
   networking.firewall = {
-    # TODO: Remap `80` and `443` at some point; this is for a
-    # general-purpose server and it's dumb that PiHole hijacks these ports.
-    allowedTCPPorts = [ 53 80 443 ];
+    allowedTCPPorts = [ 53 7000 7001 ];
     allowedUDPPorts = [ 53 ];
 
     # Open up ports on the "cni-podman0" bridge network.
@@ -73,8 +71,8 @@
     ports = [
       "53:53/tcp"
       "53:53/udp"
-      "80:80"
-      "443:443"
+      "80:7000"
+      "443:7001"
     ];
     volumes = [
       "/persist/etc/pihole:/etc/pihole/"
