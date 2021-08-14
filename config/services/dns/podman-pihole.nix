@@ -47,7 +47,7 @@
 
   # Firewall settings.
   networking.firewall = {
-    allowedTCPPorts = [ 53 80 443 ];
+    allowedTCPPorts = [ 53 9000 9443 ];
     allowedUDPPorts = [ 53 ];
 
     # Open up ports on the "cni-podman0" bridge network.
@@ -71,8 +71,8 @@
     ports = [
       "53:53/tcp"
       "53:53/udp"
-      "80:80"
-      "443:443"
+      "7000:80"
+      "7443:443"
     ];
     volumes = [
       "/persist/etc/pihole:/etc/pihole/"
