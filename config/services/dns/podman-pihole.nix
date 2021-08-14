@@ -47,7 +47,7 @@
 
   # Firewall settings.
   networking.firewall = {
-    allowedTCPPorts = [ 53 9000 9443 ];
+    allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];
 
     # Open up ports on the "cni-podman0" bridge network.
@@ -66,13 +66,18 @@
   # PIHOLE
   #############################################################################
 
+  services.nginx.virtualHosts."pihole.enigma.thempire.dev" = {
+    forceSSL = true;
+    useACMEHost = "thempire.dev";
+    locations."/".proxyPass = "http://localhost:7000";
+  };
+
   virtualisation.oci-containers.containers.pihole = {
     image = "pihole/pihole:latest";
     ports = [
       "53:53/tcp"
       "53:53/udp"
       "7000:80"
-      "7443:443"
     ];
     volumes = [
       "/persist/etc/pihole:/etc/pihole/"
@@ -85,6 +90,9 @@
       REV_SERVER_TARGET = "10.0.0.1"; # Router IP.
       REV_SERVER_CIDR = "10.0.0.0/16";
       TZ = config.time.timeZone;
+      PROXY_LOCATION = "pihole";
+      # NOTE: This must agree with the nginx virtual host.
+      VIRTUAL_HOST = "pihole.enigma.thempire.dev";
       # TODO: Change this to something secure, obviously.
       WEBPASSWORD = "hunter2";
     };

@@ -6,6 +6,7 @@
     ../../profiles/nixos/base.nix
 
     # Home server service configuration.
+    ../../config/services/nginx.nix
     ../../config/services/dns/ddclient.nix
     ../../config/services/dns/dnscrypt-proxy.nix
     ../../config/services/dns/podman-pihole.nix
@@ -38,6 +39,7 @@
   #############################################################################
   primary-user = {
     name = "jkachmar";
+    email = "me@jkachmar.com";
     git.user.name = config.primary-user.name;
     git.user.email = "git@jkachmar.com";
 

@@ -6,13 +6,15 @@
     group = "downloads";
   };
 
-  networking.firewall = {
-    allowedTCPPorts = [ 8080 9090 ];
-  };
-
   # Ensure that sabnzbd waits for the downloads directory to be available.
   systemd.services.sabnzbd = {
     after = [ "network.target" "mnt-moodyblues-downloads.mount" ];
+  };
+
+  services.nginx.virtualHosts."sabnzbd.enigma.thempire.dev" = {
+    forceSSL = true;
+    useACMEHost = "thempire.dev";
+    locations."/".proxyPass = "http://localhost:8080";
   };
 
   # TODO: Factor this out, since other downloads services depend on this group.
