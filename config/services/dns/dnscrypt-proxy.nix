@@ -12,7 +12,7 @@
   # NOTE: Symlinking (with 'systemd.tmpfiles.rules') doesn't work here, but a
   # bind-mount to the persistent storage location does the trick.
   fileSystems."/var/lib/private/dnscrypt-proxy2" = {
-    device = "/persist/var/lib/private/dnscrypt-proxy2";
+    device = "/persist/var/lib/dnscrypt-proxy2";
     options = [ "bind" ];
   };
 
@@ -35,7 +35,7 @@
     # Ideally this could specify servers to try in order of priority so
     # `cloudflare` could be set as a fallback even though I prefer Quad9.
     server_names = [
-      "quad9-doh-ip4-nofilter-pri"
+      "quad9-doh-ip4-port443-filter-pri"
     ];
 
     # TODO: Set these up after updating nixpkgs to something that provides
@@ -76,7 +76,7 @@
       # Quad9 DNS resolvers.
       quad9-resolvers = {
         urls = [ "https://www.quad9.net/quad9-resolvers.md" ];
-        cache_file = "/var/lib/dnscrypt-proxy2/quad9-resolvers.md";
+        cache_file = "/persist/var/lib/dnscrypt-proxy2/quad9-resolvers.md";
         minisign_key = "RWQBphd2+f6eiAqBsvDZEBXBGHQBJfeG6G+wJPPKxCZMoEQYpmoysKUN";
         refresh_delay = 72;
         prefix = "quad9-";
@@ -90,7 +90,7 @@
           "https://ipv6.download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
           "https://download.dnscrypt.net/resolvers-list/v3/public-resolvers.md"
         ];
-        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
+        cache_file = "/persist/var/lib/dnscrypt-proxy2/public-resolvers.md";
         minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
         refresh_delay = 72;
         prefix = "";
@@ -104,7 +104,7 @@
           "https://ipv6.download.dnscrypt.info/resolvers-list/v3/relays.md"
           "https://download.dnscrypt.net/resolvers-list/v3/relays.md"
         ];
-        cache_file = "/var/lib/dnscrypt-proxy2/relays.md";
+        cache_file = "/persist/var/lib/dnscrypt-proxy2/relays.md";
         minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
         refresh_delay = 72;
         prefix = "";

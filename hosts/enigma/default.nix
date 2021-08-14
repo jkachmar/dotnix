@@ -11,6 +11,7 @@
     ../../config/services/dns/podman-pihole.nix
     ../../config/services/media/hardware-acceleration.nix
     ../../config/services/media/plex
+    ../../config/services/downloads/sabnzbd.nix
 
     # Machine-specific hardware configuration.
     ./hardware.nix

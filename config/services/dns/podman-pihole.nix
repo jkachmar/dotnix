@@ -43,11 +43,11 @@
 
   # TODO: See if this is still necessary now that `dnscrypt-proxy` supports
   # bootstrap resolvers.
-  networking.nameservers = [ "127.0.0.1" "9.9.9.9" ];
+  networking.nameservers = [ "127.0.0.1" "::1" ];
 
   # Firewall settings.
   networking.firewall = {
-    allowedTCPPorts = [ 53 7000 7001 ];
+    allowedTCPPorts = [ 53 80 443 ];
     allowedUDPPorts = [ 53 ];
 
     # Open up ports on the "cni-podman0" bridge network.
@@ -71,8 +71,8 @@
     ports = [
       "53:53/tcp"
       "53:53/udp"
-      "80:7000"
-      "443:7001"
+      "80:80"
+      "443:443"
     ];
     volumes = [
       "/persist/etc/pihole:/etc/pihole/"
