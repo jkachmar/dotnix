@@ -81,6 +81,7 @@
   #############################################################################
   networking = {
     hostName = "enigma";
+    domain = "thempire.dev";
 
     interfaces = {
       eno1.useDHCP = true;

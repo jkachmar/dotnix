@@ -3,6 +3,10 @@
 #####################################################
 { config, pkgs, ... }:
 
+let
+  inherit (config.networking) domain hostName;
+  fqdn = "${hostName}.${domain}";
+in
 {
   #############################################################################
   # VIRTUALIZATION
@@ -66,9 +70,9 @@
   # PIHOLE
   #############################################################################
 
-  services.nginx.virtualHosts."pihole.enigma.thempire.dev" = {
+  services.nginx.virtualHosts."pihole.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = "thempire.dev";
+    useACMEHost = domain;
     locations."/".proxyPass = "http://localhost:7000";
   };
 

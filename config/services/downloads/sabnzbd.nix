@@ -1,5 +1,9 @@
-{ ... }:
+{ config, ... }:
 
+let
+  inherit (config.networking) domain hostName;
+  fqdn = "${hostName}.${domain}";
+in
 {
   services.sabnzbd = {
     enable = true;
@@ -11,9 +15,9 @@
     after = [ "network.target" "mnt-moodyblues-downloads.mount" ];
   };
 
-  services.nginx.virtualHosts."sabnzbd.enigma.thempire.dev" = {
+  services.nginx.virtualHosts."sabnzbd.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = "thempire.dev";
+    useACMEHost = domain;
     locations."/".proxyPass = "http://localhost:8080";
   };
 
