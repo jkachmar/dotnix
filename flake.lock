@@ -64,11 +64,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1627649712,
-        "narHash": "sha256-AJBasvMKpsyJmCLdjroBElCHY5AlalbVy+XY5vjbgXc=",
+        "lastModified": 1630076227,
+        "narHash": "sha256-p3YdtqSPLnMudWsLMgd6XMEhQKB2oz1hvDkHtOlz5/Q=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b39647e52ed3c0b989e9d5c965e598ae4c38d7ef",
+        "rev": "f5adb9be829f487f99bcc0f1884f74ddb85f70c8",
         "type": "github"
       },
       "original": {
@@ -89,7 +89,7 @@
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-21.05",
+        "ref": "nixos-21.05-small",
         "repo": "nixpkgs",
         "type": "github"
       }
