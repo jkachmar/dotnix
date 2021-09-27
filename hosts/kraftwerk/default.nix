@@ -7,6 +7,8 @@
   imports =
     [
       ../../profiles/nixos/base.nix
+      ../../config/desktop/nixos/applications.nix
+      ../../config/desktop/nixos/xdg.nix
       ./hardware.nix
     ];
 
@@ -108,13 +110,8 @@
   # Package management. #
   #######################
   environment.systemPackages = (with pkgs; [
-    discord
-    firefox
-    signal-desktop
-    slack
     vscode
     vim 
-    wget
   ]) ++ (with unstable; [
     neovim
   ]);
