@@ -11,10 +11,8 @@
     # `darwin` is used to indicate the most up-to-date stable packages tested
     # against macOS.
     macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-21.05-darwin";
-    # Stable NixOS package set; pinned to the latest 20.09 release.
-    #
-    # `small` is used to indicate the most up-to-date stable packages.
-    nixosPkgs.url = "github:nixos/nixpkgs/nixos-21.05-small";
+    # Stable NixOS package set; pinned to the latest 21.15 release.
+    nixosPkgs.url = "github:nixos/nixpkgs/nixos-21.05";
     # Unstable (rolling-release) NixOS package set.
     unstable.url = "github:nixos/nixpkgs";
 
@@ -109,6 +107,7 @@
 
       nixosConfigurations = {
         enigma = mkNixOSConfiguration "enigma" "x86_64-linux";
+        kraftwerk = mkNixOSConfiguration "kraftwerk" "x86_64-linux";
         star-platinum = mkNixOSConfiguration "star-platinum" "x86_64-linux";
       };
     };

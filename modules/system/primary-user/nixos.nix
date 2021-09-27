@@ -14,6 +14,7 @@ in
     ./common.nix
     # NixOS-specific option aliases.
     (mkAliasOptionModule [ "primary-user" "initialHashedPassword" ] [ "users" "users" cfg.name "initialHashedPassword" ])
+    (mkAliasOptionModule [ "primary-user" "passwordFile" ] [ "users" "users" cfg.name "passwordFile" ])
     (mkAliasOptionModule [ "primary-user" "extraGroups" ] [ "users" "users" cfg.name "extraGroups" ])
     (mkAliasOptionModule [ "primary-user" "isNormalUser" ] [ "users" "users" cfg.name "isNormalUser" ])
     (mkAliasOptionModule [ "primary-user" "openssh" ] [ "users" "users" cfg.name "openssh" ])
