@@ -3,20 +3,6 @@
 #########################
 { config, inputs, lib, pkgs, unstable, ... }:
 
-let
-  discord_0_16 =
-    let
-      version = "0.0.16";
-    in
-      pkgs.discord.overrideAttrs (oldAttrs: {
-        inherit version;
-        src = builtins.fetchurl {
-          url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-          sha256 = "UTVKjs/i7C/m8141bXBsakQRFd/c//EmqqhKhkr1OOk=";
-        };
-      });
-in
-
 {
   imports =
     [
@@ -122,7 +108,7 @@ in
   # Package management. #
   #######################
   environment.systemPackages = (with pkgs; [
-    discord_0_16
+    discord
     firefox
     signal-desktop
     slack
