@@ -37,7 +37,7 @@
   # Persistent state. #
   #####################
   environment.etc = {
-    "nixos".source = "/persist/etc/nixos";
+    "nixos".source = "${config.primary-user.home-manager.xdg.configHome}/dotfiles";
     "NetworkManager/system-connections".source =
       "/persist/etc/NetworkManager/system-connections";
   };
@@ -65,7 +65,6 @@
     };
     networkmanager.enable = true;
   };
-
 
   ############
   # Desktop. #
