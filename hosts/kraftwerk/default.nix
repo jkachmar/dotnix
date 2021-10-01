@@ -9,11 +9,13 @@
       ../../profiles/nixos/base.nix
       ../../config/desktop/nixos/applications.nix
       ../../config/desktop/nixos/xdg.nix
+      ../../config/development/direnv.nix
+      ../../config/development/vscode
       ./hardware.nix
     ];
 
-  # Localization override.
-  time.timeZone = "US/Mountain";
+  # # Localization override.
+  # time.timeZone = "US/Mountain";
 
   ##########
   # Users. #

@@ -21,7 +21,7 @@
     ../config/development/direnv.nix
     ../config/development/git.nix
     ../config/development/neovim
-    ../config/development/vscode.nix
+    ../config/development/vscode
     # Shell configuration modules.
     ../config/shell/bash.nix
     ../config/shell/fish/macos.nix

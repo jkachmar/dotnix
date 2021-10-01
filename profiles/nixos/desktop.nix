@@ -25,6 +25,6 @@
     ../../config/development/bat.nix
     ../../config/development/direnv.nix
     ../../config/development/neovim
-    ../../config/development/vscode.nix
+    ../../config/development/vscode
   ];
 }
