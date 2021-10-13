@@ -106,6 +106,20 @@
       neededForBoot = true;
     };
 
+    # systemd temporary files; sometimes we need a bit more temporary space
+    # than a 4G RAMDISK allows.
+    #
+    # NOTE: Ensure that the aging parameters are set properly so that this
+    # cleans up after itself.
+    #
+    # Symlinking this with systemd-tmpfiles won't work since there's already
+    # an entry for '/var/tmp' present by default.
+    "/var/tmp" = {
+      device = "star-platinum/persist/systemd-tmp";
+      fsType = "zfs";
+      neededForBoot = false;
+    };
+
     # [NEW] Local secret storage; sometimes needed for boot.
     "/secrets" = {
       device = "star-platinum/persist/secrets";
