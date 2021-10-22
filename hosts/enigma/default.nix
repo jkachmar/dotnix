@@ -10,9 +10,10 @@
     ../../config/services/dns/ddclient.nix
     ../../config/services/dns/dnscrypt-proxy.nix
     ../../config/services/dns/podman-pihole.nix
+    ../../config/services/downloads/sabnzbd.nix
     ../../config/services/media/hardware-acceleration.nix
     ../../config/services/media/plex
-    ../../config/services/downloads/sabnzbd.nix
+    ../../config/services/media/sonarr.nix
 
     # Machine-specific hardware configuration.
     ./hardware.nix
