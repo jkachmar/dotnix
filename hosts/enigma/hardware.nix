@@ -102,7 +102,7 @@
     "/mnt/moodyblues/media" = {
       device = "10.0.1.250:/volume1/media";
       fsType = "nfs";
-      options = [ "ro" "auto" "defaults" "nfsvers=4.1" ];
+      options = [ "auto" "defaults" "nfsvers=4.1" ];
     };
 
     # TODO: Permissions, fine-grained shares with the Synology, etc.
