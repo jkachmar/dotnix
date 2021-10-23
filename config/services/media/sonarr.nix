@@ -14,6 +14,7 @@ in
   # Ensure that sonarr waits for the downloads and media directories to be 
   # available.
   systemd.services.sonarr = {
+    wantedBy = [ "multi-user.target" ];
     after = [
       "network.target"
       "mnt-moodyblues-downloads.mount"
