@@ -158,6 +158,9 @@
   # Misc. other hardware settings (microcode updates, DPI, etc.)  
   #############################################################################
   hardware = {
+    # XXX: Unclear if this helps the microphone issue.
+    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
     cpu.amd.updateMicrocode = true;
     video.hidpi.enable = lib.mkDefault true;
   };
