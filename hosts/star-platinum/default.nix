@@ -9,6 +9,21 @@
   ];
 
   #############################################################################
+  # Machine-specific global packages.
+  #############################################################################
+  environment.systemPackages = with pkgs; [
+    # NOTE: Something's messed up with the Blue Yeti Nano, so its gain needs
+    # to be manually adjusted.
+    #
+    # TODO: Look into 'pipewire' as an alternative to 'pulseaudio' which might
+    # help improve the overall audio situation...
+    #
+    # ...or just ditch Linux and switch back to macOS, the desktop experience
+    # is absolutely fucking miserable.
+    pavucontrol
+  ];
+
+  #############################################################################
   # System user configuration.
   #############################################################################
   # TODO: All deploys should use immutable users where possible, so this
