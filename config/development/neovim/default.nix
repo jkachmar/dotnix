@@ -12,8 +12,9 @@
       myPlugins = unstable.callPackage ./plugins.nix { };
     in
     {
-      # Lua needs a formatter.
-      home.packages = with pkgs; [ luaformatter ];
+      # NOTE: Not that formatter, though; takes forever to comiple.
+      # # Lua needs a formatter.
+      # home.packages = with pkgs; [ luaformatter ];
       programs.neovim = {
         enable = true;
         # Use neovim-0.5 (only packaged on unstable at the moment).
