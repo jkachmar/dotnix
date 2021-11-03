@@ -8,9 +8,13 @@
     brews = [ ];
     casks = [
       "amethyst" # Tiling window manager.
+      "balenaetcher" # USB drive imager.
       "discord" # Nerd chat.
+      "element" # Nerdier chat.
+      "firefox" # A good web browser.
       "iterm2" # A terminal emulator with font rendering & tmux support.
       "itsycal" # Titlebar calendar.
+      "keepassxc" # 1Password keeps getting worse...
       "sensiblesidebuttons"
       # "virtualbox" # Virtualization (duh).
       # "virtualbox-extension-pack" # Virtualization helpers.
@@ -27,6 +31,7 @@
     masApps = {
       "1Password 7 - Password Manager" = 1333542190;
       "Slack" = 803453959;
+      "Xcode" = 497799835;
     };
   };
 }
