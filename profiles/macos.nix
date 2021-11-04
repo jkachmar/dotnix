@@ -7,7 +7,7 @@
     # Abstract/configuration-gnostic system modules.
     ../modules/system/primary-user/macos.nix
     # System configuration modules.
-    ../config/system/fonts/common.nix
+    ../config/system/fonts/macos.nix
     ../config/system/macos/brew.nix
     ../config/system/nix/macos.nix
     ../config/system/nixpkgs
