@@ -15,7 +15,8 @@
       "iterm2" # A terminal emulator with font rendering & tmux support.
       "itsycal" # Titlebar calendar.
       "keepassxc" # 1Password keeps getting worse...
-      "sensiblesidebuttons"
+      "sensiblesidebuttons" # Make the back buttons go... back?
+      "signal" # Secret chat.
       # "virtualbox" # Virtualization (duh).
       # "virtualbox-extension-pack" # Virtualization helpers.
       # XXX: For now, the Safari connector is only available in the Zotero beta
