@@ -22,16 +22,21 @@
       # (which is not available on homebrew).
       # "zotero" # Research paper catalog & organizer.
     ];
-    # Mac App Store applications.
+
+    # XXX: `mas` does not yet support macOS 12 Monteray.
     #
-    # NOTE: Use the `mas` CLI to search for the number associated with a given
-    # application name.
-    #
-    # e.g. `mas search 1Password`
-    masApps = {
-      "1Password 7 - Password Manager" = 1333542190;
-      "Slack" = 803453959;
-      "Xcode" = 497799835;
-    };
+    # cf. https://github.com/mas-cli/mas/issues/417
+
+    # # Mac App Store applications.
+    # #
+    # # NOTE: Use the `mas` CLI to search for the number associated with a given
+    # # application name.
+    # #
+    # # e.g. `mas search 1Password`
+    # masApps = {
+    #   "1Password 7 - Password Manager" = 1333542190;
+    #   "Slack" = 803453959;
+    #   "Xcode" = 497799835;
+    # };
   };
 }
