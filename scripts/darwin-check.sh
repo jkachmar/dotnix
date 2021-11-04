@@ -11,6 +11,10 @@ nix build \
   --show-trace \
   --no-link "${CONFIG_PATH}/#darwinConfigurations.${machine}.system"
 
-result=$(nix path-info "${HOME}/.config/dotfiles/#darwinConfigurations.${machine}.system")
+result=$(
+  nix path-info \
+    --extra-experimental-features 'flakes nix-command' \
+    "${HOME}/.config/dotfiles/#darwinConfigurations.${machine}.system"
+)
 
 "${result}"/sw/bin/darwin-rebuild --flake .#"${machine}" check
