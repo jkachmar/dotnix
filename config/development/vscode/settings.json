@@ -1,5 +1,6 @@
 {
   "update.mode": "none",
   "workbench.colorTheme": "One Dark Pro",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "todo-tree.regex.regex": "(//|-- |-- \\||#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)"
 }
