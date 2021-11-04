@@ -1,15 +1,13 @@
 ###############################################################################
 # Neovim configuration.
 ###############################################################################
-{ lib, pkgs, unstable, ... }:
+{ lib, pkgs, ... }:
 
 {
   primary-user.home-manager = { config, ... }:
     let
       inherit (config.lib.file) mkOutOfStoreSymlink;
-      # Since Neovim and its plugins are being sourced from 'unstable', the
-      # custom plugins should be similarly sourced.
-      myPlugins = unstable.callPackage ./plugins.nix { };
+      myPlugins = pkgs.callPackage ./plugins.nix { };
     in
     {
       # NOTE: Not that formatter, though; takes forever to comiple.
@@ -17,8 +15,7 @@
       # home.packages = with pkgs; [ luaformatter ];
       programs.neovim = {
         enable = true;
-        # Use neovim-0.5 (only packaged on unstable at the moment).
-        package = unstable.neovim-unwrapped;
+        package = pkgs.neovim-unwrapped;
 
         viAlias = true;
         vimAlias = true;
@@ -28,7 +25,7 @@
         withPython3 = true;
 
         # Always pull the latest plugins.
-        plugins = with unstable.vimPlugins; with myPlugins; [
+        plugins = with pkgs.vimPlugins; with myPlugins; [
           # Language support.
           coc-nvim
           haskell-vim
@@ -46,10 +43,15 @@
           fugitive
           gitgutter
         ];
+
+        # XXX: Something's broken; probably an interaction between 'neovim-0.5'
+        # (from 'unstable' nixpkgs) and the home-manager modules (which assume
+        # stable nixpkgs).
+
         # Minimal init.vim config to load Lua config.
         #
         # Nix and Home Manager don't currently support 'init.lua'.
-        extraConfig = "lua require('init')";
+        # extraConfig = "lua require('init')";
       };
 
 
