@@ -54,8 +54,9 @@
   #############################################################################
 
   environment.etc = {
-    "nixos".source = "/persist/etc/nixos";
-  	"NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
+    # TODO: Check if this can use the `home-manager` XDG home stuff.
+    "nixos".source = "${config.primary-user.home.directory}/.config/dotfiles";
+    "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
     "docker/key.json".source = "/persist/etc/docker/key.json";
 
     # Necessary to build GraphQL Engine with MSSQL support.
