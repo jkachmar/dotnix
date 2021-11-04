@@ -1,4 +1,5 @@
 {
   "update.mode": "none",
-  "workbench.colorTheme": "One Dark Pro"
+  "workbench.colorTheme": "One Dark Pro",
+  "editor.formatOnSave": true
 }
