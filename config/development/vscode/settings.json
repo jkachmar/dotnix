@@ -1,6 +1,9 @@
 {
   "update.mode": "none",
-  "workbench.colorTheme": "One Dark Pro",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
   "editor.formatOnSave": true,
-  "todo-tree.regex.regex": "(//|-- |-- \\||#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)"
+  "todo-tree.regex.regex": "(//|-- |-- \\||#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
+  "vim.handleKeys": {
+    "<C-w>": false
+  }
 }
