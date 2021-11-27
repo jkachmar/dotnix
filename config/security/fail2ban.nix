@@ -1,7 +1,7 @@
 { ... }:
 {
   services.fail2ban.enable = true;
-  
+
   # Ensure that any relevant stateful files are persisted across reboots.
   # 
   # NOTE: Symlinking (with 'systemd.tmpfiles.rules') doesn't work here, but a

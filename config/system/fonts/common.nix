@@ -22,7 +22,7 @@
       # "actual" fonts.
       #
       # cf. https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
-      (nerdfonts.override { 
+      (nerdfonts.override {
         fonts = [
           "Hack"
           "IBMPlexMono"

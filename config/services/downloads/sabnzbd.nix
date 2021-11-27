@@ -24,7 +24,7 @@ in
   # TODO: Factor this out, since other downloads services depend on this group.
   #
   # Create the group for downloads.
-  users.groups.downloads.gid = 1010; 
+  users.groups.downloads.gid = 1010;
 
   # Ensure that any relevant stateful files are persisted across reboots.
   #

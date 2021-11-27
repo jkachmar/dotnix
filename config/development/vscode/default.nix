@@ -10,10 +10,11 @@
 
       # Copied from `home-manager` source.
       configDir = "Code";
-      userDir = if pkgs.stdenv.hostPlatform.isDarwin then
-        "Library/Application Support/${configDir}/User"
-      else
-        "${config.xdg.configHome}/${configDir}/User";
+      userDir =
+        if pkgs.stdenv.hostPlatform.isDarwin then
+          "Library/Application Support/${configDir}/User"
+        else
+          "${config.xdg.configHome}/${configDir}/User";
       configFilePath = "${userDir}/settings.json";
     in
     {
@@ -29,7 +30,7 @@
         ]);
       };
 
-      home.file."${configFilePath}".source = 
+      home.file."${configFilePath}".source =
         mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/development/vscode/settings.json";
     };
 }

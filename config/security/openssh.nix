@@ -19,7 +19,7 @@
       X11Forwarding no
     '';
 
-    hostKeys =  [
+    hostKeys = [
       {
         path = "/secrets/openssh/host/ssh_host_ed25519_key";
         type = "ed25519";

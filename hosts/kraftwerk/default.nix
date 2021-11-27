@@ -112,7 +112,7 @@
   #######################
   environment.systemPackages = (with pkgs; [
     vscode
-    vim 
+    vim
   ]) ++ (with unstable; [
     neovim
   ]);

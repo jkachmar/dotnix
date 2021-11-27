@@ -110,7 +110,7 @@
     };
   };
 
-  swapDevices = [ { device = "/dev/mapper/system-swap"; } ];
+  swapDevices = [{ device = "/dev/mapper/system-swap"; }];
 
   ##################
   # Miscellaneous. #

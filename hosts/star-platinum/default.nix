@@ -64,8 +64,8 @@
     # NOTE: Ensure that the shell config for the GraphQL Engine repo uses the
     # same package set as the system to source the ODBC driver stuff.
     "odbcinst.ini".text = ''
-[ODBC Driver 17 for SQL Server]
-Driver          = ${pkgs.unixODBCDrivers.msodbcsql17}/lib/libmsodbcsql-17.7.so.1.1
+      [ODBC Driver 17 for SQL Server]
+      Driver          = ${pkgs.unixODBCDrivers.msodbcsql17}/lib/libmsodbcsql-17.7.so.1.1
     '';
   };
 

@@ -26,6 +26,6 @@
 
     # TODO: Verify that this is necessary.
     # TODO: This isn't machine-agnostic.
-    videoDrivers = [ "nvidia" ]; 
+    videoDrivers = [ "nvidia" ];
   };
 }

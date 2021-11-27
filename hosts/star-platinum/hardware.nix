@@ -15,7 +15,7 @@
     initrd = {
       # FIXME: Comment explaining why these modules were enabled.
       kernelModules = [
-        "dm-snapshot" 
+        "dm-snapshot"
         "nls_cp437"
         "nls_iso8859_1"
       ];
@@ -137,7 +137,7 @@
     };
   };
 
-  swapDevices = [ { device = "/dev/mapper/cryptswap"; } ];
+  swapDevices = [{ device = "/dev/mapper/cryptswap"; }];
   #############################################################################
   # NVIDIA
   #############################################################################
