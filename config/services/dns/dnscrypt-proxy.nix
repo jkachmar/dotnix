@@ -34,9 +34,7 @@
     #
     # Ideally this could specify servers to try in order of priority so
     # `cloudflare` could be set as a fallback even though I prefer Quad9.
-    server_names = [
-      "quad9-doh-ip4-port443-filter-pri"
-    ];
+    server_names = [ "cloudflare" ];
 
     # TODO: Set these up after updating nixpkgs to something that provides
     # the latest version of `dnscrypt-proxy`.
