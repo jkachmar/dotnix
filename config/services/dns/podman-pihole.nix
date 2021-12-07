@@ -96,7 +96,7 @@ in
       TZ = config.time.timeZone;
       PROXY_LOCATION = "pihole";
       # NOTE: This must agree with the nginx virtual host.
-      VIRTUAL_HOST = "pihole.enigma.thempire.dev";
+      VIRTUAL_HOST = "pihole.${fqdn}";
       # TODO: Change this to something secure, obviously.
       WEBPASSWORD = "hunter2";
     };
