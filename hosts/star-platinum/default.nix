@@ -90,7 +90,8 @@
     firewall.enable = true;
     interfaces = {
       enp4s0.useDHCP = true;
-      wlp5s0.useDHCP = true;
+      # This machine is now hardwired.
+      # wlp5s0.useDHCP = true;
     };
     networkmanager.enable = true;
 
