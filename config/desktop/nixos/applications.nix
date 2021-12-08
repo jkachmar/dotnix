@@ -21,7 +21,8 @@ in
   # TODO: Figure out overlays and see how difficult it is to pull in an
   # updated copy of the steam config?
   # TODO: Move this & the controller config out into a gaming module.
-  programs.steam.enable = true;
+  # XXX: lmao what the URL is 404-ing???
+  # programs.steam.enable = true;
   hardware.xpadneo.enable = true;
 
   primary-user = {
