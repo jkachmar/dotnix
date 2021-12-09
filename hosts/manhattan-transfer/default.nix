@@ -3,11 +3,12 @@
   imports = [
     ./hardware.nix
     ../../profiles/macos.nix
-    ../../config/desktop/macos/applications.nix
+    # ../../modules/system/primary-user/macos.nix
+    # ../../config/system/nix/macos.nix
   ];
 
   config = {
-    networking.hostName = "crazy-diamond";
+    networking.hostName = "manhattan-transfer";
 
     primary-user = {
       name = "jkachmar";
@@ -16,20 +17,19 @@
       user.home = /Users/jkachmar;
     };
 
+    homebrew = {
+      brewPrefix = "/opt/homebrew/bin";
+      casks = [
+        "firefox" # A good web browser.
+        "iterm2" # A better terminal emulator.
+        "keepassxc" # An alternative password manager.
+        "slack" # Business chat.
+      ];
+    };
+
     # TODO: Abstract this out.
     services.nix-daemon.enable = true;
     users.nix.configureBuildUsers = true;
-
-    nix.distributedBuilds = true;
-    nix.buildMachines = [
-      {
-        hostName = "10.0.1.150";
-        sshUser = "jkachmar";
-        sshKey = "/Users/jkachmar/.ssh/id_enigma";
-        systems = [ "x86_64-linux" ];
-        maxJobs = 2;
-      }
-    ];
 
     ###########################################################################
     # Used for backwards compatibility, please read the changelog before

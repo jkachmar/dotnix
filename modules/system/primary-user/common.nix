@@ -52,9 +52,13 @@ in
   ];
 
   config = mkIf (cfg.name != null) {
-    home-manager.users.${cfg.name}.programs.git = {
-      userName = mkAliasDefinitions options.primary-user.git.user.name;
-      userEmail = mkAliasDefinitions options.primary-user.git.user.email;
+    home-manager.users.${cfg.name} = {
+      home.stateVersion = "21.11";
+
+      programs.git = {
+        userName = mkAliasDefinitions options.primary-user.git.user.name;
+        userEmail = mkAliasDefinitions options.primary-user.git.user.email;
+      };
     };
   };
 }

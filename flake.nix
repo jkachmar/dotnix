@@ -6,12 +6,12 @@
     # PACKAGE SETS #
     ################
 
-    # Stable macOS package set; pinned to the latest 20.09 release.
+    # Stable macOS package set; pinned to the latest 21.11 release.
     #
     # `darwin` is used to indicate the most up-to-date stable packages tested
     # against macOS.
-    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-21.05-darwin";
-    # Stable NixOS package set; pinned to the latest 21.15 release.
+    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
+    # Stable NixOS package set; pinned to the latest 21.05 release.
     nixosPkgs.url = "github:nixos/nixpkgs/nixos-21.05";
     # Unstable (rolling-release) NixOS package set.
     unstable.url = "github:nixos/nixpkgs";
@@ -21,25 +21,15 @@
     #############
 
     # Declarative, NixOS-style configuration for macOS.
-    #
-    # XXX: Updated to the latest unstable branch due to compatibility issues
-    # with macOS 11.x (Big Sur); revisit when 21.05 drops.
-    #
-    # cf. https://github.com/LnL7/nix-darwin/issues/255
     darwin = {
       inputs.nixpkgs.follows = "macosPkgs";
       url = "github:lnl7/nix-darwin";
     };
 
     # Declarative user configuration for macOS systems.
-    #
-    # XXX: Updated to the latest unstable branch due to compatibility issues
-    # with macOS 11.x (Big Sur); revisit when 21.05 drops.
-    #
-    # cf. https://github.com/LnL7/nix-darwin/issues/255
     macosHome = {
       inputs.nixpkgs.follows = "macosPkgs";
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager/release-21.11";
     };
     # Declarative user configuration for NixOS systems.
     nixosHome = {
@@ -66,7 +56,7 @@
       # more than is necessary.
       mkMacOSConfiguration = hostname: system: darwin.lib.darwinSystem {
         modules = [
-          inputs.macosHome.darwinModules.home-manager
+          inputs.macosHome.darwinModule
           # XXX: Nix needs to believe we have an absolute path here.
           (./. + "/hosts/${hostname}")
         ];
@@ -89,9 +79,9 @@
         inherit system;
         modules = [
           nixosPkgs.nixosModules.notDetected
-          inputs.nixosHome.nixosModules.home-manager
+          inputs.nixosHome.nixosModule
           # XXX: Nix needs to believe we have an absolute path here.
-          (./. + "/hosts/${hostname}")
+          # (./. + "/hosts/${hostname}")
         ];
         specialArgs = {
           inherit inputs;
@@ -103,6 +93,7 @@
     {
       darwinConfigurations = {
         crazy-diamond = mkMacOSConfiguration "crazy-diamond" "x86_64-darwin";
+        manhattan-transfer = mkMacOSConfiguration "manhattan-transfer" "aarch64-darwin";
       };
 
       nixosConfigurations = {

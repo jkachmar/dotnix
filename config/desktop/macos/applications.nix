@@ -15,7 +15,7 @@
       "iterm2" # A terminal emulator with font rendering & tmux support.
       "itsycal" # Titlebar calendar.
       "keepassxc" # 1Password keeps getting worse...
-      "sensiblesidebuttons" # Make the back buttons go... back?
+      # "sensiblesidebuttons" # Make the back buttons go... back?
       "signal" # Secret chat.
       # "virtualbox" # Virtualization (duh).
       # "virtualbox-extension-pack" # Virtualization helpers.

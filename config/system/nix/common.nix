@@ -4,6 +4,9 @@
 { lib, pkgs, ... }:
 
 let
+  inherit (lib) optionalString;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin isAarch64;
+
   # TODO: Abstract this out into its own module.
   caches = [
     # NixOS default cache.
@@ -20,8 +23,10 @@ in
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes ca-references
+    '' + optionalString (isDarwin && isAarch64) ''
+      extra-platforms = aarch64-darwin x86_64-darwin
     '';
-    package = pkgs.nixUnstable;
+    package = pkgs.nixFlakes;
 
     # FIXME: lol without this it forcibly adds the default nixos cache?
     #
@@ -34,5 +39,7 @@ in
 
     substituters = ${lib.concatStringsSep " " substituters}
     trusted-public-keys = ${lib.concatStringsSep " " trustedPublicKeys}
+  '' + optionalString (isDarwin && isAarch64) ''
+    extra-platforms = aarch64-darwin x86_64-darwin
   '';
 }
