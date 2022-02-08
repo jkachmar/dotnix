@@ -30,7 +30,7 @@ in
       discord
       emacs # TODO: Move this out to a dedicated Emacs module.
       firefox
-      slack # NOTE: 21.05 = v4.15.0; unstable = v4.16.0
+      slack
       xclip # Clipboard selection a la `cat foo | xclip -selection clipboard`
       zoom-us
 

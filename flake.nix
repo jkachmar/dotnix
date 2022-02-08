@@ -11,8 +11,8 @@
     # `darwin` is used to indicate the most up-to-date stable packages tested
     # against macOS.
     macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
-    # Stable NixOS package set; pinned to the latest 21.05 release.
-    nixosPkgs.url = "github:nixos/nixpkgs/nixos-21.05";
+    # Stable NixOS package set; pinned to the latest 21.11 release.
+    nixosPkgs.url = "github:nixos/nixpkgs/nixos-21.11";
     # Unstable (rolling-release) NixOS package set.
     unstable.url = "github:nixos/nixpkgs";
 
@@ -34,7 +34,7 @@
     # Declarative user configuration for NixOS systems.
     nixosHome = {
       inputs.nixpkgs.follows = "nixosPkgs";
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager/release-21.11";
     };
   };
 
