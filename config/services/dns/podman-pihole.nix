@@ -17,11 +17,21 @@ in
   # TODO: Factor OCI container backend configuration out to a more generic
   # module if/when more OCI-based services are added.
   virtualisation = {
+    containers = {
+      enable = true;
+      storage.settings.storage = {
+        driver = "zfs";
+        graphroot = "/persist/podman/containers";
+        runroot = "/run/containers/storage";
+      };
+    };
+
     podman = {
       enable = true;
       # NOTE: Workaround for https://github.com/NixOS/nixpkgs/pull/112443
       extraPackages = [ pkgs.zfs ];
     };
+
     oci-containers.backend = "podman";
   };
 
@@ -32,14 +42,14 @@ in
   ];
 
   # FIXME: Documentation.
-  environment.etc."containers/storage.conf".text = ''
-    [storage]
-    driver = "zfs"
-    graphroot = "/persist/podman/containers"
-
-    [storage.options.zfs]
-    mountopt="nodev"
-  '';
+#   environment.etc."containers/storage.conf".text = ''
+#     [storage]
+#     driver = "zfs"
+#     graphroot = "/persist/podman/containers"
+# 
+#     [storage.options.zfs]
+#     mountopt="nodev"
+#   '';
 
   #############################################################################
   # NETWORKING
