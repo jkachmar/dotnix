@@ -9,6 +9,7 @@
   boot = {
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" "sg" ];
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     extraModulePackages = [ ];
     supportedFilesystems = [ "zfs" ];
 

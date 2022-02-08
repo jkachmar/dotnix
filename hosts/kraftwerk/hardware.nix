@@ -14,7 +14,7 @@
   #########
   boot = {
     kernel.sysctl."vm.swappiness" = 1;
-    kernelPackages = pkgs.linuxPackages_5_14;
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     supportedFilesystems = [ "zfs" ];
