@@ -12,7 +12,6 @@
       # HDR tone mapping.
       beignet
       intel-compute-runtime
-      intel-ocl
       ocl-icd
     ];
     # 32-bit support.
@@ -26,7 +25,6 @@
       # HDR tone mapping.
       beignet
       intel-compute-runtime
-      intel-ocl
       ocl-icd
     ];
   };

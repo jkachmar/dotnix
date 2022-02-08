@@ -11,11 +11,11 @@
     enable = true;
     driSupport = true;
     # XXX: Only if using Intel graphics.
-    # extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];  
+    # extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-compute-runtime ];  
 
     driSupport32Bit = true;
     # XXX: Only if using Intel graphics.
-    # extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl ];  
+    # extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau intel-compute-runtime ];  
   };
 
   # Enable X11 + Nvidia
