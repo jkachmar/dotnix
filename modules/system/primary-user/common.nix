@@ -53,7 +53,7 @@ in
 
   config = mkIf (cfg.name != null) {
     home-manager.users.${cfg.name} = {
-      home.stateVersion = "21.11";
+      home.stateVersion = "21.05";
 
       programs.git = {
         userName = mkAliasDefinitions options.primary-user.git.user.name;
