@@ -81,7 +81,7 @@
           nixosPkgs.nixosModules.notDetected
           inputs.nixosHome.nixosModule
           # XXX: Nix needs to believe we have an absolute path here.
-          # (./. + "/hosts/${hostname}")
+          (./. + "/hosts/${hostname}")
         ];
         specialArgs = {
           inherit inputs;
