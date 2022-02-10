@@ -21,13 +21,7 @@
       programs.vscode = {
         enable = true;
         package = unstable.vscode;
-        # Use up-to-date extensions.
-        extensions = (with unstable.vscode-extensions; [
-          gruntfuggly.todo-tree
-          vadimcn.vscode-lldb
-          # TODO: Check out neovim-vscode
-          vscodevim.vim
-        ]);
+        extensions = unstable.callPackage ./extensions.nix {};
       };
 
       home.file."${configFilePath}".source =
