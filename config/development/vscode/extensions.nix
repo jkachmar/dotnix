@@ -59,6 +59,7 @@ in
 (with vscode-extensions; [
   bbenoist.nix
   gruntfuggly.todo-tree
+  timonwong.shellcheck
   vadimcn.vscode-lldb
   vscodevim.vim
 ])
