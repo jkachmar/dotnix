@@ -47,6 +47,9 @@
     # TODO: Source this from a file in '/secrets'.
     initialHashedPassword =
       "$6$8IEIbo7aITp8$5A68B049UisI4S5HTMgsCZ24aZf4QsoC.cOpOLZSrpzostOCOqosm2veCq0iMQy9sWb5GP5BC.N3EcjI6Vphh0";
+    home-manager.home.packages = with pkgs; [
+      docker-compose # Hasura development tooling.
+    ];
   };
 
   #############################################################################
