@@ -26,8 +26,7 @@ in
   hardware.xpadneo.enable = true;
 
   primary-user = {
-    home-manager.home.packages = with pkgs; [
-      discord
+    home-manager.home.packages = (with pkgs; [
       emacs # TODO: Move this out to a dedicated Emacs module.
       firefox
       slack
@@ -36,7 +35,12 @@ in
 
       # Custom/overridden packages.
       updated-signal-desktop
-    ];
+    ]) ++ (with unstable; [
+      # NOTE: Discord sometimes refuses to open without the latest version.
+      #
+      # cf. https://nixos.wiki/wiki/Discord#Discord_wants_latest_version
+      discord
+    ]);
 
     # XXX: The `mimeApps` stuff is a little weird, see the following issues for
     # more information:
