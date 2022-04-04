@@ -7,8 +7,8 @@ let
     mktplcRef = {
       name = "gitlens";
       publisher = "eamodio";
-      version = "11.7.0";
-      sha256 = "po8JzwrADPSZY2SBlaX3N6VSURP/PZIGjFhS3hyV8io=";
+      version = "12.0.5";
+      sha256 = "HOr+78UQHIVQDkUNQaWyyNzDQFc+HwhGRR0ha9Pmyn0=";
     };
   };
 
@@ -16,8 +16,8 @@ let
     mktplcRef = {
       name = "rust-analyzer";
       publisher = "matklad";
-      version = "0.3.935";
-      sha256 = "/lOPQPRpE0+Zo/L94hGoJ5yeMMptrnJMxUgqeQiF3ts=";
+      version = "0.3.1000";
+      sha256 = "51loMRDeW0BrJcRkkAsgDPcPofwkfJzBeYrp8mG2cJg=";
     };
   };
 
@@ -43,8 +43,8 @@ let
     mktplcRef = {
       name = "simple-rst";
       publisher = "trond-snekvik";
-      version = "1.5.1";
-      sha256 = "+iIRswutBa+UM+37niemJbk8eo1IBHodhKBAmfGLe50=";
+      version = "1.5.2";
+      sha256 = "pV7/S8kkDIbhD2K5P2TA8E0pM4F8gsFIlc+4FIheBbc=";
     };
   };
 in
