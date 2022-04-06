@@ -19,6 +19,17 @@
 
     homebrew = {
       brewPrefix = "/opt/homebrew/bin";
+      brews = [
+        "libffi"
+        "libpq"
+        "llvm@11"
+        "mssql-tools"
+        "mysql-client@5.7"
+        "node@14"
+        "openssl"
+        "pcre"
+        "unixodbc"
+      ];
       casks = [
         "firefox" # A good web browser.
         "iterm2" # A better terminal emulator.
