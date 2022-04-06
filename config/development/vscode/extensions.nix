@@ -17,7 +17,7 @@ let
       name = "rust-analyzer";
       publisher = "matklad";
       version = "0.3.1000";
-      sha256 = "51loMRDeW0BrJcRkkAsgDPcPofwkfJzBeYrp8mG2cJg=";
+      sha256 = "CDSkG2j79QWUyBxeNa+zamXRUFCZ45BSo/SrP5gHOh0=";
     };
   };
 
