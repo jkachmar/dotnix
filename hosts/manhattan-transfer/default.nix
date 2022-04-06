@@ -19,10 +19,15 @@
 
     homebrew = {
       brewPrefix = "/opt/homebrew/bin";
+      extraConfig = ''
+        tap "microsoft/mssql-release", "https://github.com/microsoft/homebrew-mssql-release"
+      '';
       brews = [
         "libffi"
         "libpq"
         "llvm@11"
+        "msodbcsql17"
+        "mssql-tools"
         "mysql-client@5.7"
         "node@14"
         "openssl"
