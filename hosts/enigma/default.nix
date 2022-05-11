@@ -60,6 +60,8 @@
 
     home-manager.home.packages = with pkgs; [
       bind.dnsutils
+      qrencode # Useful for generating wireguard QR codes.
+      wireguard-tools
     ];
   };
 
@@ -92,10 +94,10 @@
 
     firewall = {
       enable = true;
-      allowedUDPPorts = [
-        # Wireguard.
-        51820
-      ];
+
+      # Wireguard.
+      allowedUDPPorts = [ config.networking.wireguard.interfaces.wg0.listenPort ];
+      trustedInterfaces = [ "wg0" ];
     };
   };
 
@@ -106,17 +108,65 @@
     "net.ipv4.ip_forward" = 1;
   };
 
+  networking.nat = {
+    enable = true;
+    externalInterface = "eno1";
+    internalInterfaces =
+      builtins.attrNames config.networking.wireguard.interfaces;
+  };
+
   networking.wireguard = {
     enable = true;
-    interfaces.enigma = {
-      generatePrivateKeyFile = true;
-      privateKeyFile = "/secrets/wireguard/enigma";
+    interfaces.wg0 = {
+      ips = [ "10.100.0.1/24" ];
+      listenPort = 51820;
+      privateKeyFile = "/secrets/wireguard/enigma/private";
 
-      ips = [ ];
-      peers = [ ];
+      peers = [
+        {
+          # crazy-diamond | MacBook Pro
+          publicKey = "HSnaUa1oJ4NDjbgAOnsgns4gvbkup5BFdNmSBMx4VSg="; # /secrets/wireguard/crazy-diamond/public
+          allowedIPs = [ "10.100.0.2/32" ];
+        }
+        {
+          # king-crimson | iPhone
+          publicKey = "lpfz2jYXuiv5qbD+VmIvLOKqLreb7no/gM9qQQWUHl4="; # /secrets/wireguard/king-crimson/public
+          allowedIPs = [ "10.100.0.3/32" ];
+        }
+        {
+          # manhattan-transfer | MacBook Pro
+          publicKey = "DfNLbTY465mT+m+Nw1X4MJxDPIWzP/cPvXA/FYc/rS4="; # /secrets/wireguard/manhattan-transfer/public
+          allowedIPs = [ "10.100.0.4/32" ];
+        }
+        {
+          # wonder-of-u | iPad Mini
+          publicKey = "X7KUdq+6fHFuyY81BLtKG6LUNQOmOHdtGzhDQRxC4yw="; # /secrets/wireguard/wonder-of-u/public
+          allowedIPs = [ "10.100.0.5/32" ];
+        }
+      ];
+
+      # This allows the wireguard server to route your traffic to the internet
+      # and hence be like a VPN.
+      #
+      # For this to work you have to set the dnsserver IP of your router (or
+      # dnsserver of choice) in your clients.
+      postSetup = ''
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eno1 -j MASQUERADE
+      '';
+
+      # This undoes the above command
+      postShutdown = ''
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eno1 -j MASQUERADE
+      '';
     };
   };
 
+  # Wireguard should wait to start until after the 'secrets' directory has
+  # been mounted (it needs to access keys).
+  systemd.services.wireguard-wg0 = {
+    after = [ "secrets.mount" ];
+    requires = [ "secrets.mount" ];
+  };
 
   #############################################################################
   # System.
