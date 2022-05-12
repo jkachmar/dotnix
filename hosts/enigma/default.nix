@@ -55,7 +55,14 @@
 
     # TODO: Extract this out into some shared set of known public keys.
     openssh.authorizedKeys.keys = [
+      # crazy-diamond
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrZAwektbexTFUtSn0vuCHP6lvTvA/jdOb+SF5TD9VA me@jkachmar.com"
+
+      # king-crimson
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3cKiYgihwurpDIxV+3yF+/lnFFsBRCmgcLByDlGIg+ me@jkachmar.com"
+
+      # wonder-of-u
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBN02zsOirRD6iES6+tIgTC9ppfT5xqHkjaFlZ+O2hMu me@jkachmar.com"
     ];
 
     home-manager.home.packages = with pkgs; [
