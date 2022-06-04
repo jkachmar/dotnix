@@ -29,7 +29,6 @@ in
     fd
     findutils
     htop
-    mosh
     ripgrep
     shellcheck
   ] ++ optionals isDarwin [
