@@ -59,10 +59,10 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrZAwektbexTFUtSn0vuCHP6lvTvA/jdOb+SF5TD9VA me@jkachmar.com"
 
       # king-crimson
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3cKiYgihwurpDIxV+3yF+/lnFFsBRCmgcLByDlGIg+ me@jkachmar.com"
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBL3PuktGRn+WCiNAAKuUVSB6XJuwAmRm/IPd6y9VD9yrd2F1TLMsB5v3RHrStaVVbHmITp4s+QrfyXXgQKh43e8= king-crimson"
 
       # wonder-of-u
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBN02zsOirRD6iES6+tIgTC9ppfT5xqHkjaFlZ+O2hMu me@jkachmar.com"
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCQ2KyPZfXYoVPVlRLNFUHIAWkmQ4Tgqlq7m6l0z5R8TgOmoV+2CyhEjHcUvUs6ra4O7ZjB3PwM+xCx/FtCX+I0= wonder-of-u"
     ];
 
     home-manager.home.packages = with pkgs; [
