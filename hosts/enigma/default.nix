@@ -15,6 +15,7 @@
     ../../config/services/media/plex
     ../../config/services/media/radarr.nix
     ../../config/services/media/sonarr.nix
+    ../../config/services/metabase.nix
 
     # Machine-specific hardware configuration.
     ./hardware.nix
