@@ -6,6 +6,8 @@
     ../../profiles/nixos/base.nix
 
     # Home server service configuration.
+    ../../config/services/clickhouse.nix
+    ../../config/services/metabase.nix
     ../../config/services/nginx.nix
     ../../config/services/dns/ddclient.nix
     ../../config/services/dns/dnscrypt-proxy.nix
@@ -15,7 +17,6 @@
     ../../config/services/media/plex
     ../../config/services/media/radarr.nix
     ../../config/services/media/sonarr.nix
-    ../../config/services/metabase.nix
 
     # Machine-specific hardware configuration.
     ./hardware.nix
@@ -175,6 +176,10 @@
     after = [ "secrets.mount" ];
     requires = [ "secrets.mount" ];
   };
+
+  # NOTE: Necessary to set this here because the clickhouse module sets a
+  # default time zone.
+  time.timeZone = "America/New_York";
 
   #############################################################################
   # System.
