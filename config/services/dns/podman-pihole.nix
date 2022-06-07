@@ -109,6 +109,8 @@ in
       VIRTUAL_HOST = "pihole.${fqdn}";
       # TODO: Change this to something secure, obviously.
       WEBPASSWORD = "hunter2";
+      # NOTE: cf. https://discourse.pi-hole.net/t/safari-wont-finish-loading-certain-sites-after-ios-15-5-macos-12-4-upgrade/55516/21
+      BLOCK_ICLOUD_PR = "false";
     };
     extraOptions = [ "--dns=127.0.0.1" "--dns=9.9.9.9" ];
     workdir = "/etc/pihole";
