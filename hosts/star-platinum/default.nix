@@ -50,6 +50,11 @@
     home-manager.home.packages = with pkgs; [
       docker-compose # Hasura development tooling.
     ];
+
+    openssh.authorizedKeys.keys = [
+      # wonder-of-u
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGjMxuECiMaZSZcUKydFxmca4fLfGG/nX9IcIWrbWFUVEXAa0LZrIaeD8+dmZ/9GATSR3JvhKglEp2pDCSYSBm4= wonder-of-u"
+    ];
   };
 
   #############################################################################
