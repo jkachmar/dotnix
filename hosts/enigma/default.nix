@@ -47,8 +47,10 @@
     git.user.name = config.primary-user.name;
     git.user.email = "git@jkachmar.com";
 
-    # The primary user should be able to administrate all media & downloads.
-    extraGroups = [ "downloads" ];
+    # The primary user should be able to:
+    #  - administrate all media & downloads
+    #  - manage data & analytics
+    extraGroups = [ "analytics" "downloads" ];
 
     # FIXME: Change this to a different password from the root user.
     # TODO: Source this from a file in '/secrets'.
@@ -62,6 +64,9 @@
 
       # king-crimson
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBL3PuktGRn+WCiNAAKuUVSB6XJuwAmRm/IPd6y9VD9yrd2F1TLMsB5v3RHrStaVVbHmITp4s+QrfyXXgQKh43e8= king-crimson"
+
+      # star-platinum
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJxSLTsCtr8JW1XgP+cqx6+iAI1VzJVjU/LR5nkNcEY star-platinum"
 
       # wonder-of-u
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCQ2KyPZfXYoVPVlRLNFUHIAWkmQ4Tgqlq7m6l0z5R8TgOmoV+2CyhEjHcUvUs6ra4O7ZjB3PwM+xCx/FtCX+I0= wonder-of-u"
@@ -97,7 +102,10 @@
     domain = "thempire.dev";
 
     interfaces = {
-      eno1.useDHCP = true;
+      eno1 = {
+        useDHCP = true;
+        wakeOnLan.enable = true;
+      };
       wlp0s20f3.useDHCP = true;
     };
 
