@@ -20,8 +20,8 @@ In general it follows the same principles as [Graham Christensen] described in
 his [Erase Your Darlings] blog post; in this case, `/persist` is being used as
 the persistent directory.
 
-Due to a few idiosyncracies with the persistence framework, this configuration
-should be cloned to `/persist/etc/nixos`.
+This repository can be cloned anywhere, but in general I tend to place it in
+`$HOME/.config/dotfiles` on desktop machines and `/persist/etc/nixos` on servers.
 
 After cloning, `cd` into the directory.
 
@@ -55,11 +55,18 @@ it.
 For example, the following will build and activate the `star-platinum` profile:
 
 ```bash
-nixos-rebuild switch --flake '.#star-platinum'
+nixos-rebuild switch \
+  --use-remote-sudo \
+  --flake '.#star-platinum'
 ```
 
 The initial activation will set the machine's host name, which means that
-subsequent activations can be performed with `nixos-rebuild switch`.
+subsequent activations can be performed with `nixos-rebuild switch --use-remote-sudo`.
+
+**NOTE**: `--use-remote-sudo` is a "workaround" for how flakes repositories can interact
+with `git-2.35.`.
+
+cf. https://github.com/NixOS/nixpkgs/issues/169193
 
 ### New Profile
 
