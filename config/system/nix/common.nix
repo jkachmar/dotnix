@@ -22,7 +22,7 @@ in
 {
   nix = {
     extraOptions = ''
-      experimental-features = nix-command flakes ca-references
+      experimental-features = nix-command flakes
     '' + optionalString (isDarwin && isAarch64) ''
       extra-platforms = aarch64-darwin x86_64-darwin
     '';
@@ -35,7 +35,7 @@ in
     binaryCachePublicKeys = lib.mkForce trustedPublicKeys;
   };
   primary-user.home-manager.xdg.configFile."nix/nix.conf".text = ''
-    experimental-features = nix-command flakes ca-references
+    experimental-features = nix-command flakes
 
     substituters = ${lib.concatStringsSep " " substituters}
     trusted-public-keys = ${lib.concatStringsSep " " trustedPublicKeys}

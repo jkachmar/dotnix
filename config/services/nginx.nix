@@ -21,8 +21,9 @@ in
   # Nginx needs to be able to read the certificates
   users.users.nginx.extraGroups = [ "acme" ];
 
+  security.acme.defaults = { inherit email; };
+
   security.acme = {
-    inherit email;
     acceptTerms = true;
 
     certs = {

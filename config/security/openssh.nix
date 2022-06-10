@@ -4,7 +4,7 @@
   services.openssh = {
     enable = true;
     allowSFTP = false;
-    challengeResponseAuthentication = false;
+    kbdInteractiveAuthentication = false;
     passwordAuthentication = false;
     permitRootLogin = "no";
 

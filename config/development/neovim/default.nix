@@ -1,7 +1,7 @@
 ###############################################################################
 # Neovim configuration.
 ###############################################################################
-{ lib, pkgs, ... }:
+{ lib, pkgs, unstable, ... }:
 
 {
   primary-user.home-manager = { config, ... }:
@@ -27,7 +27,6 @@
         # Always pull the latest plugins.
         plugins = with pkgs.vimPlugins; with myPlugins; [
           # Language support.
-          coc-nvim
           haskell-vim
           vim-nix
           # UI.
@@ -43,6 +42,11 @@
           fugitive
           gitgutter
         ];
+        # NOTE: Workaround for an issue that has been fixed in unstable but
+        # not yet backported (at the time of writing).
+        #
+        # cf. https://github.com/NixOS/nixpkgs/issues/176753#issuecomment-1148939386=
+        configure.packages.myVimPackages.opt = with pkgs.vimPlugins; [ coc-nvim ];
 
         # XXX: Something's broken; probably an interaction between 'neovim-0.5'
         # (from 'unstable' nixpkgs) and the home-manager modules (which assume
@@ -51,7 +55,7 @@
         # Minimal init.vim config to load Lua config.
         #
         # Nix and Home Manager don't currently support 'init.lua'.
-        # extraConfig = "lua require('init')";
+        extraConfig = "lua require('init')";
       };
 
 
