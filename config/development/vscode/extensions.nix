@@ -12,12 +12,12 @@ let
     };
   };
 
-  matklad.rust-analyzer = buildVscodeMarketplaceExtension {
+  rust-lang.rust-analyzer = buildVscodeMarketplaceExtension {
     mktplcRef = {
       name = "rust-analyzer";
-      publisher = "matklad";
-      version = "0.3.1000";
-      sha256 = "CDSkG2j79QWUyBxeNa+zamXRUFCZ45BSo/SrP5gHOh0=";
+      publisher = "rust-lang";
+      version = "0.4.1086";
+      sha256 = "1foFDbbTKoekAu88Ka91sucBawoRxT7alZXYCl8/mVk=";
     };
   };
 
@@ -51,7 +51,7 @@ in
 
 [
   eamodio.gitlens
-  matklad.rust-analyzer
+  rust-lang.rust-analyzer
   sjurmillidahl.ormolu-vscode
   tamasfe.even-better-toml
   trond-snekvik.simple-rst
@@ -60,6 +60,9 @@ in
   bbenoist.nix
   gruntfuggly.todo-tree
   timonwong.shellcheck
-  vadimcn.vscode-lldb
+  # NOTE: Fix has been merged but not propagated to 'unstable' yet.
+  #
+  # cf. https://github.com/NixOS/nixpkgs/issues/176697
+  # vadimcn.vscode-lldb
   vscodevim.vim
 ])
