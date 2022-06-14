@@ -69,7 +69,6 @@
   };
 
   systemd.tmpfiles.rules = [
-    "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
     "L /var/lib/docker    - - - - /persist/var/lib/docker"
   ];
 
