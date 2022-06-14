@@ -39,14 +39,14 @@
           commentary
           direnv-vim
           # Version control.
-          fugitive
+          # fugitive
           gitgutter
         ];
         # NOTE: Workaround for an issue that has been fixed in unstable but
         # not yet backported (at the time of writing).
         #
         # cf. https://github.com/NixOS/nixpkgs/issues/176753#issuecomment-1148939386=
-        configure.packages.myVimPackages.opt = with pkgs.vimPlugins; [ coc-nvim ];
+        # configure.packages.myVimPackages.opt = with pkgs.vimPlugins; [ coc-nvim ];
 
         # XXX: Something's broken; probably an interaction between 'neovim-0.5'
         # (from 'unstable' nixpkgs) and the home-manager modules (which assume
