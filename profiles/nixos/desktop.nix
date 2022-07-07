@@ -6,7 +6,7 @@
     # System configuration modules.
     ../../config/system/fonts/nixos.nix
     # XXX: Contains NVIDIA-specific config.
-    ../../config/system/nixos/virtualization.nix
+    ../../config/system/nixos/docker.nix
     # Security configuration modules.
     ../../config/security/gpg.nix
     # Shell configuration modules.
