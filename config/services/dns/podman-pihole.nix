@@ -5,52 +5,9 @@
 
 let
   inherit (config.networking) domain hostName;
-  fqdn = "${hostName}.${domain}";
+  fqdn = "pihole.${hostName}.${domain}";
 in
 {
-  #############################################################################
-  # VIRTUALIZATION
-  #############################################################################
-
-  # Use Podman to run OCI containers.
-  #
-  # TODO: Factor OCI container backend configuration out to a more generic
-  # module if/when more OCI-based services are added.
-  virtualisation = {
-    containers = {
-      enable = true;
-      storage.settings.storage = {
-        driver = "zfs";
-        graphroot = "/persist/podman/containers";
-        runroot = "/run/containers/storage";
-      };
-    };
-
-    podman = {
-      enable = true;
-      # NOTE: Workaround for https://github.com/NixOS/nixpkgs/pull/112443
-      extraPackages = [ pkgs.zfs ];
-    };
-
-    oci-containers.backend = "podman";
-  };
-
-  # TODO: Factor pod state persistence out to a more generic module if/when
-  # more OCI-based services are added.
-  systemd.tmpfiles.rules = [
-    "L /var/lib/cni - - - - /persist/var/lib/cni"
-  ];
-
-  # FIXME: Documentation.
-#   environment.etc."containers/storage.conf".text = ''
-#     [storage]
-#     driver = "zfs"
-#     graphroot = "/persist/podman/containers"
-# 
-#     [storage.options.zfs]
-#     mountopt="nodev"
-#   '';
-
   #############################################################################
   # NETWORKING
   #############################################################################
@@ -80,7 +37,7 @@ in
   # PIHOLE
   #############################################################################
 
-  services.nginx.virtualHosts."pihole.${fqdn}" = {
+  services.nginx.virtualHosts."${fqdn}" = {
     forceSSL = true;
     useACMEHost = domain;
     locations."/".proxyPass = "http://localhost:7000";
@@ -105,12 +62,9 @@ in
       REV_SERVER_CIDR = "10.0.0.0/16";
       TZ = config.time.timeZone;
       PROXY_LOCATION = "pihole";
-      # NOTE: This must agree with the nginx virtual host.
-      VIRTUAL_HOST = "pihole.${fqdn}";
+      VIRTUAL_HOST = fqdn;
       # TODO: Change this to something secure, obviously.
       WEBPASSWORD = "hunter2";
-      # NOTE: cf. https://discourse.pi-hole.net/t/safari-wont-finish-loading-certain-sites-after-ios-15-5-macos-12-4-upgrade/55516/21
-      BLOCK_ICLOUD_PR = "false";
     };
     extraOptions = [ "--dns=127.0.0.1" "--dns=9.9.9.9" ];
     workdir = "/etc/pihole";
