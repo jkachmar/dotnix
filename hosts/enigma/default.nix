@@ -16,7 +16,7 @@
     ../../config/services/nginx.nix
     ../../config/services/dns/ddclient.nix
     ../../config/services/dns/dnscrypt-proxy.nix
-    ../../config/services/dns/podman-pihole.nix
+    ../../config/services/dns/pihole.nix
     ../../config/services/downloads/sabnzbd.nix
     ../../config/services/media/hardware-acceleration.nix
     ../../config/services/media/plex
