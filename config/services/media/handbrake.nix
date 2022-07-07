@@ -27,7 +27,7 @@ in
     # the NAS.
     volumes = [
       "/persist/handbrake/config:/config:rw"
-      "/persist/handbrake/storage:$HOME/storage:ro"
+      "/persist/handbrake/storage:/storage:ro"
       "/persist/handbrake/watch:/watch:rw"
       "/persist/handbrake/output:/output:rw"
     ];
