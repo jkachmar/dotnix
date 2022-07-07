@@ -15,7 +15,10 @@ in
   services.nginx.virtualHosts."${fqdn}" = {
     forceSSL = true;
     useACMEHost = domain;
-    locations."/".proxyPass = "http://localhost:${port}";
+    locations."/" = {
+      proxyPass = "http://localhost:${port}";
+      proxyWebsockets = true;
+    };
   };
 
   virtualisation.oci-containers.containers.handbrake = {
