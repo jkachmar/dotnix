@@ -6,8 +6,10 @@
     ../../profiles/nixos/base.nix
 
     # Home server service configuration.
-    ../../config/services/clickhouse.nix
-    ../../config/services/metabase.nix
+    #
+    # NOTE: Didn't end up using either of these very much.
+    # ../../config/services/clickhouse.nix
+    # ../../config/services/metabase.nix
     ../../config/services/nginx.nix
     ../../config/services/dns/ddclient.nix
     ../../config/services/dns/dnscrypt-proxy.nix
