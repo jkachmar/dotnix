@@ -1,4 +1,8 @@
-{ config, ... }:
+{ config, lib, ... }:
+let
+  name = "jkachmar";
+  secretAgentDataPath = "/Users/${name}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data";
+in
 {
   imports = [
     ./hardware.nix
@@ -10,10 +14,25 @@
     networking.hostName = "crazy-diamond";
 
     primary-user = {
-      name = "jkachmar";
+      inherit name;
       git.user.name = config.primary-user.name;
       git.user.email = "git@jkachmar.com";
-      user.home = /Users/jkachmar;
+      user.home = /Users/${name};
+
+      # NOTE: Testing out 'Secretive' on macOS.
+      #
+      # The 'IdentityAgent' string below is an artifact of using 'secretive' &
+      # its 'Secret Agent' companion to manage SSH keys in Secure Enclave.
+      home-manager.programs.ssh = {
+        extraConfig = ''
+          IdentityAgent ${secretAgentDataPath}/socket.ssh
+        '';
+        matchBlocks = {
+          "github".identityFile = lib.mkForce [
+            "${secretAgentDataPath}/PublicKeys/8340b1d3d8b43aa144e30866ab4cfe05.pub"
+          ];
+        };
+      };
     };
 
     # TODO: Abstract this out.
