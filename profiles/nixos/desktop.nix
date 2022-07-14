@@ -4,7 +4,7 @@
     # Base configuration modules for all NixOS systems.
     ./base.nix
     # System configuration modules.
-    ../../config/system/fonts/nixos.nix
+    ../../config/system/fonts
     # XXX: Contains NVIDIA-specific config.
     ../../config/system/nixos/docker.nix
     # Security configuration modules.

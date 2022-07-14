@@ -8,7 +8,7 @@
     ../modules/system/primary-user/macos.nix
 
     # System configuration modules.
-    ../config/system/fonts/macos.nix
+    ../config/system/fonts
     ../config/system/macos/brew.nix
     ../config/system/nix/macos.nix
     ../config/system/nixpkgs

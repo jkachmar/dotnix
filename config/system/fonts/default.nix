@@ -5,6 +5,7 @@
 
 {
   fonts = {
+    fontDir.enable = true;
     fonts = with pkgs; [
       # Icon fonts.
       emacs-all-the-icons-fonts
