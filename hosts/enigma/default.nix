@@ -66,7 +66,10 @@
     # TODO: Extract this out into some shared set of known public keys.
     openssh.authorizedKeys.keys = [
       # crazy-diamond
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrZAwektbexTFUtSn0vuCHP6lvTvA/jdOb+SF5TD9VA me@jkachmar.com"
+      # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrZAwektbexTFUtSn0vuCHP6lvTvA/jdOb+SF5TD9VA me@jkachmar.com"
+
+      # crazy-diamond (secure enclave)
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNUZg7/DH/FzbiTz7nqP+KfsxIRRd0N2SplekG7EF2xwAxnFvcR/uoXf6dcbYFO14GCd/myHWXJzeGuxq/ihOkE= enigma@secretive.crazy-diamond.local"
 
       # king-crimson
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBL3PuktGRn+WCiNAAKuUVSB6XJuwAmRm/IPd6y9VD9yrd2F1TLMsB5v3RHrStaVVbHmITp4s+QrfyXXgQKh43e8= king-crimson"
