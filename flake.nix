@@ -6,11 +6,11 @@
     # PACKAGE SETS #
     ################
 
-    # Stable macOS package set; pinned to the latest 21.11 release.
+    # Stable macOS package set; pinned to the latest 22.05 release.
     #
     # `darwin` is used to indicate the most up-to-date stable packages tested
     # against macOS.
-    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
+    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
     # Stable NixOS package set; pinned to the latest 22.05 release.
     nixosPkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     # Unstable (rolling-release) NixOS package set.
