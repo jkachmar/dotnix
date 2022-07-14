@@ -33,7 +33,7 @@
     masApps = {
       "1Password 7 - Password Manager" = 1333542190;
       "Slack" = 803453959;
-      "Xcode" = 497799835;
+      "Wireguard" = 1451685025;
     };
   };
 }
