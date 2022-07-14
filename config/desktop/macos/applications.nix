@@ -15,6 +15,7 @@
       "iterm2" # A terminal emulator with font rendering & tmux support.
       "itsycal" # Titlebar calendar.
       "keepassxc" # 1Password keeps getting worse...
+      "secretive" # Secure Enclave SSH key & identity management.
       # "sensiblesidebuttons" # Make the back buttons go... back?
       "signal" # Secret chat.
       # "virtualbox" # Virtualization (duh).
