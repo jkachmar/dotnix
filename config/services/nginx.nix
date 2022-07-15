@@ -53,5 +53,11 @@ in
       useACMEHost = domain;
       locations."/".proxyPass = "https://10.0.1.250:5001";
     };
+
+    "webdav.moody-blues.${domain}" = {
+      forceSSL = true;
+      useACMEHost = domain;
+      locations."/".proxyPass = "https://10.0.1.250:5006";
+    };
   };
 }
