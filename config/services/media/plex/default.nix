@@ -7,6 +7,9 @@ let
 in
 
 {
+  # Nginx reverse proxy config is in a separate file because it is too long.
+  imports = [ ./nginx.nix ];
+
   # Create a "plex" user for the service, so a user ID can be manually set.
   #
   # XXX: The NixOS Plex module checks if `services.plex.user == "plex"`, so the
