@@ -63,19 +63,19 @@
       neededForBoot = true;
     };
 
-    # [NEW] Persistent '/home' state.
+    # Persistent '/home' state.
     "/home" = {
       device = "enigma/persist/home";
       fsType = "zfs";
     };
 
-    # [NEW] Persistent global state.
+    # Persistent global state.
     "/persist" = {
       device = "enigma/persist/root";
       fsType = "zfs";
     };
 
-    # [NEW] Persistent podman containers.
+    # Persistent podman containers.
     # 
     # NOTE: Symlinking this with 'systemd-tmpfiles' won't work since the ZFS
     # storage driver expects an actual ZFS dataset.
@@ -84,7 +84,7 @@
       fsType = "zfs";
     };
 
-    # [NEW] 'systemd' logging.
+    # 'systemd' logging.
     #
     # `journalctl` (and presumably all other well-behaved application loggers)
     # will manage its own rotation, cleanup, etc. and ZFS shouldn't try to
@@ -96,6 +96,17 @@
       device = "enigma/persist/systemd-logs";
       fsType = "zfs";
       neededForBoot = true;
+    };
+
+    # Large file download management.
+    #
+    # For the most part, anything that sits in these directories is expected to
+    # be on this machine temporarily (in transit to 'moody-blues' or
+    # elsewhere); snapshotting these sorts of files is a waste of space.
+    "/persist/downloads" = {
+      device = "enigma/persist/downloads";
+      fsType = "zfs";
+      neededForBoot = false;
     };
 
     # TODO: Permissions, fine-grained shares with the Synology, etc.
