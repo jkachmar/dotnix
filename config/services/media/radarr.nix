@@ -7,7 +7,7 @@ in
 {
   services.radarr = {
     enable = true;
-    dataDir = "/persist/downloads/radarr";
+    dataDir = "/persist/var/lib/radarr";
     group = "downloads";
     openFirewall = true;
   };

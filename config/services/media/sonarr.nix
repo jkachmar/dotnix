@@ -7,7 +7,7 @@ in
 {
   services.sonarr = {
     enable = true;
-    dataDir = "/persist/downloads/sonarr";
+    dataDir = "/persist/var/lib/downloads/sonarr";
     group = "downloads";
     openFirewall = true;
   };
