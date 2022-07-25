@@ -1,9 +1,0 @@
-{
-  "update.mode": "none",
-  "editor.formatOnSave": true,
-  "todo-tree.regex.regex": "(//|-- |-- \\||#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
-  "vim.handleKeys": {
-    "<C-w>": false
-  },
-  "haskell.updateBehavior": "never-check"
-}
