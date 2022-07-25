@@ -8,6 +8,9 @@
     # Podman-based OCI virtualization configuration.
     ../../config/system/nixos/podman.nix
 
+    # VS Code developer tools.
+    ../../config/development/vscode
+
     # Home server service configuration.
     #
     # NOTE: Didn't end up using either of these very much.
