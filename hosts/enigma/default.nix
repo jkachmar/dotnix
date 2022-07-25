@@ -9,8 +9,8 @@
     ../../config/system/nixos/podman.nix
 
     # VS Code developer tools.
-    ../../config/development/vscode
-    ../../config/development/vscode/server.nix
+    ../../config/development/vscode/server
+    ../../config/development/vscode/server/service.nix
 
     # Home server service configuration.
     #
@@ -103,7 +103,8 @@
   #############################################################################
 
   environment.etc = {
-    "nixos".source = "/persist/etc/nixos";
+    # TODO: Check if this can use the `home-manager` XDG home stuff.
+    "nixos".source = "${config.primary-user.home.directory}/.config/dotfiles";
   };
 
   #############################################################################
