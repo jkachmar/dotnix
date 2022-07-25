@@ -95,6 +95,9 @@
   # Enable `mosh` server; opens UDP ports 60000 - 61000;
   programs.mosh.enable = true;
 
+  # Enable SFTP (required for Blink Shell VS Code).
+  services.openssh.allowSFTP = true;
+
   #############################################################################
   # Global persistence.
   #############################################################################

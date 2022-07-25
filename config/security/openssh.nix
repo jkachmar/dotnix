@@ -1,9 +1,9 @@
-{ ... }:
+{ lib, ... }:
 
 {
   services.openssh = {
     enable = true;
-    allowSFTP = false;
+    allowSFTP = lib.mkDefault false;
     kbdInteractiveAuthentication = false;
     passwordAuthentication = false;
     permitRootLogin = "no";
