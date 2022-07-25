@@ -10,6 +10,7 @@
 
     # VS Code developer tools.
     ../../config/development/vscode
+    ../../config/development/vscode/server.nix
 
     # Home server service configuration.
     #
