@@ -39,13 +39,6 @@ in
     enable = true;
     dataDir = "/persist/var/lib/plex";
     openFirewall = true;
-    # XXX: Keep up-to-date with:
-    #
-    # https://plex.tv/api/downloads/5.json?channel=plexpass
-    #
-    # TODO: Adapt a more automatic solution with a script:
-    #
-    # https://github.com/tadfisher/flake/blob/a947b381fc7fb48aa22c29ac4e7149e9f46a9a85/pkgs/plex-plexpass/update.sh
     package = pkgs.plex.override {
       plexRaw = pkgs.callPackage ./raw.nix { };
     };
