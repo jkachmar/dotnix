@@ -117,6 +117,9 @@
     hostName = "enigma";
     domain = "thempire.dev";
 
+    # TODO: Figure out how to route IPv6 traffic appropriately.
+    enableIPv6 = false;
+
     interfaces = {
       eno1 = {
         useDHCP = true;
