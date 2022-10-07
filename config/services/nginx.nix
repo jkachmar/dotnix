@@ -2,7 +2,7 @@
 
 let
   inherit (config.networking) domain;
-  email = config.primary-user.email;
+  inherit (config.primary-user) email;
 in
 {
   services.nginx = {
