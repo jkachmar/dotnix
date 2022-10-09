@@ -165,8 +165,8 @@
           allowedIPs = [ "10.100.0.2/32" ];
         }
         {
-          # king-crimson | iPhone
-          publicKey = "lpfz2jYXuiv5qbD+VmIvLOKqLreb7no/gM9qQQWUHl4="; # /secrets/wireguard/king-crimson/public
+          # purple-haze | iPhone 14 pro
+          publicKey = "NjplYF6mLOytQXJ7xDLEgTosGu8QFgX9Y9mqqIdWOxo="; # /secrets/wireguard/purple-haze/public
           allowedIPs = [ "10.100.0.3/32" ];
         }
         {
