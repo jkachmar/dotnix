@@ -21,6 +21,15 @@ let
     };
   };
 
+  asvetliakov.vscode-neovim = buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "vscode-neovim";
+      publisher = "asvetliakov";
+      version = "0.0.88"; # https://github.com/vscode-neovim/vscode-neovim/issues/1036
+      sha256 = "sGF4q7jzPxeXaT17K91DFVx8We8K/I4AXjKWtt0N5MI=";
+    };
+  };
+
   sjurmillidahl.ormolu-vscode = buildVscodeMarketplaceExtension {
     mktplcRef = {
       name = "ormolu-vscode";
@@ -48,8 +57,8 @@ let
     };
   };
 in
-
 [
+  asvetliakov.vscode-neovim
   eamodio.gitlens
   rust-lang.rust-analyzer
   sjurmillidahl.ormolu-vscode
@@ -64,5 +73,5 @@ in
   #
   # cf. https://github.com/NixOS/nixpkgs/issues/176697
   # vadimcn.vscode-lldb
-  vscodevim.vim
+  # vscodevim.vim
 ])

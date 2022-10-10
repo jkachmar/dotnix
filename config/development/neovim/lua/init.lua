@@ -4,6 +4,11 @@
 local cmd = vim.cmd
 local indent = 2
 
+------------
+-- Leader --
+------------
+vim.g.mapleader = ';'
+
 ------------------
 -- Color scheme --
 ------------------

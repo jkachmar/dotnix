@@ -38,6 +38,7 @@
           # Misc. tooling.
           commentary
           direnv-vim
+          easymotion
           # Version control.
           # fugitive
           gitgutter

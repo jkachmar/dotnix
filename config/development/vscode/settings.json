@@ -6,5 +6,6 @@
   "vim.handleKeys": {
     "<C-w>": false
   },
-  "haskell.updateBehavior": "never-check"
+  "haskell.updateBehavior": "never-check",
+  "vscode-neovim.neovimExecutablePaths.darwin": "/Users/jkachmar/.nix-profile/bin/nvim"
 }
