@@ -71,8 +71,8 @@
       # crazy-diamond (secure enclave)
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNUZg7/DH/FzbiTz7nqP+KfsxIRRd0N2SplekG7EF2xwAxnFvcR/uoXf6dcbYFO14GCd/myHWXJzeGuxq/ihOkE= enigma@secretive.crazy-diamond.local"
 
-      # king-crimson
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBL3PuktGRn+WCiNAAKuUVSB6XJuwAmRm/IPd6y9VD9yrd2F1TLMsB5v3RHrStaVVbHmITp4s+QrfyXXgQKh43e8= king-crimson"
+      # purple-haze
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBZcDYiijg9rjTJ8PkmEIbg8GeIcPh8cUAQTD2NWIis8CcVkPR9B5THM6OPAs2zps3/3HTzvNClBCHlhks/dVGE= purple-haze"
 
       # star-platinum
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJxSLTsCtr8JW1XgP+cqx6+iAI1VzJVjU/LR5nkNcEY star-platinum"
