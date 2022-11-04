@@ -3,7 +3,7 @@
 # Adapted from https://github.com/tadfisher/flake/blob/44c998ef12060876f07b9203360acad23744931e/pkgs/plex-plexpass/update.sh
 
 shopt -s extglob
-set -eu -o pipefail
+set -eux -o pipefail
 
 path="$(realpath "$(dirname "$0")")"
 
