@@ -19,29 +19,6 @@ in
       git.user.name = config.primary-user.name;
       git.user.email = "git@jkachmar.com";
       user.home = /Users/${name};
-
-      # NOTE: Testing out 'Secretive' on macOS.
-      #
-      # The 'IdentityAgent' string below is an artifact of using 'secretive' &
-      # its 'Secret Agent' companion to manage SSH keys in Secure Enclave.
-      home-manager.programs.ssh = {
-        extraConfig = ''
-          IdentityAgent ${secretAgentDataPath}/socket.ssh
-        '';
-
-        matchBlocks = {
-          "192.168.1.150" = {
-            hostname = "192.168.1.150";
-            user = "jkachmar";
-            identityFile = [
-              "${secretAgentPubKeysPath}/ff67f327ddfda7771e3741f7bcdd95ce.pub"
-            ];
-          };
-          "github".identityFile = lib.mkForce [
-            "${secretAgentPubKeysPath}/8340b1d3d8b43aa144e30866ab4cfe05.pub"
-          ];
-        };
-      };
     };
 
     # TODO: Abstract this out.
