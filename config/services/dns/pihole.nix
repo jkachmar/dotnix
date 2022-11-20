@@ -58,8 +58,8 @@ in
     environment = {
       DNS1 = "10.88.0.1#5053";
       REV_SERVER = "true";
-      REV_SERVER_TARGET = "10.0.0.1"; # Router IP.
-      REV_SERVER_CIDR = "10.0.0.0/16";
+      REV_SERVER_TARGET = "192.168.0.1"; # Router IP.
+      REV_SERVER_CIDR = "192.168.0.0/16";
       TZ = config.time.timeZone;
       PROXY_LOCATION = "pihole";
       VIRTUAL_HOST = fqdn;

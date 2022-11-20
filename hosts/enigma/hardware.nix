@@ -111,14 +111,14 @@
 
     # TODO: Permissions, fine-grained shares with the Synology, etc.
     "/mnt/moodyblues/media" = {
-      device = "10.0.1.250:/volume1/media";
+      device = "192.168.1.155:/volume1/media";
       fsType = "nfs";
       options = [ "auto" "defaults" "nfsvers=4.1" ];
     };
 
     # TODO: Permissions, fine-grained shares with the Synology, etc.
     "/mnt/moodyblues/downloads" = {
-      device = "10.0.1.250:/volume1/downloads";
+      device = "192.168.1.155:/volume1/downloads";
       fsType = "nfs";
       options = [ "auto" "defaults" "nfsvers=4.1" ];
     };

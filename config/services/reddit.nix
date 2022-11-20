@@ -12,7 +12,7 @@ in
   services.libreddit = {
     enable = true;
     inherit (listen) address port;
-    # redirect = true;
+    redirect = true;
     openFirewall = false;
   };
 

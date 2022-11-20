@@ -52,7 +52,7 @@ in
       forceSSL = true;
       useACMEHost = domain;
       locations."/" = {
-        proxyPass = "https://10.0.1.250:5001";
+        proxyPass = "https://192.168.1.155:5001";
         extraConfig = ''
           # Causes issues w/ uploading very large files via Synology web UI.
           client_max_body_size 0;
@@ -64,7 +64,7 @@ in
     "webdav.moody-blues.${domain}" = {
       forceSSL = true;
       useACMEHost = domain;
-      locations."/".proxyPass = "https://10.0.1.250:5006";
+      locations."/".proxyPass = "https://192.168.1.155:5006";
     };
   };
 }
