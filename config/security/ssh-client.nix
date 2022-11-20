@@ -49,8 +49,8 @@ in
     # FIXME: There seems to be some weird home-manager DAG ordering issue going
     # on...
     } // optionalAttrs isLinux {
-      "10.0.1.150" = {
-        hostname = "10.0.1.150";
+      "192.168.1.150" = {
+        hostname = "192.168.1.150";
         user = "jkachmar";
         identityFile = [ "/secrets/openssh/client/${username}/id_enigma" ];
       };

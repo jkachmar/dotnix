@@ -30,8 +30,8 @@ in
         '';
 
         matchBlocks = {
-          "10.0.1.150" = {
-            hostname = "10.0.1.150";
+          "192.168.1.150" = {
+            hostname = "192.168.1.150";
             user = "jkachmar";
             identityFile = [
               "${secretAgentPubKeysPath}/ff67f327ddfda7771e3741f7bcdd95ce.pub"
@@ -51,7 +51,7 @@ in
     nix.distributedBuilds = true;
     nix.buildMachines = [
       {
-        hostName = "10.0.1.150";
+        hostName = "192.168.1.150";
         sshUser = "jkachmar";
         sshKey = "/Users/jkachmar/.ssh/id_enigma";
         systems = [ "x86_64-linux" ];
