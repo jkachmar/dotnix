@@ -12,8 +12,8 @@ in
   services.libreddit = {
     enable = true;
     inherit (listen) address port;
-    redirect = true;
-    openFirewall = false;
+    # redirect = true;
+    openFirewall = true;
   };
 
   services.nginx.virtualHosts."reddit.${fqdn}" = {
