@@ -21,7 +21,7 @@
     ../../config/services/downloads/sabnzbd.nix
     ../../config/services/media/hardware-acceleration.nix
     ../../config/services/media/plex
-    ../../config/services/media/handbrake.nix
+    # ../../config/services/media/handbrake.nix
     ../../config/services/media/radarr.nix
     ../../config/services/media/sonarr.nix
 
@@ -152,7 +152,7 @@
   networking.wireguard = {
     enable = true;
     interfaces.wg0 = {
-      ips = [ "10.100.0.1/24" ];
+      ips = [ "192.168.50.1/24" ];
       listenPort = 51820;
       privateKeyFile = "/secrets/wireguard/enigma/private";
 
@@ -160,22 +160,17 @@
         {
           # crazy-diamond | MacBook Pro
           publicKey = "HSnaUa1oJ4NDjbgAOnsgns4gvbkup5BFdNmSBMx4VSg="; # /secrets/wireguard/crazy-diamond/public
-          allowedIPs = [ "10.100.0.2/32" ];
+          allowedIPs = [ "192.168.50.2/32" ];
         }
         {
           # purple-haze | iPhone 14 pro
-          publicKey = "NjplYF6mLOytQXJ7xDLEgTosGu8QFgX9Y9mqqIdWOxo="; # /secrets/wireguard/purple-haze/public
-          allowedIPs = [ "10.100.0.3/32" ];
-        }
-        {
-          # manhattan-transfer | MacBook Pro
-          publicKey = "DfNLbTY465mT+m+Nw1X4MJxDPIWzP/cPvXA/FYc/rS4="; # /secrets/wireguard/manhattan-transfer/public
-          allowedIPs = [ "10.100.0.4/32" ];
+          publicKey = "U9twqSeN7eNEap4JodQf20aO+rtbBylB82RUiYuEUnc="; # /secrets/wireguard/purple-haze/public
+          allowedIPs = [ "192.168.50.3/32" ];
         }
         {
           # wonder-of-u | iPad Mini
           publicKey = "X7KUdq+6fHFuyY81BLtKG6LUNQOmOHdtGzhDQRxC4yw="; # /secrets/wireguard/wonder-of-u/public
-          allowedIPs = [ "10.100.0.5/32" ];
+          allowedIPs = [ "192.168.50.4/32" ];
         }
       ];
 
@@ -185,12 +180,12 @@
       # For this to work you have to set the dnsserver IP of your router (or
       # dnsserver of choice) in your clients.
       postSetup = ''
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eno1 -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 192.168.50.0/24 -o eno1 -j MASQUERADE
       '';
 
       # This undoes the above command
       postShutdown = ''
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eno1 -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 192.168.50.0/24 -o eno1 -j MASQUERADE
       '';
     };
   };
