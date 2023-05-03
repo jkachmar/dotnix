@@ -9,6 +9,8 @@
     ];
 
   boot = {
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+
     # Lifted from github.com/nixos/nixos-hardware/blob/master/common/pc/ssd/default.nix
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-intel" ];

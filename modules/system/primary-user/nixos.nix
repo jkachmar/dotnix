@@ -33,9 +33,9 @@ in
 
     # TODO: Should this use `lib.mkMerge` and _only_ specify the primary user
     # as an allowed and/or trusted user?
-    nix = {
-      allowedUsers = [ "root" cfg.name ];
-      trustedUsers = [ "root" cfg.name ];
+    nix.settings = {
+      allowed-users = [ "root" cfg.name ];
+      trusted-users = [ "root" cfg.name ];
     };
   };
 }

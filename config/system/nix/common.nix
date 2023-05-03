@@ -26,20 +26,21 @@ in
     '' + optionalString (isDarwin && isAarch64) ''
       extra-platforms = aarch64-darwin x86_64-darwin
     '';
+
     package = pkgs.nixFlakes;
 
-    # FIXME: lol without this it forcibly adds the default nixos cache?
-    #
-    # There's gotta be a better solution to this...
-    binaryCaches = lib.mkForce substituters;
-    binaryCachePublicKeys = lib.mkForce trustedPublicKeys;
+    settings = {
+      # FIXME: lol without this it forcibly adds the default nixos cache?
+      #
+      # There's gotta be a better solution to this...
+      substituters = lib.mkForce substituters;
+      trusted-public-keys = lib.mkForce trustedPublicKeys;
+    };
   };
   primary-user.home-manager.xdg.configFile."nix/nix.conf".text = ''
     experimental-features = nix-command flakes
 
     substituters = ${lib.concatStringsSep " " substituters}
     trusted-public-keys = ${lib.concatStringsSep " " trustedPublicKeys}
-  '' + optionalString (isDarwin && isAarch64) ''
-    extra-platforms = aarch64-darwin x86_64-darwin
   '';
 }
