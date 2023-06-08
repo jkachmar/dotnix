@@ -159,7 +159,7 @@
       peers = [
         {
           # crazy-diamond | MacBook Pro
-          publicKey = "HSnaUa1oJ4NDjbgAOnsgns4gvbkup5BFdNmSBMx4VSg="; # /secrets/wireguard/crazy-diamond/public
+          publicKey = "Mi0aMgmZrZF9MDS8POWtAOgdSCyG4C0kpiAcLvz8HAs="; # /secrets/wireguard/crazy-diamond/public
           allowedIPs = [ "192.168.50.2/32" ];
         }
         {
