@@ -5,8 +5,8 @@
     ################
     # PACKAGE SETS #
     ################
-    # Stable NixOS package set; pinned to the latest 22.11 release.
-    nixosPkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    # Stable NixOS package set; pinned to the latest 23.05 release.
+    nixosPkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     # Unstable (rolling-release) NixOS package set.
     unstable.url = "github:nixos/nixpkgs";
 
@@ -16,7 +16,7 @@
     # Declarative user configuration for NixOS systems.
     nixosHome = {
       inputs.nixpkgs.follows = "nixosPkgs";
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/release-23.05";
     };
   };
 

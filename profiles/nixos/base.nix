@@ -31,5 +31,5 @@
   # system memory.
   #
   # cf. https://github.com/NixOS/nixpkgs/issues/23912 for details.
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
 }

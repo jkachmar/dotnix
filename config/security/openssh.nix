@@ -4,9 +4,11 @@
   services.openssh = {
     enable = true;
     allowSFTP = lib.mkDefault false;
-    kbdInteractiveAuthentication = false;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
+    settings = {
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
 
     # Stealing some "paranoid" OpenSSH configuration options.
     #

@@ -138,9 +138,5 @@
   swapDevices = [{ device = "/dev/mapper/system-swap"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-    # High-resolution display.
-    video.hidpi.enable = lib.mkDefault true;
-  };
+  hardware.cpu.intel.updateMicrocode = true;
 }
