@@ -7,7 +7,6 @@
   #############################################################################
   # VIRTUALIZATION
   #############################################################################
-
   # Use Podman to run OCI containers.
   virtualisation = {
     containers = {
@@ -27,8 +26,4 @@
 
     oci-containers.backend = "podman";
   };
-
-  systemd.tmpfiles.rules = [
-    "L /var/lib/cni - - - - /persist/var/lib/cni"
-  ];
 }
