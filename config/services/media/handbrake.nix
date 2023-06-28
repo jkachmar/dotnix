@@ -16,7 +16,10 @@ in
     forceSSL = true;
     useACMEHost = domain;
     locations."/" = {
-      proxyPass = "http://localhost:${port}";
+      proxyPass = "http://127.0.0.1:${port}";
+    };
+    locations."/websockify" = {
+      proxyPass = "http://127.0.0.1:${port}/websockify";
       proxyWebsockets = true;
     };
   };
@@ -29,6 +32,7 @@ in
     # TODO: The storage, watch, and output directories should probably live on
     # the NAS.
     volumes = [
+      "/mnt/moodyblues/media:/media:ro"
       "/persist/handbrake/config:/config:rw"
       "/persist/handbrake/storage:/storage:ro"
       "/persist/handbrake/watch:/watch:rw"
