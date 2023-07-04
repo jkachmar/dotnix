@@ -66,6 +66,9 @@
 
     # TODO: Extract this out into some shared set of known public keys.
     openssh.authorizedKeys.keys = [
+      # yubikey
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKZJVgzxzU87/KHzc8u+RZot1/CHyW85zSC5jdlbDDUx openpgp:0xAAF3634A"
+
       # crazy-diamond
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF24RILK9tCEnuPCg5m37lOZh/Udgjx9fkqPp7PLK1X2 crazy-diamond"
 
