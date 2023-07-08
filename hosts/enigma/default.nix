@@ -6,6 +6,7 @@
     ../../profiles/nixos/base.nix
 
     # Podman-based OCI virtualization configuration.
+    ../../modules/system/podman.nix
     ../../config/system/nixos/podman.nix
 
     # Home server service configuration.

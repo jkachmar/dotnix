@@ -20,6 +20,7 @@
 
     podman = {
       enable = true;
+      autoUpdate = true;
       # NOTE: Workaround for https://github.com/NixOS/nixpkgs/pull/112443
       extraPackages = [ pkgs.zfs ];
     };
