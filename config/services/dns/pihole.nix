@@ -66,7 +66,11 @@ in
       # TODO: Change this to something secure, obviously.
       WEBPASSWORD = "hunter2";
     };
-    extraOptions = [ "--dns=127.0.0.1" "--dns=9.9.9.9" ];
+    extraOptions = [
+      "--dns=127.0.0.1"
+      "--dns=9.9.9.9"
+      "--label=\"io.containers.autoupdate=registry\""
+    ];
     workdir = "/etc/pihole";
     autoStart = true;
   };

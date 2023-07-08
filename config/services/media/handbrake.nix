@@ -40,6 +40,7 @@ in
     ];
     extraOptions = [
       "--device=/dev/dri:/dev/dri:rwm"
+      "--label=\"io.containers.autoupdate=registry\""
     ];
     autoStart = true;
   };
