@@ -26,6 +26,10 @@ in
 
   security.acme = {
     acceptTerms = true;
+    # Do not install self-signed certs initially; this appears to be
+    # incompatible with nginx OCSP stapling & can create a race condition upon
+    # reboot.
+    preliminarySelfsigned = false;
 
     certs = {
       "thempire.dev" = {
