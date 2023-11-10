@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  inherit (config.networking) domain hostName;
-  fqdn = "${hostName}.${domain}";
+  inherit (config.networking) fqdn;
   listen = {
     address = "0.0.0.0";
     port = 5050;
@@ -18,7 +17,7 @@ in
 
   services.nginx.virtualHosts."reddit.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = domain;
+    useACMEHost = fqdn;
     locations."/" = {
       proxyPass = "http://${listen.address}:${builtins.toString listen.port}";
       proxyWebsockets = true;

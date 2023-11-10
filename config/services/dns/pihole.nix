@@ -4,14 +4,12 @@
 { config, pkgs, ... }:
 
 let
-  inherit (config.networking) domain hostName;
-  fqdn = "pihole.${hostName}.${domain}";
+  inherit (config.networking) fqdn;
 in
 {
   #############################################################################
   # NETWORKING
   #############################################################################
-
   # TODO: See if this is still necessary now that `dnscrypt-proxy` supports
   # bootstrap resolvers.
   networking.nameservers = [ "127.0.0.1" "::1" ];
@@ -37,9 +35,9 @@ in
   # PIHOLE
   #############################################################################
 
-  services.nginx.virtualHosts."${fqdn}" = {
+  services.nginx.virtualHosts."pihole.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = domain;
+    useACMEHost = fqdn;
     locations."/".proxyPass = "http://localhost:7000";
   };
 
@@ -62,7 +60,7 @@ in
       REV_SERVER_CIDR = "192.168.0.0/16";
       TZ = config.time.timeZone;
       PROXY_LOCATION = "pihole";
-      VIRTUAL_HOST = fqdn;
+      VIRTUAL_HOST = "pihole.${fqdn}";
       # TODO: Change this to something secure, obviously.
       WEBPASSWORD = "hunter2";
     };

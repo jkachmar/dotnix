@@ -4,13 +4,12 @@
 { config, ... }:
 
 let
-  inherit (config.networking) domain hostName;
-  fqdn = "${hostName}.${domain}";
+  inherit (config.networking) fqdn;
 in
 {
   services.nginx.virtualHosts."plex.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = domain;
+    useACMEHost = fqdn;
     http2 = true;
     locations."/" = {
       proxyPass = "https://localhost:32400";

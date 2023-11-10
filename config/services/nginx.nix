@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  inherit (config.networking) domain;
+  inherit (config.networking) domain fqdn;
   inherit (config.primary-user) email;
 in
 {
@@ -32,15 +32,21 @@ in
     preliminarySelfsigned = false;
 
     certs = {
-      "thempire.dev" = {
+      "${fqdn}" = {
         inherit email;
         credentialsFile = "/secrets/cloudflare/acme.env";
         dnsProvider = "cloudflare";
-        extraDomainNames = [
-          "*.thempire.dev"
-          "*.enigma.thempire.dev"
-          "*.moody-blues.thempire.dev"
-        ];
+        extraDomainNames = [ "*.${fqdn}" ];
+
+        # Use Cloudflare's DNS resolver rather than the system-provided one to
+        # ensure that everything propagates as quickly as possible.
+        extraLegoFlags = [ "--dns.resolvers=1.1.1.1:53" ];
+      };
+      "moody-blues.${domain}" = {
+        inherit email;
+        credentialsFile = "/secrets/cloudflare/acme.env";
+        dnsProvider = "cloudflare";
+        extraDomainNames = [ "*.moody-blues.${domain}" ];
 
         # Use Cloudflare's DNS resolver rather than the system-provided one to
         # ensure that everything propagates as quickly as possible.
@@ -54,7 +60,7 @@ in
     # 'Control Panel' -> 'Security' -> 'Trusted Proxies' in the DSM webapp.
     "moody-blues.${domain}" = {
       forceSSL = true;
-      useACMEHost = domain;
+      useACMEHost = "moody-blues.${domain}";
       locations."/" = {
         proxyPass = "https://192.168.1.155:5001";
         extraConfig = ''
@@ -67,7 +73,7 @@ in
 
     "webdav.moody-blues.${domain}" = {
       forceSSL = true;
-      useACMEHost = domain;
+      useACMEHost = "moody-blues.${domain}";
       locations."/".proxyPass = "https://192.168.1.155:5006";
     };
   };

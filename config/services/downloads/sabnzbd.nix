@@ -1,8 +1,7 @@
 { config, ... }:
 
 let
-  inherit (config.networking) domain hostName;
-  fqdn = "${hostName}.${domain}";
+  inherit (config.networking) fqdn;
 in
 {
   services.sabnzbd = {
@@ -17,7 +16,7 @@ in
 
   services.nginx.virtualHosts."sabnzbd.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = domain;
+    useACMEHost = fqdn;
     locations."/".proxyPass = "http://localhost:8080";
   };
 

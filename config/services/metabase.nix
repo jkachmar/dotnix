@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  inherit (config.networking) domain hostName;
-  fqdn = "${hostName}.${domain}";
+  inherit (config.networking) fqdn;
 
   dataDir = "/persist/var/lib/metabase";
 
@@ -51,7 +50,7 @@ in
 
   services.nginx.virtualHosts."metabase.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = domain;
+    useACMEHost = fqdn;
     locations."/".proxyPass = "http://localhost:${builtins.toString listen.port}";
   };
 }

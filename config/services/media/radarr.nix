@@ -1,8 +1,7 @@
 { config, ... }:
 
 let
-  inherit (config.networking) domain hostName;
-  fqdn = "${hostName}.${domain}";
+  inherit (config.networking) fqdn;
 in
 {
   services.radarr = {
@@ -25,7 +24,7 @@ in
 
   services.nginx.virtualHosts."radarr.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = domain;
+    useACMEHost = fqdn;
     locations."/".proxyPass = "http://localhost:7878";
   };
 }

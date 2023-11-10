@@ -4,17 +4,16 @@
 { config, pkgs, ... }:
 
 let
-  inherit (config.networking) domain hostName;
-  fqdn = "handbrake.${hostName}.${domain}";
+  inherit (config.networking) fqdn;
   port = "7001";
 in
 {
   #############################################################################
   # Handbrake.
   #############################################################################
-  services.nginx.virtualHosts."${fqdn}" = {
+  services.nginx.virtualHosts."handbrake.${fqdn}" = {
     forceSSL = true;
-    useACMEHost = domain;
+    useACMEHost = fqdn;
     locations."/" = {
       proxyPass = "http://127.0.0.1:${port}";
     };
