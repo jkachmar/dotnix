@@ -21,7 +21,6 @@
     ../../config/services/dns/pihole.nix
     ../../config/services/downloads/sabnzbd.nix
     ../../config/services/media/hardware-acceleration.nix
-    ../../config/services/media/plex
     ../../config/services/media/handbrake.nix
     ../../config/services/media/radarr.nix
     ../../config/services/media/sonarr.nix
