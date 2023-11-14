@@ -1,3 +1,7 @@
+# gone fishin'
+
+fresh start with over at https://github.com/jkachmar/termina 
+
 # I Fucking Hate Dotfiles
 
 ## Installation
